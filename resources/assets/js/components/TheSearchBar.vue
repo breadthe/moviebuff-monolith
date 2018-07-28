@@ -1,6 +1,15 @@
 <template>
-    <form action="" method="">
-        <input class="form-control searchbar" type="text" placeholder="Find a movie" v-model="searchString" @keyup.enter="searchMovie">
+    <form action="/search" method="POST">
+        <input type="hidden" name="_token" :value="csrf">
+        <input
+            type="text"
+            name="search_string"
+            class="form-control searchbar"
+            :class="{'is-loading': isSearching}"
+            placeholder="Find a movie"
+            v-model="searchString"
+            @keyup.enter="searchMovie"
+        >
     </form>
 </template>
 
@@ -8,16 +17,15 @@
     export default {
         data () {
             return {
-                searchString: ''
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                searchString: '',
+                isSearching: false
             }
         },
         methods: {
             searchMovie: function () {
-                alert('searching movie');
+                this.isSearching = true
             }
-        },
-        mounted() {
-            console.log('Component mounted.')
         }
     }
 </script>
