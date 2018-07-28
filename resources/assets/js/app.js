@@ -15,7 +15,8 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('the-search-bar', require('./components/TheSearchBar.vue'));
+Vue.component('search-page', require('./components/SearchPage.vue'));
+Vue.component('search-results', require('./components/SearchResults.vue'));
 
 const app = new Vue({
     el: '#app'

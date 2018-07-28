@@ -13,16 +13,8 @@ class SearchController extends Controller
      */
     public function index(Request $request)
     {
-        return view('search.results', compact('request'));
-    }
-
-    public function search(Request $request)
-    {
-        $search_string = $request->search_string;
-        // $response = $this->json('POST', self::$endpoint, $body, ['Accept' => 'application/json']);
-        $data = [];
-
-        return view('search.results', compact('data'));
+        $search_string = $request->search_string ?? '';
+        return view('search.results', compact('search_string'));
     }
 
     /**
