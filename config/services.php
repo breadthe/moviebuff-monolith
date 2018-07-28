@@ -37,6 +37,7 @@ return [
     // OMDB API key
     'omdb' => [
         'key' => env('OMDB_API_KEY'),
+        'url' => 'http://www.omdbapi.com',
     ],
 
     // Google Places API key
