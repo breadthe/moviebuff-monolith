@@ -25,7 +25,9 @@
 
         @include ('layouts.nav')
 
-        @include ('layouts.searchbar')
+        @if (Auth::check())
+            @include ('layouts.searchbar')
+        @endif
 
         <main class="py-4">
             @yield('content')
