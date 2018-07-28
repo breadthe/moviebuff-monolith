@@ -25,6 +25,8 @@
 
         @include ('layouts.nav')
 
+        @include ('layouts.searchbar')
+
         <main class="py-4">
             @yield('content')
         </main>
