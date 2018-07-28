@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Third Party Services
@@ -35,4 +34,13 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    // OMDB API key
+    'omdb' => [
+        'key' => env('OMDB_API_KEY'),
+    ],
+
+    // Google Places API key
+    'places' => [
+        'key' => env('YOUR_API_KEY'),
+    ]
 ];
