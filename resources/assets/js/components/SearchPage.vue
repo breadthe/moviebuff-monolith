@@ -9,20 +9,29 @@
         </div>
         <div v-else>
             <div v-if="searchResults">
-                <div class="">
+                <div class="search-summary">
                     Found <strong>{{ totalResults }}</strong> results for <strong>"{{ searchString }}"</strong>
                 </div>
 
-                <!-- <pagination-controls
-                :search-string="searchString"
-                :number-of-pages="numberOfPages"
-                :page="page"
-                :results-range="resultsRange"
-                :total-results="totalResults"
-                /> -->
+                <search-pagination-controls
+                    :search-string="searchString"
+                    :number-of-pages="numberOfPages"
+                    :page="page"
+                    :results-range="resultsRange"
+                    :total-results="totalResults"
+                />
                 <hr>
 
                 <search-results :movies="searchResults"></search-results>
+
+                <hr>
+                <search-pagination-controls
+                    :search-string="searchString"
+                    :number-of-pages="numberOfPages"
+                    :page="page"
+                    :results-range="resultsRange"
+                    :total-results="totalResults"
+                />
 
             </div>
 
@@ -89,6 +98,17 @@
                 }
                 finally {
                     this.isSearching = false
+                }
+            }
+        },
+        computed: {
+            resultsRange: function () {
+                let from, to
+                from = this.page === 1 ? 1 : Math.floor((this.page - 1) * this.resultsPerPage + 1)
+                to = this.page === this.numberOfPages ? this.totalResults : this.page * this.resultsPerPage
+                return {
+                    from: from,
+                    to: to
                 }
             }
         },

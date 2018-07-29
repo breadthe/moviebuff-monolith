@@ -3128,7 +3128,7 @@ body {
   margin: 0;
   font-family: "Nunito", sans-serif;
   font-size: 0.9rem;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.6;
   color: #212529;
   text-align: left;
@@ -13526,6 +13526,33 @@ a.text-dark:focus {
   }
 }
 
+strong {
+  font-weight: 700;
+}
+
+.level {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+.level .level-item.left {
+  justify-self: left;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
+.level .level-item.center {
+  -ms-flex-item-align: center;
+      align-self: center;
+  justify-self: center;
+}
+
+.level .level-item.right {
+  justify-self: right;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
 .navbar-laravel {
   background-color: #ffdd57;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -13575,6 +13602,12 @@ input.form-control.searchbar::placeholder {
 
 /* Search Results */
 
+.search-summary {
+  margin: 5px 0;
+  text-align: center;
+  font-size: 1rem;
+}
+
 .movie-results {
   width: 100%;
   position: relative;
@@ -13604,8 +13637,12 @@ input.form-control.searchbar::placeholder {
 .movie-results .movie-item .right-side {
   display: table-cell;
   padding-left: 10px;
-  font-size: 20px;
+  font-size: 1.5rem;
   vertical-align: top;
+}
+
+.movie-results .movie-item .right-side .movie-year {
+  font-size: 1rem;
 }
 
 .movie-results .movie-item .right-side .action-buttons {

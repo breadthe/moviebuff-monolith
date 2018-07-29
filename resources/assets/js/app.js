@@ -17,6 +17,7 @@ window.Vue = require('vue');
 
 Vue.component('search-page', require('./components/SearchPage.vue'));
 Vue.component('search-results', require('./components/SearchResults.vue'));
+Vue.component('search-pagination-controls', require('./components/SearchPaginationControls.vue'));
 
 const app = new Vue({
     el: '#app'

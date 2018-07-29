@@ -13893,6 +13893,7 @@ window.Vue = __webpack_require__(36);
 
 Vue.component('search-page', __webpack_require__(66));
 Vue.component('search-results', __webpack_require__(61));
+Vue.component('search-pagination-controls', __webpack_require__(71));
 
 var app = new Vue({
   el: '#app'
@@ -48731,7 +48732,7 @@ exports = module.exports = __webpack_require__(42)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48748,6 +48749,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -48872,6 +48882,18 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             return searchMovie;
         }()
     },
+    computed: {
+        resultsRange: function resultsRange() {
+            var from = void 0,
+                to = void 0;
+            from = this.page === 1 ? 1 : Math.floor((this.page - 1) * this.resultsPerPage + 1);
+            to = this.page === this.numberOfPages ? this.totalResults : this.page * this.resultsPerPage;
+            return {
+                from: from,
+                to: to
+            };
+        }
+    },
     mounted: function mounted() {
         if (this.searchString) {
             this.searchMovie();
@@ -48906,7 +48928,7 @@ var render = function() {
                   ? _c(
                       "div",
                       [
-                        _c("div", {}, [
+                        _c("div", { staticClass: "search-summary" }, [
                           _vm._v("\n                    Found "),
                           _c("strong", [_vm._v(_vm._s(_vm.totalResults))]),
                           _vm._v(" results for "),
@@ -48915,10 +48937,32 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
+                        _c("search-pagination-controls", {
+                          attrs: {
+                            "search-string": _vm.searchString,
+                            "number-of-pages": _vm.numberOfPages,
+                            page: _vm.page,
+                            "results-range": _vm.resultsRange,
+                            "total-results": _vm.totalResults
+                          }
+                        }),
+                        _vm._v(" "),
                         _c("hr"),
                         _vm._v(" "),
                         _c("search-results", {
                           attrs: { movies: _vm.searchResults }
+                        }),
+                        _vm._v(" "),
+                        _c("hr"),
+                        _vm._v(" "),
+                        _c("search-pagination-controls", {
+                          attrs: {
+                            "search-string": _vm.searchString,
+                            "number-of-pages": _vm.numberOfPages,
+                            page: _vm.page,
+                            "results-range": _vm.resultsRange,
+                            "total-results": _vm.totalResults
+                          }
                         })
                       ],
                       1
@@ -48992,6 +49036,299 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-e21f1b64", module.exports)
+  }
+}
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(72)
+}
+var normalizeComponent = __webpack_require__(45)
+/* script */
+var __vue_script__ = __webpack_require__(74)
+/* template */
+var __vue_template__ = __webpack_require__(75)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-19aa2f6f"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/SearchPaginationControls.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-19aa2f6f", Component.options)
+  } else {
+    hotAPI.reload("data-v-19aa2f6f", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(73);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(43)("07e089d0", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-19aa2f6f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SearchPaginationControls.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-19aa2f6f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SearchPaginationControls.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(42)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 74 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'SearchPaginationControls',
+  props: {
+    'search-string': {
+      type: String,
+      required: true,
+      default: ''
+    },
+    'number-of-pages': {
+      type: Number,
+      required: true
+    },
+    'page': {
+      type: Number,
+      required: true,
+      default: 1
+    },
+    'results-range': {
+      type: Object,
+      required: true
+    },
+    'total-results': {
+      type: Number,
+      required: true
+    }
+  },
+  computed: {
+    firstPageUrl: function firstPageUrl() {
+      return '/search?q=' + ('' + this.searchString) + '&page=1';
+    },
+    lastPageUrl: function lastPageUrl() {
+      return '/search?q=' + ('' + this.searchString) + '&page=' + this.numberOfPages;
+    },
+    previousPageUrl: function previousPageUrl() {
+      var previousPage = this.page;
+      previousPage--;
+      if (previousPage < 1) {
+        return this.firstPageUrl;
+      }
+      return '/search?q=' + ('' + this.searchString) + '&page=' + previousPage;
+    },
+    nextPageUrl: function nextPageUrl() {
+      var nextPage = this.page;
+      nextPage++;
+      if (nextPage > this.numberOfPages) {
+        return this.lastPageUrl;
+      }
+      return '/search?q=' + ('' + this.searchString) + '&page=' + nextPage;
+    }
+  }
+});
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "btn-toolbar level",
+        attrs: { role: "toolbar", "aria-label": "Toolbar with button groups" }
+      },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "level-item center" }, [
+          _vm._v("\n            Showing "),
+          _c("strong", [_vm._v(_vm._s(_vm.resultsRange.from))]),
+          _vm._v("-"),
+          _c("strong", [_vm._v(_vm._s(_vm.resultsRange.to))]),
+          _vm._v(" of "),
+          _c("strong", [_vm._v(_vm._s(_vm.totalResults))])
+        ]),
+        _vm._v(" "),
+        _vm._m(1)
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "btn-group level-item left",
+        attrs: { role: "group", "aria-label": "First, Previous" }
+      },
+      [
+        _c(
+          "button",
+          { staticClass: "btn btn-secondary", attrs: { type: "button" } },
+          [_c("i", { staticClass: "fa fa-step-backward" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-secondary", attrs: { type: "button" } },
+          [_c("i", { staticClass: "fa fa-caret-left fa-lg" })]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "btn-group level-item right",
+        attrs: { role: "group", "aria-label": "Next, Last" }
+      },
+      [
+        _c(
+          "button",
+          { staticClass: "btn btn-secondary", attrs: { type: "button" } },
+          [_c("i", { staticClass: "fa fa-caret-right fa-lg" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-secondary", attrs: { type: "button" } },
+          [_c("i", { staticClass: "fa fa-step-forward" })]
+        )
+      ]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-19aa2f6f", module.exports)
   }
 }
 

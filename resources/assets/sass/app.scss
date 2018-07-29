@@ -11,6 +11,29 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+strong {
+  font-weight: 700;
+}
+
+.level {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  .level-item {
+    &.left {
+      justify-self: left;
+      align-self: center;
+    }
+    &.center {
+      align-self: center;
+      justify-self: center;
+    }
+    &.right {
+      justify-self: right;
+      align-self: center;
+    }
+  }
+}
+
 .navbar-laravel {
   background-color: $mb-yellow;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -46,6 +69,12 @@ input {
 
 /* Search Results */
 
+.search-summary {
+  margin: 5px 0;
+  text-align: center;
+  font-size: 1rem;
+}
+
 .movie-results {
   width: 100%;
   position: relative;
@@ -68,8 +97,14 @@ input {
       .right-side {
           display: table-cell;
           padding-left: 10px;
-          font-size: 20px;
+          font-size: 1.5rem;
           vertical-align: top;
+          .movie-year {
+            font-size: 1rem;
+          }
+          .movie-title {
+
+          }
           .action-buttons {
               margin-top: 10px;
               // display: table-cell;
