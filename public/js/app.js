@@ -48507,7 +48507,7 @@ exports = module.exports = __webpack_require__(42)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48518,30 +48518,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -48583,16 +48559,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             csrf: document.head.querySelector('meta[name="csrf-token"]')
-            // isSearching: true,
-            // searchResults: null,
-            // totalResults: 0,
-            // resultsPerPage: 10,
-            // numberOfPages: 0,
-            // page: 1,
         };
     },
 
-    methods: {},
+    methods: {
+        isInList: function isInList(imdbID) {
+            return false;
+        },
+        addToList: function addToList(imdbID) {
+            console.log(imdbID);
+            return false;
+        }
+    },
     mounted: function mounted() {}
 });
 
@@ -48629,7 +48607,22 @@ var render = function() {
               _vm._v(_vm._s(movie.Title))
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "action-buttons" })
+            _c("div", { staticClass: "action-buttons" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-link p-0",
+                  class: { "is-success": _vm.isInList(movie.imdbID) },
+                  attrs: { disabled: _vm.isInList(movie.imdbID) },
+                  on: {
+                    click: function($event) {
+                      _vm.addToList(movie.imdbID)
+                    }
+                  }
+                },
+                [_vm._v("\n                    Add to List\n                ")]
+              )
+            ])
           ])
         ])
       })

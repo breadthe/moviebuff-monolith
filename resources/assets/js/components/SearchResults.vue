@@ -11,39 +11,15 @@
                 <div class="movie-title is-size-4 has-text-black">{{movie.Title}}</div>
                 <div class="action-buttons">
 
-                <!-- <button
-                    class="button"
-                    :class="{'is-success': isInSeenlist(movie.imdbID)}"
-                    :disabled="isInSeenlist(movie.imdbID)"
-                    @click="openSeenDetails(movie.imdbID)"
+                <button
+                    class="btn btn-link p-0"
+                    :class="{'is-success': isInList(movie.imdbID)}"
+                    :disabled="isInList(movie.imdbID)"
+                    @click="addToList(movie.imdbID)"
                 >
-                    <i class="fa"
-                    :class="{'fa-circle-o-notch fa-spin': addingToSeenlist === movie.imdbID, 'fa-eye': addingToSeenlist !== movie.imdbID && isInSeenlist(movie.imdbID), 'fa-eye-slash': addingToSeenlist !== movie.imdbID && !isInSeenlist(movie.imdbID)}"
-                    aria-hidden="true"
-                    ></i>&nbsp;Seen
-                </button> -->
+                    Add to List
+                </button>
 
-                <!-- <button
-                    v-if="!isInSeenlist(movie.imdbID) && !isInWishlist(movie.imdbID)"
-                    class="button"
-                    @click="addToWishlist(movie.imdbID)"
-                >
-                    <i class="fa"
-                    :class="{'fa-circle-o-notch fa-spin': addingToWishlist === movie.imdbID, 'fa-heart-o': addingToWishlist !== movie.imdbID}"
-                    aria-hidden="true"
-                    ></i>&nbsp;Wishlist
-                </button> -->
-
-                <!-- <button
-                    v-if="!isInSeenlist(movie.imdbID) && isInWishlist(movie.imdbID)"
-                    class="button is-warning"
-                    @click="removeFromWishlist(movie.imdbID)"
-                >
-                    <i class="fa"
-                    :class="{'fa-circle-o-notch fa-spin': addingToWishlist === movie.imdbID, 'fa-heart': addingToWishlist !== movie.imdbID}"
-                    aria-hidden="true"
-                    ></i>&nbsp;Wishlist
-                </button> -->
 
                 </div>
             </div>
@@ -63,15 +39,16 @@
         data () {
             return {
                 csrf: document.head.querySelector('meta[name="csrf-token"]'),
-                // isSearching: true,
-                // searchResults: null,
-                // totalResults: 0,
-                // resultsPerPage: 10,
-                // numberOfPages: 0,
-                // page: 1,
             }
         },
         methods: {
+            isInList: function (imdbID) {
+                return false;
+            },
+            addToList: function (imdbID) {
+                console.log(imdbID);
+                return false;
+            },
         },
         mounted () {
         }
