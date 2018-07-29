@@ -48725,7 +48725,7 @@ exports = module.exports = __webpack_require__(42)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48742,6 +48742,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
+//
 //
 //
 //
@@ -48826,46 +48828,47 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     methods: {
         searchMovie: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
                 var omdbAxios, results;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
                                 this.isSearching = true;
+                                this.page = page || 1;
 
-                                _context.prev = 1;
+                                _context.prev = 2;
 
-                                // Override Axios headers, OMDB doesn't accept these
+                                // Override Axios headers, OMDB doesn't accept those
                                 omdbAxios = Object.assign({}, axios);
 
                                 delete omdbAxios.defaults.headers.common['X-Requested-With'];
                                 delete omdbAxios.defaults.headers.common['X-CSRF-TOKEN'];
 
-                                _context.next = 7;
+                                _context.next = 8;
                                 return omdbAxios.get('' + this.apiUrl + '/?apikey=' + ('' + this.apiKey) + '&type=movie&s=' + ('' + this.searchString) + '&page=' + ('' + this.page));
 
-                            case 7:
+                            case 8:
                                 results = _context.sent;
 
-                                // await store.dispatch('toggleSearching', false)
                                 if (results.data) {
                                     this.totalResults = parseInt(results.data.totalResults, 10);
                                     this.numberOfPages = parseInt(Math.ceil(this.totalResults / this.resultsPerPage), 10);
                                     this.searchResults = results.data.Search;
                                 }
 
-                            case 9:
-                                _context.prev = 9;
+                            case 10:
+                                _context.prev = 10;
 
                                 this.isSearching = false;
-                                return _context.finish(9);
+                                return _context.finish(10);
 
-                            case 12:
+                            case 13:
                             case 'end':
                                 return _context.stop();
                         }
                     }
-                }, _callee, this, [[1,, 9, 12]]);
+                }, _callee, this, [[2,, 10, 13]]);
             }));
 
             function searchMovie() {
@@ -48873,7 +48876,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }
 
             return searchMovie;
-        }()
+        }(),
+        goto: function goto(page) {
+            this.searchMovie(page);
+        }
     },
     computed: {
         resultsRange: function resultsRange() {
@@ -48937,6 +48943,11 @@ var render = function() {
                             page: _vm.page,
                             "results-range": _vm.resultsRange,
                             "total-results": _vm.totalResults
+                          },
+                          on: {
+                            goto: function($event) {
+                              _vm.goto($event)
+                            }
                           }
                         }),
                         _vm._v(" "),
@@ -48955,6 +48966,11 @@ var render = function() {
                             page: _vm.page,
                             "results-range": _vm.resultsRange,
                             "total-results": _vm.totalResults
+                          },
+                          on: {
+                            goto: function($event) {
+                              _vm.goto($event)
+                            }
                           }
                         })
                       ],
@@ -49118,7 +49134,7 @@ exports = module.exports = __webpack_require__(42)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -49129,24 +49145,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -49207,27 +49205,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   computed: {
-    firstPageUrl: function firstPageUrl() {
-      return '/search?q=' + ('' + this.searchString) + '&page=1';
+    firstPage: function firstPage() {
+      return 1;
     },
-    lastPageUrl: function lastPageUrl() {
-      return '/search?q=' + ('' + this.searchString) + '&page=' + this.numberOfPages;
+    lastPage: function lastPage() {
+      return this.numberOfPages;
     },
-    previousPageUrl: function previousPageUrl() {
+    previousPage: function previousPage() {
       var previousPage = this.page;
       previousPage--;
       if (previousPage < 1) {
-        return this.firstPageUrl;
+        return this.firstPage;
       }
-      return '/search?q=' + ('' + this.searchString) + '&page=' + previousPage;
+      return previousPage;
     },
-    nextPageUrl: function nextPageUrl() {
+    nextPage: function nextPage() {
       var nextPage = this.page;
       nextPage++;
       if (nextPage > this.numberOfPages) {
-        return this.lastPageUrl;
+        return this.lastPage;
       }
-      return '/search?q=' + ('' + this.searchString) + '&page=' + nextPage;
+      return nextPage;
     }
   }
 });
@@ -49248,7 +49246,46 @@ var render = function() {
         attrs: { role: "toolbar", "aria-label": "Toolbar with button groups" }
       },
       [
-        _vm._m(0),
+        _c(
+          "div",
+          {
+            staticClass: "level-item left",
+            attrs: { role: "group", "aria-label": "First, Previous" }
+          },
+          [
+            _vm.page > 1
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-link text-body bg-light",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.$emit("goto", _vm.firstPage)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-step-backward" })]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.page > 1
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-link text-body bg-light",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.$emit("goto", _vm.previousPage)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-caret-left fa-lg" })]
+                )
+              : _vm._e()
+          ]
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "level-item center" }, [
           _vm._v("\n            Showing "),
@@ -49259,63 +49296,51 @@ var render = function() {
           _c("strong", [_vm._v(_vm._s(_vm.totalResults))])
         ]),
         _vm._v(" "),
-        _vm._m(1)
+        _c(
+          "div",
+          {
+            staticClass: "level-item right",
+            attrs: { role: "group", "aria-label": "Next, Last" }
+          },
+          [
+            _vm.page < _vm.numberOfPages
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-link text-body bg-light",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.$emit("goto", _vm.nextPage)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-caret-right fa-lg" })]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.page < _vm.numberOfPages
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-link text-body bg-light",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.$emit("goto", _vm.lastPage)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-step-forward" })]
+                )
+              : _vm._e()
+          ]
+        )
       ]
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "btn-group level-item left",
-        attrs: { role: "group", "aria-label": "First, Previous" }
-      },
-      [
-        _c(
-          "button",
-          { staticClass: "btn btn-secondary", attrs: { type: "button" } },
-          [_c("i", { staticClass: "fa fa-step-backward" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-secondary", attrs: { type: "button" } },
-          [_c("i", { staticClass: "fa fa-caret-left fa-lg" })]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "btn-group level-item right",
-        attrs: { role: "group", "aria-label": "Next, Last" }
-      },
-      [
-        _c(
-          "button",
-          { staticClass: "btn btn-secondary", attrs: { type: "button" } },
-          [_c("i", { staticClass: "fa fa-caret-right fa-lg" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-secondary", attrs: { type: "button" } },
-          [_c("i", { staticClass: "fa fa-step-forward" })]
-        )
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

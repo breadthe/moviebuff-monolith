@@ -19,6 +19,7 @@
                     :page="page"
                     :results-range="resultsRange"
                     :total-results="totalResults"
+                    @goto="goto($event)"
                 />
                 <hr>
 
@@ -31,6 +32,7 @@
                     :page="page"
                     :results-range="resultsRange"
                     :total-results="totalResults"
+                    @goto="goto($event)"
                 />
 
             </div>
@@ -79,17 +81,17 @@
             }
         },
         methods: {
-            searchMovie: async function () {
+            searchMovie: async function (page = null) {
                 this.isSearching = true
+                this.page = page || 1
 
                 try {
-                    // Override Axios headers, OMDB doesn't accept these
+                    // Override Axios headers, OMDB doesn't accept those
                     const omdbAxios = Object.assign({}, axios)
                     delete omdbAxios.defaults.headers.common['X-Requested-With']
                     delete omdbAxios.defaults.headers.common['X-CSRF-TOKEN']
 
                     const results = await omdbAxios.get(`${this.apiUrl}` + '/?apikey=' + `${this.apiKey}` + '&type=movie&s=' + `${this.searchString}` + '&page=' + `${this.page}`)
-                    // await store.dispatch('toggleSearching', false)
                     if (results.data) {
                         this.totalResults = parseInt(results.data.totalResults, 10)
                         this.numberOfPages = parseInt(Math.ceil(this.totalResults / this.resultsPerPage), 10)
@@ -99,6 +101,9 @@
                 finally {
                     this.isSearching = false
                 }
+            },
+            goto: function (page) {
+                this.searchMovie(page)
             }
         },
         computed: {
