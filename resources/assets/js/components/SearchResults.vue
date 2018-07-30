@@ -47,6 +47,15 @@
             },
             addToList: async function (imdbID) {
                 // console.log(imdbID);
+                // console.log(axios.defaults)
+                // const token = localStorage.getItem('access_token')
+                // axios.defaults.headers.common['Authorization'] = `Bearer ${this.csrf}`
+                // console.log(this.csrf.getContents())
+                // axios.defaults.headers.common = {
+                //     'X-CSRF-TOKEN': this.csrf,
+                //     'X-Requested-With': 'XMLHttpRequest'
+                // };
+
                 await axios.get('/api/catalogs').then((data) => {
                     console.log(data);
                 });

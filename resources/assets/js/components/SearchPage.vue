@@ -87,7 +87,7 @@
 
                 try {
                     // Override Axios headers, OMDB doesn't accept those
-                    const omdbAxios = Object.assign({}, axios)
+                    let omdbAxios = Object.assign({}, axios)
                     delete omdbAxios.defaults.headers.common['X-Requested-With']
                     delete omdbAxios.defaults.headers.common['X-CSRF-TOKEN']
 
