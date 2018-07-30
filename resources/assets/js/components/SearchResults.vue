@@ -45,8 +45,11 @@
             isInList: function (imdbID) {
                 return false;
             },
-            addToList: function (imdbID) {
-                console.log(imdbID);
+            addToList: async function (imdbID) {
+                // console.log(imdbID);
+                await axios.get('/api/catalogs').then((data) => {
+                    console.log(data);
+                });
                 return false;
             },
         },
