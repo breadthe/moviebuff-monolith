@@ -51027,7 +51027,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51098,15 +51098,20 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                _context.next = 2;
+                                window.axios.defaults.headers.common = {
+                                    'X-CSRF-TOKEN': this.csrf.content,
+                                    'X-Requested-With': 'XMLHttpRequest'
+                                };
+
+                                _context.next = 3;
                                 return axios.get('/api/catalogs').then(function (data) {
                                     console.log(data);
                                 });
 
-                            case 2:
+                            case 3:
                                 return _context.abrupt('return', false);
 
-                            case 3:
+                            case 4:
                             case 'end':
                                 return _context.stop();
                         }

@@ -20,6 +20,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     });
     // Route::get('/catalogs', 'CatalogsController@index')->name('catalogs');
     Route::get('/catalogs', function (User $user) {
-        return $user->catalogs();
+        return Auth::user()->catalogs()->get();
     })->name('catalogs');
 });
