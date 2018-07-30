@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 
-class CatalogController extends Controller
+class CatalogsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        //
+        $catalogs = Auth::user()->catalogs;
+        return view('catalogs', compact('catalogs'));
     }
 
     /**
