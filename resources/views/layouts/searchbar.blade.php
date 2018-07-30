@@ -1,5 +1,4 @@
-<form action="/search" method="POST">
-    @csrf
+<form action="{{ route('search') }}" method="GET">
     <input
         type="text"
         name="search_string"
