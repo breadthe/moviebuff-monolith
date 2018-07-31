@@ -1,30 +1,14 @@
 <template>
 <div class="container">
+
     <div class="movie-results">
         <div v-for="movie in movies" :key="movie.imdbID" class="movie-item">
-            <div class="left-side">
-                <img :src="movie.Poster" v-if="movie.Poster && movie.Poster != 'N/A'">
-                <img src="http://via.placeholder.com/75x100?text=NO+IMAGE" v-else>
-            </div>
-            <div class="right-side">
-                <div class="movie-year is-size-6">{{movie.Year}}</div>
-                <div class="movie-title is-size-4 has-text-black">{{movie.Title}}</div>
-                <div class="action-buttons">
-
-                <button
-                    class="btn btn-link p-0"
-                    :class="{'is-success': isInList(movie.imdbID)}"
-                    :disabled="isInList(movie.imdbID)"
-                    @click="addToList(movie.imdbID)"
-                >
-                    Add to List
-                </button>
-
-
-                </div>
-            </div>
+            <search-result :movie="movie" :is-loading-catalogs="isLoadingCatalogs" @openModal="openModal($event)"></search-result>
         </div>
     </div>
+
+    <add-movie-to-catalog :catalogs="catalogs" :error="error" :movie="movie"></add-movie-to-catalog>
+
 </div>
 </template>
 
@@ -39,23 +23,39 @@
         data () {
             return {
                 csrf: document.head.querySelector('meta[name="csrf-token"]'),
+                catalogs: [],
+                movie: {},
+                isLoadingCatalogs: '',
+                error: false
             }
         },
         methods: {
-            isInList: function (imdbID) {
-                return false;
+            openModal: function (movie) {
+                this.movie = movie
+                this.isLoadingCatalogs = movie.imdbID
+                this.loadCatalogs()
             },
-            addToList: async function (imdbID) {
+            loadCatalogs: function () {
+                const $this = this
+
+                // Restore internal headers headers for axios request
                 window.axios.defaults.headers.common = {
                     'X-CSRF-TOKEN': this.csrf.content,
                     'X-Requested-With': 'XMLHttpRequest'
                 };
 
-                await axios.get('/api/catalogs').then((data) => {
-                    console.log(data);
-                });
-                return false;
-            },
+                axios.get('/api/catalogs')
+                    .then((response) => {
+                        $this.error = false
+                        $this.catalogs = response.data
+                        $this.isLoadingCatalogs = ''
+                    })
+                    .catch ((e) => {
+                        $this.error = true
+                        $this.catalogs = []
+                        $this.isLoadingCatalogs = ''
+                    })
+            }
         },
         mounted () {
         }
