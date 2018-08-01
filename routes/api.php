@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +17,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    // Route::get('/catalogs', 'CatalogsController@index')->name('catalogs');
-    Route::get('/catalogs', function (User $user) {
-        return Auth::user()->catalogs()->get();
-    })->name('catalogs');
+    Route::get('/catalogs', 'Api\CatalogsController@index')->name('catalogs');
 });
