@@ -8,6 +8,8 @@ class Catalog extends Model
 {
     protected $fillable = ['user_id', 'name'];
 
+    protected $hidden = ['user_id', 'updated_at'];
+
     /**
      * Relationship between Catalog and User
      * Catalog belongs to a User

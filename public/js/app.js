@@ -51766,7 +51766,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51845,7 +51845,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     data: function data() {
-        return {};
+        return {
+            selectedCatalogs: []
+        };
     },
 
     methods: {
@@ -51867,7 +51869,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "modal fade",
+        staticClass: "modal",
         attrs: {
           id: "addMovieToCatalog",
           tabindex: "-1",
@@ -51894,7 +51896,9 @@ var render = function() {
                   },
                   [
                     _vm._v("Add "),
-                    _c("strong", [_vm._v(_vm._s(_vm.movie.Title))]),
+                    _c("strong", { staticClass: "text-primary" }, [
+                      _vm._v(_vm._s(_vm.movie.Title))
+                    ]),
                     _vm._v(" To Catalog")
                   ]
                 ),
@@ -51943,8 +51947,54 @@ var render = function() {
                                   { staticClass: "form-check-label ml-2" },
                                   [
                                     _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.selectedCatalogs,
+                                          expression: "selectedCatalogs"
+                                        }
+                                      ],
                                       staticClass: "form-check-input",
-                                      attrs: { type: "checkbox" }
+                                      attrs: {
+                                        type: "checkbox",
+                                        name: "catalog_name"
+                                      },
+                                      domProps: {
+                                        value: catalog.id,
+                                        checked: Array.isArray(
+                                          _vm.selectedCatalogs
+                                        )
+                                          ? _vm._i(
+                                              _vm.selectedCatalogs,
+                                              catalog.id
+                                            ) > -1
+                                          : _vm.selectedCatalogs
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          var $$a = _vm.selectedCatalogs,
+                                            $$el = $event.target,
+                                            $$c = $$el.checked ? true : false
+                                          if (Array.isArray($$a)) {
+                                            var $$v = catalog.id,
+                                              $$i = _vm._i($$a, $$v)
+                                            if ($$el.checked) {
+                                              $$i < 0 &&
+                                                (_vm.selectedCatalogs = $$a.concat(
+                                                  [$$v]
+                                                ))
+                                            } else {
+                                              $$i > -1 &&
+                                                (_vm.selectedCatalogs = $$a
+                                                  .slice(0, $$i)
+                                                  .concat($$a.slice($$i + 1)))
+                                            }
+                                          } else {
+                                            _vm.selectedCatalogs = $$c
+                                          }
+                                        }
+                                      }
                                     }),
                                     _vm._v(
                                       _vm._s(catalog.name) +
