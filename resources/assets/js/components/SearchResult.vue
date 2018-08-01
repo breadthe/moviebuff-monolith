@@ -10,7 +10,13 @@
         <div class="movie-title is-size-4 has-text-black">{{movie.Title}}</div>
         <div class="action-buttons">
 
-            <p v-if="isLoadingCatalogs === movie.imdbID"><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>&nbsp;loading catalogs...</p>
+            <p v-if="isLoadingCatalogs"><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></p>
+
+            <p v-else>
+                <a :href="'catalogs/' + catalog.id" class="badge badge-primary mr-1" v-if="catalogs.length" v-for="catalog in catalogs" :key="catalog.name">{{ catalog.name }}</a>
+            </p>
+
+            <p v-if="isOpeningModal === movie.imdbID"><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>&nbsp;loading catalogs...</p>
 
             <p v-else>
                 <button
@@ -34,7 +40,7 @@
 <script>
     export default {
         props: {
-            'isLoadingCatalogs': {
+            'isOpeningModal': {
                 required: true,
                 type: String,
                 default: ''
@@ -46,14 +52,38 @@
         },
         data () {
             return {
+                csrf: document.head.querySelector('meta[name="csrf-token"]'),
+                catalogs: [],
+                isLoadingCatalogs: false
             }
         },
         methods: {
-            isInCatalog: function (imdbID) {
+            isInCatalog: function (imdbId) {
                 return false;
+            },
+            getCatalogs: async function () {
+                const $this = this
+
+                // Restore internal headers headers for axios request
+                window.axios.defaults.headers.common = {
+                    'X-CSRF-TOKEN': this.csrf.content,
+                    'X-Requested-With': 'XMLHttpRequest'
+                };
+
+                $this.isLoadingCatalogs = true
+
+                await axios.get(`/api/movie/${$this.movie.imdbID}/catalogs`)
+                    .then(response => {
+                        $this.catalogs = response.data
+                        $this.isLoadingCatalogs = false
+                    }).catch (e => {
+                        $this.catalogs = []
+                        $this.isLoadingCatalogs = ''
+                    })
             }
         },
         mounted () {
+            this.getCatalogs()
         }
     }
 </script>

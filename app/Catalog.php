@@ -8,7 +8,7 @@ class Catalog extends Model
 {
     protected $fillable = ['user_id', 'name'];
 
-    protected $hidden = ['user_id', 'updated_at'];
+    protected $hidden = ['user_id', 'updated_at', 'pivot'];
 
     /**
      * Relationship between Catalog and User

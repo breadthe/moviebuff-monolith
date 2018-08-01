@@ -3,7 +3,7 @@
 
     <div class="movie-results">
         <div v-for="movie in movies" :key="movie.imdbID" class="movie-item">
-            <search-result :movie="movie" :is-loading-catalogs="isLoadingCatalogs" @openModal="openModal($event)"></search-result>
+            <search-result :movie="movie" :is-opening-modal="isOpeningModal" @openModal="openModal($event)"></search-result>
         </div>
     </div>
 
@@ -25,14 +25,14 @@
                 csrf: document.head.querySelector('meta[name="csrf-token"]'),
                 catalogs: [],
                 movie: {},
-                isLoadingCatalogs: '',
+                isOpeningModal: '',
                 error: false
             }
         },
         methods: {
             openModal: function (movie) {
                 this.movie = movie
-                this.isLoadingCatalogs = movie.imdbID
+                this.isOpeningModal = movie.imdbID
                 this.loadCatalogs()
             },
             loadCatalogs: function () {
@@ -45,15 +45,15 @@
                 };
 
                 axios.get('/api/catalogs')
-                    .then((response) => {
+                    .then(response => {
                         $this.error = false
                         $this.catalogs = response.data
-                        $this.isLoadingCatalogs = ''
+                        $this.isOpeningModal = ''
                     })
-                    .catch ((e) => {
+                    .catch (e => {
                         $this.error = true
                         $this.catalogs = []
-                        $this.isLoadingCatalogs = ''
+                        $this.isOpeningModal = ''
                     })
             }
         },

@@ -18,4 +18,5 @@ Route::group(['middleware' => 'auth:api'], function () {
         return $request->user();
     });
     Route::get('/catalogs', 'Api\CatalogsController@index')->name('catalogs');
+    Route::get('/movie/{movie}/catalogs', 'Api\MoviesController@catalogs')->name('movie_catalogs');
 });

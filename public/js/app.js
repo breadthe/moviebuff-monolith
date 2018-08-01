@@ -51067,7 +51067,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             csrf: document.head.querySelector('meta[name="csrf-token"]'),
             catalogs: [],
             movie: {},
-            isLoadingCatalogs: '',
+            isOpeningModal: '',
             error: false
         };
     },
@@ -51075,7 +51075,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         openModal: function openModal(movie) {
             this.movie = movie;
-            this.isLoadingCatalogs = movie.imdbID;
+            this.isOpeningModal = movie.imdbID;
             this.loadCatalogs();
         },
         loadCatalogs: function loadCatalogs() {
@@ -51090,11 +51090,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get('/api/catalogs').then(function (response) {
                 $this.error = false;
                 $this.catalogs = response.data;
-                $this.isLoadingCatalogs = '';
+                $this.isOpeningModal = '';
             }).catch(function (e) {
                 $this.error = true;
                 $this.catalogs = [];
-                $this.isLoadingCatalogs = '';
+                $this.isOpeningModal = '';
             });
         }
     },
@@ -51122,10 +51122,7 @@ var render = function() {
             { key: movie.imdbID, staticClass: "movie-item" },
             [
               _c("search-result", {
-                attrs: {
-                  movie: movie,
-                  "is-loading-catalogs": _vm.isLoadingCatalogs
-                },
+                attrs: { movie: movie, "is-opening-modal": _vm.isOpeningModal },
                 on: {
                   openModal: function($event) {
                     _vm.openModal($event)
@@ -51241,7 +51238,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51252,6 +51249,18 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -51288,7 +51297,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
-        'isLoadingCatalogs': {
+        'isOpeningModal': {
             required: true,
             type: String,
             default: ''
@@ -51299,15 +51308,62 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     data: function data() {
-        return {};
+        return {
+            csrf: document.head.querySelector('meta[name="csrf-token"]'),
+            catalogs: [],
+            isLoadingCatalogs: false
+        };
     },
 
     methods: {
-        isInCatalog: function isInCatalog(imdbID) {
+        isInCatalog: function isInCatalog(imdbId) {
             return false;
-        }
+        },
+        getCatalogs: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var $this;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                $this = this;
+
+                                // Restore internal headers headers for axios request
+
+                                window.axios.defaults.headers.common = {
+                                    'X-CSRF-TOKEN': this.csrf.content,
+                                    'X-Requested-With': 'XMLHttpRequest'
+                                };
+
+                                $this.isLoadingCatalogs = true;
+
+                                _context.next = 5;
+                                return axios.get('/api/movie/' + $this.movie.imdbID + '/catalogs').then(function (response) {
+                                    $this.catalogs = response.data;
+                                    $this.isLoadingCatalogs = false;
+                                }).catch(function (e) {
+                                    $this.catalogs = [];
+                                    $this.isLoadingCatalogs = '';
+                                });
+
+                            case 5:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function getCatalogs() {
+                return _ref.apply(this, arguments);
+            }
+
+            return getCatalogs;
+        }()
     },
-    mounted: function mounted() {}
+    mounted: function mounted() {
+        this.getCatalogs();
+    }
 });
 
 /***/ }),
@@ -51337,7 +51393,30 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "action-buttons" }, [
-        _vm.isLoadingCatalogs === _vm.movie.imdbID
+        _vm.isLoadingCatalogs
+          ? _c("p", [
+              _c("i", {
+                staticClass: "fa fa-circle-o-notch fa-spin fa-3x fa-fw"
+              })
+            ])
+          : _c(
+              "p",
+              _vm._l(_vm.catalogs, function(catalog) {
+                return _vm.catalogs.length
+                  ? _c(
+                      "a",
+                      {
+                        key: catalog.name,
+                        staticClass: "badge badge-primary mr-1",
+                        attrs: { href: "catalogs/" + catalog.id }
+                      },
+                      [_vm._v(_vm._s(catalog.name))]
+                    )
+                  : _vm._e()
+              })
+            ),
+        _vm._v(" "),
+        _vm.isOpeningModal === _vm.movie.imdbID
           ? _c("p", [
               _c("i", {
                 staticClass: "fa fa-circle-o-notch fa-spin fa-3x fa-fw"
