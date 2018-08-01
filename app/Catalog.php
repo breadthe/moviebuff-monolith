@@ -18,8 +18,11 @@ class Catalog extends Model
         return $this->belongsTo(User::class);
     }
 
-    /* public function movies()
+    /**
+     * Many-to-many relationship between Catalog and Movie
+     */
+    public function movies()
     {
-        return $this->hasMany(Movie::class);
-    } */
+        return $this->belongsToMany(Movie::class, 'movie_catalog', 'catalog_id', 'movie_id');
+    }
 }
