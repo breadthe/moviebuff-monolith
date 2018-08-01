@@ -51766,7 +51766,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51777,6 +51777,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -51937,15 +51938,19 @@ var render = function() {
                                   "list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                               },
                               [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: { type: "checkbox" }
-                                }),
-                                _vm._v(" "),
                                 _c(
                                   "label",
-                                  { staticClass: "form-check-label ml-1" },
-                                  [_vm._v(_vm._s(catalog.name))]
+                                  { staticClass: "form-check-label ml-2" },
+                                  [
+                                    _c("input", {
+                                      staticClass: "form-check-input",
+                                      attrs: { type: "checkbox" }
+                                    }),
+                                    _vm._v(
+                                      _vm._s(catalog.name) +
+                                        "\n                                    "
+                                    )
+                                  ]
                                 ),
                                 _vm._v(" "),
                                 _c(
@@ -51954,7 +51959,7 @@ var render = function() {
                                     staticClass:
                                       "badge badge-primary badge-pill"
                                   },
-                                  [_vm._v("14")]
+                                  [_vm._v(_vm._s(catalog.movies.length))]
                                 )
                               ]
                             )

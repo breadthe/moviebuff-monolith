@@ -26,9 +26,10 @@
                         <p>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" v-for="catalog in catalogs" :key="catalog.id">
-                                    <input type="checkbox" class="form-check-input">
-                                    <label class="form-check-label ml-1">{{ catalog.name }}</label>
-                                    <span class="badge badge-primary badge-pill">14</span>
+                                    <label class="form-check-label ml-2">
+                                        <input type="checkbox" class="form-check-input">{{ catalog.name }}
+                                    </label>
+                                    <span class="badge badge-primary badge-pill">{{ catalog.movies.length }}</span>
                                 </li>
                             </ul>
                         </p>

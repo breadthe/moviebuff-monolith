@@ -16,7 +16,7 @@ class CatalogsController extends Controller
      */
     public function index()
     {
-        return Auth::user()->catalogs()->get();
+        return Auth::user()->catalogs()->with('movies')->get();
     }
 
     /**
