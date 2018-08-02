@@ -51230,7 +51230,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51295,6 +51295,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 
+function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
         'isOpeningModal': {
@@ -51318,7 +51322,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         return {
             csrf: document.head.querySelector('meta[name="csrf-token"]'),
             catalogs: [],
-            isLoadingCatalogs: false
+            isLoadingCatalogs: false,
+            newCatalogName: ''
         };
     },
 
@@ -51405,6 +51410,30 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                     // TODO: handle errors somehow
                 });
             }
+        },
+        addMovieToNewCatalog: function addMovieToNewCatalog(event) {
+            var _this3 = this;
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            var data = {
+                'movie': this.movie,
+                'catalog_id': null,
+                'catalog_name': this.newCatalogName
+            };
+
+            axios.post('/api/catalog', data).then(function (response) {
+                // Retrieve catalogs for the current movie again
+                _this3.getCatalogs();
+
+                // Tell the parent to reload all the catalogs
+                _this3.$emit('loadAllCatalogs');
+
+                _this3.newCatalogName = '';
+            }).catch(function (e) {
+                // TODO: handle errors somehow
+            });
         }
     },
     mounted: function mounted() {
@@ -51472,7 +51501,68 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "dropdown-divider" }),
               _vm._v(" "),
-              _vm._m(1)
+              _c(
+                "form",
+                {
+                  staticClass: "form-inline px-2 py-1",
+                  on: {
+                    submit: function($event) {
+                      _vm.addMovieToNewCatalog($event)
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "btn-toolbar",
+                      attrs: {
+                        role: "toolbar",
+                        "aria-label": "Toolbar with button groups"
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.newCatalogName,
+                              expression: "newCatalogName"
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm",
+                          attrs: { type: "text", placeholder: "New catalog" },
+                          domProps: { value: _vm.newCatalogName },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.newCatalogName = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group-append" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary btn-sm",
+                              attrs: {
+                                type: "submit",
+                                disabled: !_vm.newCatalogName.length
+                              }
+                            },
+                            [_vm._v("Save")]
+                          )
+                        ])
+                      ])
+                    ]
+                  )
+                ]
+              )
             ],
             2
           )
@@ -51523,39 +51613,6 @@ var staticRenderFns = [
       },
       [_c("i", { staticClass: "fa fa-plus fa-lg text-secondary" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("form", { staticClass: "form-inline px-2 py-1" }, [
-      _c(
-        "div",
-        {
-          staticClass: "btn-toolbar",
-          attrs: { role: "toolbar", "aria-label": "Toolbar with button groups" }
-        },
-        [
-          _c("div", { staticClass: "input-group" }, [
-            _c("input", {
-              staticClass: "form-control form-control-sm",
-              attrs: { type: "text", placeholder: "New catalog" }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary btn-sm",
-                  attrs: { type: "submit" }
-                },
-                [_vm._v("Save")]
-              )
-            ])
-          ])
-        ]
-      )
-    ])
   }
 ]
 render._withStripped = true

@@ -19,12 +19,12 @@
 
                     <div class="dropdown-divider"></div>
 
-                    <form class="form-inline px-2 py-1">
+                    <form class="form-inline px-2 py-1" @submit="addMovieToNewCatalog($event)">
                         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                             <div class="input-group">
-                                <input type="text" class="form-control form-control-sm" placeholder="New catalog">
+                                <input type="text" class="form-control form-control-sm" placeholder="New catalog" v-model="newCatalogName">
                                 <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                    <button type="submit" class="btn btn-primary btn-sm" :disabled="!newCatalogName.length">Save</button>
                                 </div>
                             </div>
                         </div>
@@ -46,6 +46,10 @@
 </template>
 
 <script>
+    function isNumeric(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+
     export default {
         props: {
             'isOpeningModal': {
@@ -67,7 +71,8 @@
             return {
                 csrf: document.head.querySelector('meta[name="csrf-token"]'),
                 catalogs: [],
-                isLoadingCatalogs: false
+                isLoadingCatalogs: false,
+                newCatalogName: ''
             }
         },
         methods: {
@@ -124,6 +129,29 @@
                             // TODO: handle errors somehow
                         })
                 }
+            },
+            addMovieToNewCatalog(event) {
+                event.preventDefault()
+                event.stopPropagation()
+
+                const data = {
+                    'movie': this.movie,
+                    'catalog_id': null,
+                    'catalog_name': this.newCatalogName
+                }
+
+                axios.post(`/api/catalog`, data)
+                    .then(response => {
+                        // Retrieve catalogs for the current movie again
+                        this.getCatalogs()
+
+                        // Tell the parent to reload all the catalogs
+                        this.$emit('loadAllCatalogs')
+
+                        this.newCatalogName = ''
+                    }).catch (e => {
+                        // TODO: handle errors somehow
+                    })
             }
         },
         mounted () {

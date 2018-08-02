@@ -58,6 +58,15 @@ class CatalogsController extends Controller
          * Then use the new catalog_id to attach the movie to it
          */
 
+        if (empty($catalog_id)) {
+            $catalog_name = $request->catalog_name;
+            $new_catalog = Catalog::create([
+                'user_id' => Auth::user()->id,
+                'name' => $catalog_name
+            ]);
+            $catalog_id = $new_catalog->id;
+        }
+
         // Add movie_id, catalog_id to movie_catalog
         Catalog::find($catalog_id)->movies()->attach($imdbID);
     }
