@@ -15,10 +15,10 @@
                     <i class="fa fa-plus fa-lg text-secondary"></i>
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#" v-for="catalog in allCatalogs" :key="catalog.id" @click="addMovieToCatalog(catalog.id, $event)">{{ catalog.name }}</a>
-                    <!-- <a class="dropdown-item active" href="#">Static catalog</a> -->
-                    <!-- <a class="dropdown-item" href="#">Another static catalog</a> -->
+                    <a class="dropdown-item" :class="{'active': isInCatalog(catalog.id)}" href="#" v-for="catalog in allCatalogs" :key="catalog.id" @click="addMovieToCatalog(catalog.id, $event)">{{ catalog.name }}</a>
+
                     <div class="dropdown-divider"></div>
+
                     <form class="form-inline px-2 py-1">
                         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                             <div class="input-group">
@@ -29,7 +29,8 @@
                             </div>
                         </div>
                     </form>
-                </div>
+
+                </div><!-- .dropdown-menu -->
             </div>
 
             <span v-if="isLoadingCatalogs"><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></span>
@@ -70,8 +71,12 @@
             }
         },
         methods: {
-            isInCatalog(imdbId) {
-                return false;
+            // Determines if a movie belongs to a catalog
+            isInCatalog(catalogId) {
+                const catalog = this.allCatalogs.filter(catalog => catalog.id === catalogId)
+                const movies = catalog[0].movies // HACKY - find a better way
+                const isInCatalog = movies.filter(movie => movie.id === this.movie.imdbID)
+                return isInCatalog.length || false
             },
             async getCatalogs() {
                 const $this = this
@@ -95,13 +100,30 @@
                     'movie': this.movie,
                     'catalog_id': catalogId
                 }
-                axios.post(`/api/catalogs`, data)
-                    .then(response => {
-                        // Retrieve catalogs again
-                        this.getCatalogs()
-                    }).catch (e => {
-                        // TODO: handle errors somehow
-                    })
+
+                if (this.isInCatalog(catalogId)) { // If the movie is already in a catalog, remove it
+                    axios.delete(`/api/catalog/${catalogId}/movie/${this.movie.imdbID}`, data)
+                        .then(response => {
+                            // Retrieve catalogs for the current movie again
+                            this.getCatalogs()
+
+                            // Tell the parent to reload all the catalogs
+                            this.$emit('loadAllCatalogs')
+                        }).catch (e => {
+                            // TODO: handle errors somehow
+                        })
+                } else { // Otherwise add it
+                    axios.post(`/api/catalog`, data)
+                        .then(response => {
+                            // Retrieve catalogs for the current movie again
+                            this.getCatalogs()
+
+                            // Tell the parent to reload all the catalogs
+                            this.$emit('loadAllCatalogs')
+                        }).catch (e => {
+                            // TODO: handle errors somehow
+                        })
+                }
             }
         },
         mounted () {

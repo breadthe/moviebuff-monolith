@@ -62,6 +62,15 @@ class CatalogsController extends Controller
         Catalog::find($catalog_id)->movies()->attach($imdbID);
     }
 
+    public function destroyMovie(Request $request)
+    {
+        $catalog_id = $request->catalog;
+        $movie_id = $request->movie;
+
+        // Detach the movie from the catalog - remove the record from movie_catalog
+        Catalog::find($catalog_id)->movies()->detach($movie_id);
+    }
+
     /**
      * Display the specified resource.
      *

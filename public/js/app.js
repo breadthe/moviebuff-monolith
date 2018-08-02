@@ -51028,7 +51028,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51039,6 +51039,11 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -51117,8 +51122,8 @@ var render = function() {
                 "is-opening-modal": _vm.isOpeningModal
               },
               on: {
-                openModal: function($event) {
-                  _vm.openModal($event)
+                loadAllCatalogs: function($event) {
+                  _vm.loadAllCatalogs()
                 }
               }
             })
@@ -51225,7 +51230,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51242,6 +51247,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
 //
 //
 //
@@ -51317,8 +51323,18 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     },
 
     methods: {
-        isInCatalog: function isInCatalog(imdbId) {
-            return false;
+        // Determines if a movie belongs to a catalog
+        isInCatalog: function isInCatalog(catalogId) {
+            var _this = this;
+
+            var catalog = this.allCatalogs.filter(function (catalog) {
+                return catalog.id === catalogId;
+            });
+            var movies = catalog[0].movies; // HACKY - find a better way
+            var isInCatalog = movies.filter(function (movie) {
+                return movie.id === _this.movie.imdbID;
+            });
+            return isInCatalog.length || false;
         },
         getCatalogs: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
@@ -51356,7 +51372,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             return getCatalogs;
         }(),
         addMovieToCatalog: function addMovieToCatalog(catalogId, event) {
-            var _this = this;
+            var _this2 = this;
 
             event.preventDefault();
             event.stopPropagation();
@@ -51365,12 +51381,30 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 'movie': this.movie,
                 'catalog_id': catalogId
             };
-            axios.post('/api/catalogs', data).then(function (response) {
-                // Retrieve catalogs again
-                _this.getCatalogs();
-            }).catch(function (e) {
-                // TODO: handle errors somehow
-            });
+
+            if (this.isInCatalog(catalogId)) {
+                // If the movie is already in a catalog, remove it
+                axios.delete('/api/catalog/' + catalogId + '/movie/' + this.movie.imdbID, data).then(function (response) {
+                    // Retrieve catalogs for the current movie again
+                    _this2.getCatalogs();
+
+                    // Tell the parent to reload all the catalogs
+                    _this2.$emit('loadAllCatalogs');
+                }).catch(function (e) {
+                    // TODO: handle errors somehow
+                });
+            } else {
+                // Otherwise add it
+                axios.post('/api/catalog', data).then(function (response) {
+                    // Retrieve catalogs for the current movie again
+                    _this2.getCatalogs();
+
+                    // Tell the parent to reload all the catalogs
+                    _this2.$emit('loadAllCatalogs');
+                }).catch(function (e) {
+                    // TODO: handle errors somehow
+                });
+            }
         }
     },
     mounted: function mounted() {
@@ -51424,6 +51458,7 @@ var render = function() {
                   {
                     key: catalog.id,
                     staticClass: "dropdown-item",
+                    class: { active: _vm.isInCatalog(catalog.id) },
                     attrs: { href: "#" },
                     on: {
                       click: function($event) {

@@ -24,7 +24,8 @@ Route::group(['middleware' => 'auth:api'], function () {
      * Add movie to catalog - pass in movie_id and catalog_id
      * Create new catalog and add movie to it - pass in movie_id and catalog_name
     */
-    Route::post('/catalogs', 'Api\CatalogsController@store');
+    Route::post('/catalog', 'Api\CatalogsController@store');
+    Route::delete('/catalog/{catalog}/movie/{movie}', 'Api\CatalogsController@destroyMovie');
 
     Route::get('/movie/{movie}/catalogs', 'Api\MoviesController@catalogs')->name('movie_catalogs');
 });

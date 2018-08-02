@@ -3,7 +3,12 @@
 
     <div class="movie-results">
         <div v-for="movie in movies" :key="movie.imdbID" class="movie-item">
-            <search-result :all-catalogs="allCatalogs" :movie="movie" :is-opening-modal="isOpeningModal" @openModal="openModal($event)"></search-result>
+            <search-result
+                :all-catalogs="allCatalogs"
+                :movie="movie"
+                :is-opening-modal="isOpeningModal"
+                @loadAllCatalogs="loadAllCatalogs()"
+            ></search-result>
         </div>
     </div>
 
@@ -28,7 +33,7 @@
             }
         },
         methods: {
-            loadAllCatalogs: function () {
+            loadAllCatalogs() {
                 const $this = this
 
                 axios.get('/api/catalogs')
