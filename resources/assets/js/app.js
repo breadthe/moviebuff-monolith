@@ -23,7 +23,6 @@ Vue.component('search-page', require('./components/SearchPage.vue'));
 Vue.component('search-results', require('./components/SearchResults.vue'));
 Vue.component('search-result', require('./components/SearchResult.vue'));
 Vue.component('search-pagination-controls', require('./components/SearchPaginationControls.vue'));
-Vue.component('add-movie-to-catalog', require('./components/modals/AddMovieToCatalog.vue'));
 
 const app = new Vue({
     el: '#app'

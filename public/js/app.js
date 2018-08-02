@@ -14325,7 +14325,6 @@ Vue.component('search-page', __webpack_require__(59));
 Vue.component('search-results', __webpack_require__(66));
 Vue.component('search-result', __webpack_require__(71));
 Vue.component('search-pagination-controls', __webpack_require__(76));
-Vue.component('add-movie-to-catalog', __webpack_require__(81));
 
 var app = new Vue({
   el: '#app'
@@ -51847,12 +51846,7 @@ if (false) {
 }
 
 /***/ }),
-/* 81 */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/cemitas/source/laravel/moviebuff-monolith/resources/assets/js/components/modals/AddMovieToCatalog.vue'");
-
-/***/ }),
+/* 81 */,
 /* 82 */,
 /* 83 */,
 /* 84 */,
