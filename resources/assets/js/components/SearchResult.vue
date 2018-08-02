@@ -22,7 +22,7 @@
                     <form class="form-inline px-2 py-1" @submit="addMovieToNewCatalog($event)">
                         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                             <div class="input-group">
-                                <input type="text" class="form-control form-control-sm" placeholder="New catalog" v-model="newCatalogName">
+                                <input type="text" class="form-control form-control-sm" placeholder="New catalog" v-model="newCatalogName" @key.enter="addMovieToNewCatalog($event)">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-primary btn-sm" :disabled="!newCatalogName.length">Save</button>
                                 </div>

@@ -51536,6 +51536,21 @@ var render = function() {
                           attrs: { type: "text", placeholder: "New catalog" },
                           domProps: { value: _vm.newCatalogName },
                           on: {
+                            key: function($event) {
+                              if (
+                                !("button" in $event) &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              _vm.addMovieToNewCatalog($event)
+                            },
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
