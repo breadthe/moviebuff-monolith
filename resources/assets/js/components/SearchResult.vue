@@ -15,9 +15,9 @@
                     <i class="fa fa-plus fa-lg text-secondary"></i>
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#" v-for="catalog in allCatalogs" :key="catalog.id" @click="addMovieToCatalog(movie.imdbID, catalog.id, $event)">{{ catalog.name }}</a>
-                    <a class="dropdown-item active" href="#">Static catalog</a>
-                    <a class="dropdown-item" href="#">Another static catalog</a>
+                    <a class="dropdown-item" href="#" v-for="catalog in allCatalogs" :key="catalog.id" @click="addMovieToCatalog(catalog.id, $event)">{{ catalog.name }}</a>
+                    <!-- <a class="dropdown-item active" href="#">Static catalog</a> -->
+                    <!-- <a class="dropdown-item" href="#">Another static catalog</a> -->
                     <div class="dropdown-divider"></div>
                     <form class="form-inline px-2 py-1">
                         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -87,19 +87,21 @@
                         $this.isLoadingCatalogs = ''
                     })
             },
-            addMovieToCatalog(movieId, catalogId, event) {
+            addMovieToCatalog(catalogId, event) {
                 event.preventDefault()
                 event.stopPropagation()
-                console.log(movieId, catalogId)
 
-                /* await axios.post(`/api/movie/${$this.movie.imdbID}/catalogs`)
+                const data = {
+                    'movie': this.movie,
+                    'catalog_id': catalogId
+                }
+                axios.post(`/api/catalogs`, data)
                     .then(response => {
-                        $this.catalogs = response.data
-                        $this.isLoadingCatalogs = false
+                        // Retrieve catalogs again
+                        this.getCatalogs()
                     }).catch (e => {
-                        $this.catalogs = []
-                        $this.isLoadingCatalogs = ''
-                    }) */
+                        // TODO: handle errors somehow
+                    })
             }
         },
         mounted () {

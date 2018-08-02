@@ -51225,7 +51225,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51355,19 +51355,22 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return getCatalogs;
         }(),
-        addMovieToCatalog: function addMovieToCatalog(movieId, catalogId, event) {
+        addMovieToCatalog: function addMovieToCatalog(catalogId, event) {
+            var _this = this;
+
             event.preventDefault();
             event.stopPropagation();
-            console.log(movieId, catalogId);
 
-            /* await axios.post(`/api/movie/${$this.movie.imdbID}/catalogs`)
-                .then(response => {
-                    $this.catalogs = response.data
-                    $this.isLoadingCatalogs = false
-                }).catch (e => {
-                    $this.catalogs = []
-                    $this.isLoadingCatalogs = ''
-                }) */
+            var data = {
+                'movie': this.movie,
+                'catalog_id': catalogId
+            };
+            axios.post('/api/catalogs', data).then(function (response) {
+                // Retrieve catalogs again
+                _this.getCatalogs();
+            }).catch(function (e) {
+                // TODO: handle errors somehow
+            });
         }
     },
     mounted: function mounted() {
@@ -51424,27 +51427,13 @@ var render = function() {
                     attrs: { href: "#" },
                     on: {
                       click: function($event) {
-                        _vm.addMovieToCatalog(
-                          _vm.movie.imdbID,
-                          catalog.id,
-                          $event
-                        )
+                        _vm.addMovieToCatalog(catalog.id, $event)
                       }
                     }
                   },
                   [_vm._v(_vm._s(catalog.name))]
                 )
               }),
-              _vm._v(" "),
-              _c(
-                "a",
-                { staticClass: "dropdown-item active", attrs: { href: "#" } },
-                [_vm._v("Static catalog")]
-              ),
-              _vm._v(" "),
-              _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-                _vm._v("Another static catalog")
-              ]),
               _vm._v(" "),
               _c("div", { staticClass: "dropdown-divider" }),
               _vm._v(" "),

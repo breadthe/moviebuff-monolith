@@ -15,10 +15,10 @@ class CreateMoviesTable extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->string('id', 10)->primary()->comment('imdbID');
-            $table->string('title');
-            $table->string('poster');
-            $table->string('type', 10);
-            $table->integer('year');
+            $table->string('title')->nullable();
+            $table->string('poster')->nullable();
+            $table->string('type', 10)->nullable();
+            $table->integer('year')->nullable();
             $table->timestamps();
         });
 

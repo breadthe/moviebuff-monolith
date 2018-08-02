@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Movie extends Model
 {
+    protected $fillable = ['id', 'title', 'poster', 'year', 'type'];
+
     protected $hidden = ['pivot']; // hide the movie_catalog pivot table when joining with catalogs
 
     /**
