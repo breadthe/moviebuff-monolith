@@ -13649,16 +13649,16 @@ input.form-control.searchbar::placeholder {
   margin-top: 10px;
 }
 
-.movie-results .movie-item .right-side .action-buttons p {
+.movie-results .movie-item .right-side .action-buttons span {
   color: #B8C2CC;
   font-size: 1rem;
 }
 
-.movie-results .movie-item .right-side .action-buttons p .btn.btn-link {
+.movie-results .movie-item .right-side .action-buttons span .btn.btn-link {
   font-size: 1rem;
 }
 
-.movie-results .movie-item .right-side .action-buttons p i.fa {
+.movie-results .movie-item .right-side .action-buttons span i.fa {
   font-size: 1rem;
 }
 

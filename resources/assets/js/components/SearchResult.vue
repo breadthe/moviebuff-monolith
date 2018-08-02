@@ -10,26 +10,33 @@
         <div class="movie-title is-size-4 has-text-black">{{movie.Title}}</div>
         <div class="action-buttons">
 
-            <p v-if="isLoadingCatalogs"><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></p>
-
-            <p v-else>
-                <a :href="'catalogs/' + catalog.id" class="badge badge-primary mr-1" v-if="catalogs.length" v-for="catalog in catalogs" :key="catalog.name">{{ catalog.name }}</a>
-            </p>
-
-            <p v-if="isOpeningModal === movie.imdbID"><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>&nbsp;loading catalogs...</p>
-
-            <p v-else>
-                <button
-                    class="btn btn-link p-0"
-                    :class="{'is-success': isInCatalog(movie.imdbID)}"
-                    :disabled="isInCatalog(movie.imdbID)"
-                    @click="$emit('openModal', movie)"
-                    data-toggle="modal"
-                    data-target="#addMovieToCatalog"
-                >
-                    Add to List
+            <div class="btn-group">
+                <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Add to Catalog">
+                    <i class="fa fa-plus fa-lg text-secondary"></i>
                 </button>
-            </p>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#" v-for="catalog in allCatalogs" :key="catalog.id" @click="addMovieToCatalog(movie.imdbID, catalog.id, $event)">{{ catalog.name }}</a>
+                    <a class="dropdown-item active" href="#">Static catalog</a>
+                    <a class="dropdown-item" href="#">Another static catalog</a>
+                    <div class="dropdown-divider"></div>
+                    <form class="form-inline px-2 py-1">
+                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                            <div class="input-group">
+                                <input type="text" class="form-control form-control-sm" placeholder="New catalog">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <span v-if="isLoadingCatalogs"><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></span>
+
+            <span v-else>
+                <a :href="'catalogs/' + catalog.id" class="badge badge-primary mr-1" v-if="catalogs.length" v-for="catalog in catalogs" :key="catalog.name">{{ catalog.name }}</a>
+            </span>
 
         </div>
     </div>
@@ -48,6 +55,11 @@
             'movie': {
                 required: true,
                 type: Object
+            },
+            'allCatalogs': {
+                required: false,
+                type: Array,
+                default: () => []
             }
         },
         data () {
@@ -58,17 +70,11 @@
             }
         },
         methods: {
-            isInCatalog: function (imdbId) {
+            isInCatalog(imdbId) {
                 return false;
             },
-            getCatalogs: async function () {
+            async getCatalogs() {
                 const $this = this
-
-                // Restore internal headers headers for axios request
-                window.axios.defaults.headers.common = {
-                    'X-CSRF-TOKEN': this.csrf.content,
-                    'X-Requested-With': 'XMLHttpRequest'
-                };
 
                 $this.isLoadingCatalogs = true
 
@@ -80,9 +86,29 @@
                         $this.catalogs = []
                         $this.isLoadingCatalogs = ''
                     })
+            },
+            addMovieToCatalog(movieId, catalogId, event) {
+                event.preventDefault()
+                event.stopPropagation()
+                console.log(movieId, catalogId)
+
+                /* await axios.post(`/api/movie/${$this.movie.imdbID}/catalogs`)
+                    .then(response => {
+                        $this.catalogs = response.data
+                        $this.isLoadingCatalogs = false
+                    }).catch (e => {
+                        $this.catalogs = []
+                        $this.isLoadingCatalogs = ''
+                    }) */
             }
         },
         mounted () {
+            // Restore internal headers headers for axios request
+            window.axios.defaults.headers.common = {
+                'X-CSRF-TOKEN': this.csrf.content,
+                'X-Requested-With': 'XMLHttpRequest'
+            };
+
             this.getCatalogs()
         }
     }
