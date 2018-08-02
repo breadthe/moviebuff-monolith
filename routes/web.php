@@ -19,6 +19,9 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
     Route::get('/catalogs', 'CatalogsController@index')->name('catalogs');
+    Route::get('/catalogs/{catalog}', 'CatalogsController@show')->name('catalog');
+
     Route::get('/search', 'SearchController@index')->name('search');
 });

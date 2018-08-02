@@ -81,45 +81,45 @@ input {
   hr {
       margin: 1rem 0;
   }
-  .movie-item {
-      width: 100%;
-      display: table;
-      margin-bottom: 20px;
-      .left-side {
-          display: table-cell;
-          width: 100px;
-          height: 110px;
-          img {
-              max-height: 110px;
-              max-width: 110px;
-          }
-      }
-      .right-side {
-          display: table-cell;
-          padding-left: 10px;
-          font-size: 1.5rem;
-          vertical-align: top;
-          .movie-year {
-            font-size: 1rem;
-          }
-          .movie-title {
+}
+.movie-item {
+    width: 100%;
+    display: table;
+    margin-bottom: 20px;
+    .left-side {
+        display: table-cell;
+        width: 100px;
+        height: 110px;
+        img {
+            max-height: 110px;
+            max-width: 110px;
+        }
+    }
+    .right-side {
+        display: table-cell;
+        padding-left: 10px;
+        font-size: 1.5rem;
+        vertical-align: top;
+        .movie-year {
+          font-size: 1rem;
+        }
+        .movie-title {
 
-          }
-          .action-buttons {
-              margin-top: 10px;
-              span {
-                color: $grey;
-                font-size: 1rem;
-                .btn {
-                  &.btn-link {
-                    font-size: 1rem;
-                  }
-                }
-                i.fa {
+        }
+        .action-buttons {
+            margin-top: 10px;
+            span {
+              color: $grey;
+              font-size: 1rem;
+              .btn {
+                &.btn-link {
                   font-size: 1rem;
                 }
               }
-          }
-      }
-  }
+              i.fa {
+                font-size: 1rem;
+              }
+            }
+        }
+    }
 }

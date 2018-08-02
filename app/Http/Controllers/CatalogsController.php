@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Catalog;
 
 class CatalogsController extends Controller
 {
@@ -46,9 +47,10 @@ class CatalogsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Catalog $catalog)
     {
-        //
+        $movies = $catalog->movies()->get();
+        return view('catalog', compact('catalog', 'movies'));
     }
 
     /**

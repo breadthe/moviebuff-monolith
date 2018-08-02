@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
 
             <div class="card">
                 <div class="card-header d-flex">
@@ -20,8 +20,10 @@
                     <ul class="list-group list-group-flush">
                         @foreach ($catalogs as $catalog)
                             <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                {{ $catalog->name }}
-                                <span class="badge badge-primary badge-pill">{{ $catalog->movies->count() }}</span>
+                                <a href="{{ route('catalog', ['catalog' => $catalog]) }}">{{ $catalog->name }}</a>
+                                @if ($catalog->movies->count())
+                                    <span class="badge badge-primary badge-pill">{{ $catalog->movies->count() }}</span>
+                                @endif
                             </li>
                         @endforeach
                     </ul>

@@ -13617,48 +13617,48 @@ input.form-control.searchbar::placeholder {
   margin: 1rem 0;
 }
 
-.movie-results .movie-item {
+.movie-item {
   width: 100%;
   display: table;
   margin-bottom: 20px;
 }
 
-.movie-results .movie-item .left-side {
+.movie-item .left-side {
   display: table-cell;
   width: 100px;
   height: 110px;
 }
 
-.movie-results .movie-item .left-side img {
+.movie-item .left-side img {
   max-height: 110px;
   max-width: 110px;
 }
 
-.movie-results .movie-item .right-side {
+.movie-item .right-side {
   display: table-cell;
   padding-left: 10px;
   font-size: 1.5rem;
   vertical-align: top;
 }
 
-.movie-results .movie-item .right-side .movie-year {
+.movie-item .right-side .movie-year {
   font-size: 1rem;
 }
 
-.movie-results .movie-item .right-side .action-buttons {
+.movie-item .right-side .action-buttons {
   margin-top: 10px;
 }
 
-.movie-results .movie-item .right-side .action-buttons span {
+.movie-item .right-side .action-buttons span {
   color: #B8C2CC;
   font-size: 1rem;
 }
 
-.movie-results .movie-item .right-side .action-buttons span .btn.btn-link {
+.movie-item .right-side .action-buttons span .btn.btn-link {
   font-size: 1rem;
 }
 
-.movie-results .movie-item .right-side .action-buttons span i.fa {
+.movie-item .right-side .action-buttons span i.fa {
   font-size: 1rem;
 }
 
