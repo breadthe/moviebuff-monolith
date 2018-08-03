@@ -70,10 +70,10 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        // Create a default Wishlist catalog when registering a new user
+        // Create a default Watchlist catalog when registering a new user
         Catalog::create([
             'user_id' => $user->id,
-            'name' => 'Wishlist'
+            'name' => 'Watchlist'
         ]);
 
         return $user;

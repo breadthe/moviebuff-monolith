@@ -49,8 +49,16 @@ class CatalogsController extends Controller
      */
     public function show(Catalog $catalog)
     {
-        $movies = $catalog->movies()->get();
-        return view('catalog', compact('catalog', 'movies'));
+        // Find the catalog associated with this user
+        // TODO: maybe there's a better way?
+        $catalog = Auth::user()->catalogs()->with('movies')->where('id', $catalog->id)->first();
+        if ($catalog) {
+            $movies = $catalog->movies;
+            return view('catalog', compact('catalog', 'movies'));
+        }
+
+        // If the user doesn't own this catalog, redirect
+        return redirect()->route('catalogs');
     }
 
     /**
