@@ -5,7 +5,7 @@ Laravel 5.6 monolith implementation of https://github.com/breadthe/moviebuff
 
 # Installation
 
-These instructions assume the use of Homestead. For other types of Vagrant boxes or Docker, feel free to create your own instructions and PR them here.
+These instructions assume the use of Homestead. For other types of Vagrant boxes or Docker, feel free to create your own instructions and PR them here. Also assumes you have the necessary tools installed and in your path (`git`, `php`, `composer`, `npm`, `yarn`, `artisan`).
 
 ## Mac
 
@@ -46,3 +46,67 @@ composer install
 npm install
 ```
 
+Install Passport:
+
+```bash
+php artisan passport:install
+```
+
+Alternately:
+
+```bash
+php artisan passport:client --password
+```
+
+Next, configure Laravel. Generate a `.env`:
+
+```bash
+cp .env.example .env
+```
+
+I use these values (relevant bits shown only):
+
+```
+APP_NAME=MovieBuff
+APP_URL=http://moviebuff.test
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=moviebuff
+DB_USERNAME=homestead
+DB_PASSWORD=secret
+
+OMDB_API_KEY={YOUR OMDB API KEY}
+GOOGLE_PLACES_API_KEY={YOUR GOOGLE PLACES API KEY}
+```
+
+Run database migrations:
+
+```bash
+php artisan migrate
+```
+
+One additional thing that I like to do is to allow Artisan to run on the local DB port (3306) instead of the Homestead (33060) port. So in your `.bashrc` or `.zshrc` file, export the local DB port:
+
+```bash
+export DB_PORT=33060
+```
+
+Finally, switch back to your Homestead directory and run:
+
+```bash
+vagrant up
+```
+
+The site should now be accessible in the browser at `moviebuff.test`.
+
+**NOTE:** If I have missed any steps, feel free to correct me with a PR.
+
+## Windows
+
+You're on your own, buddy! Again, feel free to make a PR if you have Windows-specific instructions.
+
+## Linux
+
+See above.
