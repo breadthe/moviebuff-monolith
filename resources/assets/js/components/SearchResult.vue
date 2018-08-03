@@ -14,17 +14,31 @@
                 <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Add to Catalog">
                     <i class="fa fa-plus fa-lg text-secondary"></i>
                 </button>
+
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" :class="{'active': isInCatalog(catalog.id)}" href="#" v-for="catalog in allCatalogs" :key="catalog.id" @click="addMovieToCatalog(catalog.id, $event)">{{ catalog.name }}</a>
+                    <a
+                        class="dropdown-item d-flex align-items-center"
+                        href="#"
+                        v-for="catalog in allCatalogs"
+                        :key="catalog.id"
+                        @click="addMovieToCatalog(catalog.id, $event)"
+                        @mouseover="showDelete = catalog.id"
+                        @mouseout="showDelete = false"
+                    >
+                        <i class="fa" :class="isInCatalog(catalog.id) ? 'fa-star text-primary' : 'fa-star-o text-white'"></i>&nbsp;
+                        {{ catalog.name }}
+                        <span v-if="catalog.movies.length"><small>&nbsp;({{ catalog.movies.length }})</small></span>
+                        <i class="fa fa-ban ml-auto pl-1 text-danger" v-if="showDelete === catalog.id && isInCatalog(catalog.id)"></i>
+                    </a>
 
                     <div class="dropdown-divider"></div>
 
-                    <form class="form-inline px-2 py-1" @submit="addMovieToNewCatalog($event)">
+                    <form class="form-inline px-2" @submit="addMovieToNewCatalog($event)">
                         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                             <div class="input-group">
                                 <input type="text" class="form-control form-control-sm" placeholder="New catalog" v-model="newCatalogName" @key.enter="addMovieToNewCatalog($event)">
                                 <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary btn-sm" :disabled="!newCatalogName.length">Save</button>
+                                    <button type="submit" class="btn btn-primary btn-sm" :disabled="!newCatalogName.length">Add</button>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +86,8 @@
                 csrf: document.head.querySelector('meta[name="csrf-token"]'),
                 catalogs: [],
                 isLoadingCatalogs: false,
-                newCatalogName: ''
+                newCatalogName: '',
+                showDelete: false
             }
         },
         methods: {
