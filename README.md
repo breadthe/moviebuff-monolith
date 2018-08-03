@@ -1,7 +1,8 @@
 # MovieBuff-monolith
-Laravel 5.6 monolith implementation of https://github.com/breadthe/moviebuff
 
-*Migrated from Gitlab*
+*Migrated from GitLab*
+
+Laravel 5.6 monolith implementation of https://github.com/breadthe/moviebuff
 
 # Installation
 
