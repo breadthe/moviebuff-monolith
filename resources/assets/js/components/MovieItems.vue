@@ -1,6 +1,7 @@
 <template>
 <section>
     <movie-item
+        :catalog-id="catalogId"
         :movie="movie"
         v-for="(movie, i) in mutableMovies"
         :key="i"
@@ -13,6 +14,10 @@
     export default {
         name: 'movie-items',
         props: {
+            'catalogId': {
+                required: true,
+                type: Number
+            },
             'movies': {
                 required: true,
                 type: Array

@@ -16,7 +16,7 @@
 
                 <div class="card-body">
                     @if (count($movies))
-                        <movie-items :movies="{{ $movies }}"></movie-items>
+                        <movie-items :catalog-id="{{ $catalog->id }}" :movies="{{ $movies }}"></movie-items>
                     @else
                         There are no movies in this catalog.
                     @endif

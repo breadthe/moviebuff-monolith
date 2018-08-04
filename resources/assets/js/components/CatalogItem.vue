@@ -114,8 +114,7 @@
                     .then(response => {
                         if (response.status === 200) {
                             this.isDeleting = false;
-                            this.$emit('removeItem', this.catalog.id);
-                            // remove this item from the DOM
+                            this.$emit('removeItem', this.catalog.id); // remove this item from the DOM
                         }
                     }).catch (e => {
                         // TODO: handle errors somehow

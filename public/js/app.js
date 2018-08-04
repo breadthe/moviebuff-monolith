@@ -50025,7 +50025,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50189,8 +50189,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 return axios.delete('/api/catalog/' + this.catalog.id).then(function (response) {
                                     if (response.status === 200) {
                                         _this2.isDeleting = false;
-                                        _this2.$emit('removeItem', _this2.catalog.id);
-                                        // remove this item from the DOM
+                                        _this2.$emit('removeItem', _this2.catalog.id); // remove this item from the DOM
                                     }
                                 }).catch(function (e) {
                                     // TODO: handle errors somehow
@@ -52775,7 +52774,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52797,10 +52796,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'movie-items',
     props: {
+        'catalogId': {
+            required: true,
+            type: Number
+        },
         'movies': {
             required: true,
             type: Array
@@ -52834,7 +52838,7 @@ var render = function() {
     _vm._l(_vm.mutableMovies, function(movie, i) {
       return _c("movie-item", {
         key: i,
-        attrs: { movie: movie },
+        attrs: { "catalog-id": _vm.catalogId, movie: movie },
         on: {
           removeItem: function($event) {
             _vm.removeItem($event)
@@ -52940,7 +52944,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -53018,6 +53022,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'movie-item',
     props: {
+        'catalogId': {
+            required: true,
+            type: Number
+        },
         'movie': {
             required: true,
             type: Object
@@ -53098,21 +53106,20 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         }(),
         deleteMovie: function () {
             var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+                var _this = this;
+
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
                         switch (_context3.prev = _context3.next) {
                             case 0:
-                                console.log('deleteMovie');
-                                /* await axios.delete(`/api/movie/${this.movie.id}`)
-                                    .then(response => {
-                                        if (response.status === 200) {
-                                            this.isDeleting = false;
-                                            this.$emit('removeItem', this.movie.id);
-                                            // remove this item from the DOM
-                                        }
-                                    }).catch (e => {
-                                        // TODO: handle errors somehow
-                                    }); */
+                                axios.delete('/api/catalog/' + this.catalogId + '/movie/' + this.movie.id).then(function (response) {
+                                    if (response.status === 200) {
+                                        _this.isDeleting = false;
+                                        _this.$emit('removeItem', _this.movie.id); // remove this item from the DOM
+                                    }
+                                }).catch(function (e) {
+                                    // TODO: handle errors somehow
+                                });
 
                             case 1:
                             case 'end':

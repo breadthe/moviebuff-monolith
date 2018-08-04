@@ -59,6 +59,10 @@
     export default {
         name: 'movie-item',
         props: {
+            'catalogId': {
+                required: true,
+                type: Number
+            },
             'movie': {
                 required: true,
                 type: Object
@@ -99,17 +103,15 @@
                 this.isCopying = false;
             },
             async deleteMovie() {
-                console.log('deleteMovie');
-                /* await axios.delete(`/api/movie/${this.movie.id}`)
+                axios.delete(`/api/catalog/${this.catalogId}/movie/${this.movie.id}`)
                     .then(response => {
                         if (response.status === 200) {
                             this.isDeleting = false;
-                            this.$emit('removeItem', this.movie.id);
-                            // remove this item from the DOM
+                            this.$emit('removeItem', this.movie.id); // remove this item from the DOM
                         }
                     }).catch (e => {
                         // TODO: handle errors somehow
-                    }); */
+                    })
             },
         },
         mounted () {
