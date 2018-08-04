@@ -52940,7 +52940,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52969,6 +52969,51 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'movie-item',
@@ -52982,38 +53027,40 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         return {
             csrf: document.head.querySelector('meta[name="csrf-token"]'),
             showControls: false,
-            isEditing: false,
+            isMoving: false,
+            isCopying: false,
             isDeleting: false
         };
     },
 
     methods: {
+        confirmMove: function confirmMove(event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            this.isMoving = true;
+        },
+        confirmCopy: function confirmCopy(event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            this.isCopying = true;
+        },
         confirmDelete: function confirmDelete(event) {
             event.preventDefault();
             event.stopPropagation();
 
             this.isDeleting = true;
         },
-        deleteMovie: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-                var _this = this;
-
+        moveToCatalog: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(event) {
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                _context.next = 2;
-                                return axios.delete('/api/movie/' + this.movie.id).then(function (response) {
-                                    if (response.status === 200) {
-                                        _this.isDeleting = false;
-                                        _this.$emit('removeItem', _this.movie.id);
-                                        // remove this item from the DOM
-                                    }
-                                }).catch(function (e) {
-                                    // TODO: handle errors somehow
-                                });
+                                this.isMoving = false;
 
-                            case 2:
+                            case 1:
                             case 'end':
                                 return _context.stop();
                         }
@@ -53021,8 +53068,62 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 }, _callee, this);
             }));
 
-            function deleteMovie() {
+            function moveToCatalog(_x) {
                 return _ref.apply(this, arguments);
+            }
+
+            return moveToCatalog;
+        }(),
+        copyToCatalog: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(event) {
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                this.isCopying = false;
+
+                            case 1:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function copyToCatalog(_x2) {
+                return _ref2.apply(this, arguments);
+            }
+
+            return copyToCatalog;
+        }(),
+        deleteMovie: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                console.log('deleteMovie');
+                                /* await axios.delete(`/api/movie/${this.movie.id}`)
+                                    .then(response => {
+                                        if (response.status === 200) {
+                                            this.isDeleting = false;
+                                            this.$emit('removeItem', this.movie.id);
+                                            // remove this item from the DOM
+                                        }
+                                    }).catch (e => {
+                                        // TODO: handle errors somehow
+                                    }); */
+
+                            case 1:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
+
+            function deleteMovie() {
+                return _ref3.apply(this, arguments);
             }
 
             return deleteMovie;
@@ -53045,27 +53146,188 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "movie-item" }, [
-    _c("div", { staticClass: "left-side" }, [
-      _c("img", {
-        attrs: {
-          src: _vm.movie.poster
-            ? _vm.movie.poster
-            : "http://via.placeholder.com/75x100?text=NO+IMAGE"
+  return _c(
+    "div",
+    {
+      staticClass: "movie-item",
+      on: {
+        mouseover: function($event) {
+          _vm.showControls = true
+        },
+        mouseout: function($event) {
+          _vm.showControls = false
         }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "right-side" }, [
-      _c("div", { staticClass: "movie-year is-size-6" }, [
-        _vm._v(_vm._s(_vm.movie.year))
+      }
+    },
+    [
+      _c("div", { staticClass: "left-side" }, [
+        _c("img", {
+          attrs: {
+            src: _vm.movie.poster
+              ? _vm.movie.poster
+              : "http://via.placeholder.com/75x100?text=NO+IMAGE"
+          }
+        })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "movie-title is-size-4 has-text-black" }, [
-        _vm._v(_vm._s(_vm.movie.title))
-      ])
-    ])
-  ])
+      _c("div", { staticClass: "right-side" }, [
+        _vm.isMoving
+          ? _c("section", { staticClass: "confirmation" }, [
+              _c("p", [
+                _vm._v("Move "),
+                _c("strong", [_vm._v(_vm._s(_vm.movie.title))]),
+                _vm._v(" to another catalog?")
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-link",
+                  on: {
+                    click: function($event) {
+                      _vm.isMoving = false
+                    }
+                  }
+                },
+                [_vm._v("\n                Cancel\n            ")]
+              )
+            ])
+          : _vm.isCopying
+            ? _c("section", { staticClass: "confirmation" }, [
+                _c("p", [
+                  _vm._v("Copy "),
+                  _c("strong", [_vm._v(_vm._s(_vm.movie.title))]),
+                  _vm._v(" to another catalog?")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-link",
+                    on: {
+                      click: function($event) {
+                        _vm.isCopying = false
+                      }
+                    }
+                  },
+                  [_vm._v("\n                Cancel\n            ")]
+                )
+              ])
+            : _vm.isDeleting
+              ? _c(
+                  "section",
+                  { staticClass: "confirmation d-flex align-items-center" },
+                  [
+                    _c("p", [
+                      _vm._v("Are you sure you want to remove "),
+                      _c("strong", [_vm._v(_vm._s(_vm.movie.title))]),
+                      _vm._v(" from this catalog?")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-sm",
+                        on: {
+                          click: function($event) {
+                            _vm.deleteMovie()
+                          }
+                        }
+                      },
+                      [_vm._v("\n                Delete\n            ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-link",
+                        on: {
+                          click: function($event) {
+                            _vm.isDeleting = false
+                          }
+                        }
+                      },
+                      [_vm._v("\n                Cancel\n            ")]
+                    )
+                  ]
+                )
+              : _c("section", [
+                  _c("div", { staticClass: "movie-year is-size-6" }, [
+                    _vm._v(_vm._s(_vm.movie.year))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "movie-title is-size-4 has-text-black" },
+                    [_vm._v(_vm._s(_vm.movie.title))]
+                  )
+                ])
+      ]),
+      _vm._v(" "),
+      _vm.showControls && !(_vm.isMoving || _vm.isCopying || _vm.isDeleting)
+        ? _c("div", { staticClass: "d-flex align-items-center" }, [
+            _c("span", { staticClass: "ml-auto align-self-center" }, [
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.confirmMove($event)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-share-square-o fa-lg text-primary m-2",
+                    attrs: { "aria-hidden": "true", title: "Move to Catalog" }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.confirmCopy($event)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-clone fa-lg text-success m-2",
+                    attrs: { "aria-hidden": "true", title: "Copy to Catalog" }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.confirmDelete($event)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-trash fa-lg text-danger m-2",
+                    attrs: {
+                      "aria-hidden": "true",
+                      title: "Delete " + _vm.movie.name
+                    }
+                  })
+                ]
+              )
+            ])
+          ])
+        : _vm._e()
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

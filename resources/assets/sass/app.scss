@@ -106,6 +106,11 @@ input {
         .movie-title {
 
         }
+        section {
+          &.confirmation {
+            font-size: 1rem;
+          }
+        }
         .action-buttons {
             margin-top: 10px;
             span {

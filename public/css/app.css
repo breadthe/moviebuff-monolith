@@ -13645,6 +13645,10 @@ input.form-control.searchbar::placeholder {
   font-size: 1rem;
 }
 
+.movie-item .right-side section.confirmation {
+  font-size: 1rem;
+}
+
 .movie-item .right-side .action-buttons {
   margin-top: 10px;
 }
