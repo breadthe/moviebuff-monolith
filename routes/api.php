@@ -25,7 +25,24 @@ Route::group(['middleware' => 'auth:api'], function () {
      * Create new catalog and add movie to it - pass in movie_id and catalog_name
     */
     Route::post('/catalog', 'Api\CatalogsController@store');
+
+    /**
+     * Edit the Catalog name
+     */
+    Route::post('/catalog/{id}', 'Api\CatalogsController@update');
+
+    /**
+     * Delete a Catalog
+     */
+    Route::delete('/catalog', 'Api\CatalogsController@destroy');
+
+    /**
+     * Remove the Catalog-Movie association (un-tag a movie)
+     */
     Route::delete('/catalog/{catalog}/movie/{movie}', 'Api\CatalogsController@destroyMovie');
 
+    /**
+     * Retrieve all the catalogs for a given movie (tag the movie)
+     */
     Route::get('/movie/{movie}/catalogs', 'Api\MoviesController@catalogs')->name('movie_catalogs');
 });
