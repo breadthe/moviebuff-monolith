@@ -9,7 +9,15 @@
         <form class="form-inline px-2" @submit="saveCatalogName($event)">
             <div class="btn-toolbar" role="toolbar" aria-label="Edit catalog name">
                 <div class="input-group">
-                    <input type="text" class="form-control form-control-sm" placeholder="Catalog name" v-model="catalog.name" @key.enter="saveCatalogName($event)">
+                    <input 
+                        type="text"
+                        class="form-control form-control-sm"
+                        placeholder="Catalog name"
+                        v-model="catalog.name"
+                        @key.enter="saveCatalogName($event)"
+                        v-focus
+                    >
+
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary btn-sm" :disabled="!catalog.name.length">Save</button>
                     </div>
