@@ -52260,7 +52260,7 @@ var render = function() {
     [
       !_vm.isEditing
         ? _c("span", { staticClass: "d-flex align-items-center" }, [
-            _c("a", { attrs: { href: "/catalog/" + _vm.catalog.id } }, [
+            _c("a", { attrs: { href: "/catalogs/" + _vm.catalog.id } }, [
               _vm._v(_vm._s(_vm.catalog.name))
             ]),
             _vm._v(" "),

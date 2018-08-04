@@ -6,7 +6,7 @@
 >
 
     <span class="d-flex align-items-center" v-if="! isEditing">
-        <a :href="'/catalog/' + catalog.id">{{ catalog.name }}</a>
+        <a :href="'/catalogs/' + catalog.id">{{ catalog.name }}</a>
         <small v-if="catalog.movies.length">&nbsp;({{ catalog.movies.length }})</small>
 
         <span class="ml-auto pl-1" v-if="showControls">

@@ -14,9 +14,9 @@ class CatalogsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function index()
     {
-        $catalogs = Auth::user()->catalogs;
+        $catalogs = Auth::user()->catalogs()->with('movies')->get();
         return view('catalogs', compact('catalogs'));
     }
 
