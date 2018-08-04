@@ -126,6 +126,6 @@ class CatalogsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Catalog::destroy($id);
     }
 }

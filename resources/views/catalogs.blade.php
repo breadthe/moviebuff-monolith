@@ -17,11 +17,8 @@
 
                 <div class="card-body">
                     <p>Some generic text describing what these things are, even though it's obvious that they are catalogs used to organize your movies.</p>
-                    <ul class="list-group list-group-flush">
-                        @foreach ($catalogs as $catalog)
-                            <catalog-item :catalog="{{ $catalog }}"></catalog-item>
-                        @endforeach
-                    </ul>
+
+                    <catalog-items :catalogs="{{ $catalogs }}"></catalog-items>
                 </div>
             </div>
 

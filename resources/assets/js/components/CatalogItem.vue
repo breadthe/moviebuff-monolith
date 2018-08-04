@@ -5,21 +5,7 @@
     @mouseout="showControls = false"
 >
 
-    <span class="d-flex align-items-center" v-if="! isEditing">
-        <a :href="'/catalogs/' + catalog.id">{{ catalog.name }}</a>
-        <small v-if="catalog.movies.length">&nbsp;({{ catalog.movies.length }})</small>
-
-        <span class="ml-auto pl-1" v-if="showControls">
-            <a href="#" @click="editCatalog($event)">
-                <i class="fa fa-pencil fa-lg text-primary" aria-hidden="true" :title="'Edit ' + catalog.name"></i>
-            </a>
-            <a href="#" @click="deleteCatalog($event)">
-                <i class="fa fa-trash fa-lg text-danger ml-3" aria-hidden="true" :title="'Delete ' + catalog.name"></i>
-            </a>
-        </span>
-    </span>
-
-    <span class="d-flex align-items-center" v-else>
+    <span class="d-flex align-items-center" v-if="isEditing">
         <form class="form-inline px-2" @submit="saveCatalogName($event)">
             <div class="btn-toolbar" role="toolbar" aria-label="Edit catalog name">
                 <div class="input-group">
@@ -35,6 +21,34 @@
             <button class="btn btn-link" @click="isEditing = false">
                 Cancel
             </button>
+        </span>
+    </span>
+
+    <span class="d-flex align-items-center" v-else-if="isDeleting">
+        <span>Are you sure you want to delete <strong>{{ catalog.name }}</strong>?</span>
+
+        <span class="ml-auto pl-1">
+            <button class="btn btn-danger btn-sm" @click="deleteCatalog()">
+                Delete
+            </button>
+
+            <button class="btn btn-link" @click="isDeleting = false">
+                Cancel
+            </button>
+        </span>
+    </span>
+
+    <span class="d-flex align-items-center" v-else>
+        <a :href="'/catalogs/' + catalog.id">{{ catalog.name }}</a>
+        <small v-if="catalog.movies.length">&nbsp;({{ catalog.movies.length }})</small>
+
+        <span class="ml-auto pl-1" v-if="showControls">
+            <a href="#" @click="editCatalog($event)">
+                <i class="fa fa-pencil fa-lg text-primary" aria-hidden="true" :title="'Edit ' + catalog.name"></i>
+            </a>
+            <a href="#" @click="confirmDelete($event)">
+                <i class="fa fa-trash fa-lg text-danger ml-3" aria-hidden="true" :title="'Delete ' + catalog.name"></i>
+            </a>
         </span>
     </span>
 
@@ -54,7 +68,8 @@
             return {
                 csrf: document.head.querySelector('meta[name="csrf-token"]'),
                 showControls: false,
-                isEditing: false
+                isEditing: false,
+                isDeleting: false
             }
         },
         methods: {
@@ -80,9 +95,23 @@
 
                 this.isEditing = false;
             },
-            deleteCatalog(event) {
+            confirmDelete(event) {
                 event.preventDefault();
                 event.stopPropagation();
+
+                this.isDeleting = true;
+            },
+            async deleteCatalog() {
+                await axios.delete(`/api/catalog/${this.catalog.id}`)
+                    .then(response => {
+                        if (response.status === 200) {
+                            this.isDeleting = false;
+                            this.$emit('removeItem', this.catalog.id);
+                            // remove this item from the DOM
+                        }
+                    }).catch (e => {
+                        // TODO: handle errors somehow
+                    });
             },
         },
         mounted () {
