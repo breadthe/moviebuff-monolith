@@ -4,6 +4,7 @@
             <i class="fa fa-film fa-2x" aria-hidden="true"></i>&nbsp;
             <span>{{ config('app.name', 'MovieBuff') }}</span>
         </a>
+        <small class="text-secondary">{{ config('app.version') }}</small>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
