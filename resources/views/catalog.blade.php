@@ -16,28 +16,7 @@
 
                 <div class="card-body">
                     @if (count($movies))
-                        <!-- <ul class="list-group list-group-flush">
-                            @foreach ($movies as $movie)
-                                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                    {{ $movie->title }}
-                                </li>
-                            @endforeach
-                        </ul> -->
-                        @foreach ($movies as $movie)
-                            <div class="movie-item">
-                                <div class="left-side">
-                                    @if ($movie->poster)
-                                        <img src="{{ $movie->poster }}">
-                                    @else
-                                        <img src="http://via.placeholder.com/75x100?text=NO+IMAGE">
-                                    @endif
-                                </div>
-                                <div class="right-side">
-                                    <div class="movie-year is-size-6">{{ $movie->year }}</div>
-                                    <div class="movie-title is-size-4 has-text-black">{{ $movie->title }}</div>
-                                </div>
-                            </div>
-                        @endforeach
+                        <movie-items :movies="{{ $movies }}"></movie-items>
                     @else
                         There are no movies in this catalog.
                     @endif

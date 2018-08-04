@@ -30,6 +30,9 @@ Vue.component('passport-personal-access-tokens', require('./components/passport/
 Vue.component('catalog-items', require('./components/CatalogItems.vue'));
 Vue.component('catalog-item', require('./components/CatalogItem.vue'));
 
+Vue.component('movie-items', require('./components/MovieItems.vue'));
+Vue.component('movie-item', require('./components/MovieItem.vue'));
+
 Vue.component('search-page', require('./components/SearchPage.vue'));
 Vue.component('search-results', require('./components/SearchResults.vue'));
 Vue.component('search-result', require('./components/SearchResult.vue'));
