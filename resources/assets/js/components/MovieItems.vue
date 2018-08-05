@@ -8,6 +8,7 @@
             v-for="(movie, i) in mutableMovies"
             :key="i"
             @removeItem="removeItem($event)"
+            @loadAllCatalogs="loadAllCatalogs()"
         ></movie-item>
     </div>
 

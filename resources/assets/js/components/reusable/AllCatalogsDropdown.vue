@@ -76,20 +76,6 @@
                 const isInCatalog = movies.filter(movie => movie.id === this.movie.imdbID)
                 return isInCatalog.length || false
             },
-            async getCatalogs() {
-                const $this = this
-
-                $this.isLoadingCatalogs = true
-
-                await axios.get(`/api/movie/${$this.movie.id}/catalogs`)
-                    .then(response => {
-                        $this.catalogs = response.data
-                        $this.isLoadingCatalogs = false
-                    }).catch (e => {
-                        $this.catalogs = []
-                        $this.isLoadingCatalogs = ''
-                    })
-            },
             moveOrCopyMovieToCatalog(catalogId, event) {
                 const $this = this;
 
@@ -111,6 +97,7 @@
                         }
 
                         $this.$emit('isCopying', false);
+                        this.$emit('loadAllCatalogs');
                     }).catch (e => {
                         // TODO: handle errors somehow
                     })
@@ -127,11 +114,8 @@
 
                 axios.post(`/api/catalog`, data)
                     .then(response => {
-                        // Retrieve catalogs for the current movie again
-                        this.getCatalogs()
-
                         // Tell the parent to reload all the catalogs
-                        this.$emit('loadAllCatalogs')
+                        this.$emit('loadAllCatalogs');
 
                         this.newCatalogName = ''
                     }).catch (e => {
@@ -145,8 +129,6 @@
                 'X-CSRF-TOKEN': this.csrf.content,
                 'X-Requested-With': 'XMLHttpRequest'
             };
-
-            this.getCatalogs()
         }
     }
 </script>

@@ -15,6 +15,7 @@
                 action="move"
                 @removeItem="removeItem($event)"
                 @isMoving="isMoving = $event"
+                @loadAllCatalogs="$emit('loadAllCatalogs')"
             ></all-catalogs-dropdown>
 
             <button class="btn btn-link" @click="isMoving = false">
@@ -31,6 +32,7 @@
                 :all-catalogs="allCatalogs"
                 action="copy"
                 @isCopying="isCopying = $event"
+                @loadAllCatalogs="$emit('loadAllCatalogs')"
             ></all-catalogs-dropdown>
 
             <button class="btn btn-link" @click="isCopying = false">
