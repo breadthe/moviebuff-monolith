@@ -45,7 +45,7 @@
                     </form>
 
                 </div><!-- .dropdown-menu -->
-            </div>
+            </div><!-- .btn-group -->
 
             <span v-if="isLoadingCatalogs"><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></span>
 
@@ -60,17 +60,8 @@
 </template>
 
 <script>
-    function isNumeric(n) {
-        return !isNaN(parseFloat(n)) && isFinite(n);
-    }
-
     export default {
         props: {
-            'isOpeningModal': {
-                required: true,
-                type: String,
-                default: ''
-            },
             'movie': {
                 required: true,
                 type: Object

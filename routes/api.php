@@ -42,6 +42,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('/catalog/{catalog}/movie/{movie}', 'Api\CatalogsController@destroyMovie');
 
     /**
+     * Move/Copy a move to another Catalog
+     */
+    Route::put('/catalog/{catalog}/movie/{movie}', 'Api\CatalogsController@moveOrCopyMovie');
+
+    /**
      * Retrieve all the catalogs for a given movie (tag the movie)
      */
     Route::get('/movie/{movie}/catalogs', 'Api\MoviesController@catalogs')->name('movie_catalogs');

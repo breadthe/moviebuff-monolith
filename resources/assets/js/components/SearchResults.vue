@@ -6,7 +6,6 @@
             <search-result
                 :all-catalogs="allCatalogs"
                 :movie="movie"
-                :is-opening-modal="isOpeningModal"
                 @loadAllCatalogs="loadAllCatalogs()"
             ></search-result>
         </div>
@@ -28,7 +27,6 @@
                 csrf: document.head.querySelector('meta[name="csrf-token"]'),
                 allCatalogs: [],
                 movie: {},
-                isOpeningModal: '',
                 error: false
             }
         },

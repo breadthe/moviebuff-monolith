@@ -8,6 +8,15 @@
         <section class="confirmation" v-if="isMoving">
             <p>Move <strong>{{ movie.title }}</strong> to another catalog?</p>
 
+            <all-catalogs-dropdown
+                :catalog-id="catalogId"
+                :movie="movie"
+                :all-catalogs="allCatalogs"
+                action="move"
+                @removeItem="removeItem($event)"
+                @isMoving="isMoving = $event"
+            ></all-catalogs-dropdown>
+
             <button class="btn btn-link" @click="isMoving = false">
                 Cancel
             </button>
@@ -15,6 +24,14 @@
 
         <section class="confirmation" v-else-if="isCopying">
             <p>Copy <strong>{{ movie.title }}</strong> to another catalog?</p>
+
+            <all-catalogs-dropdown
+                :catalog-id="catalogId"
+                :movie="movie"
+                :all-catalogs="allCatalogs"
+                action="copy"
+                @isCopying="isCopying = $event"
+            ></all-catalogs-dropdown>
 
             <button class="btn btn-link" @click="isCopying = false">
                 Cancel
@@ -66,6 +83,11 @@
             'movie': {
                 required: true,
                 type: Object
+            },
+            'allCatalogs': {
+                required: false,
+                type: Array,
+                default: () => []
             }
         },
         data () {
@@ -96,12 +118,6 @@
 
                 this.isDeleting = true;
             },
-            async moveToCatalog(event) {
-                this.isMoving = false;
-            },
-            async copyToCatalog(event) {
-                this.isCopying = false;
-            },
             async deleteMovie() {
                 axios.delete(`/api/catalog/${this.catalogId}/movie/${this.movie.id}`)
                     .then(response => {
@@ -113,6 +129,9 @@
                         // TODO: handle errors somehow
                     })
             },
+            removeItem($event) {
+                this.$emit('removeItem', $event);
+            }
         },
         mounted () {
             // Restore internal headers headers for axios request
