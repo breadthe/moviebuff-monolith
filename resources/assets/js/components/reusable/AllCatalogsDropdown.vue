@@ -9,6 +9,7 @@
             class="dropdown-item d-flex align-items-center"
             href="#"
             v-for="catalog in allCatalogs"
+            v-if="catalog.id !== catalogId"
             :key="catalog.id"
             @click="moveOrCopyMovieToCatalog(catalog.id, $event)"
             @mouseover="showDelete = catalog.id"

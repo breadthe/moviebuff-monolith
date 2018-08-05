@@ -53482,7 +53482,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -53499,6 +53499,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
 //
 //
 //
@@ -53711,47 +53712,51 @@ var render = function() {
       { staticClass: "dropdown-menu" },
       [
         _vm._l(_vm.allCatalogs, function(catalog) {
-          return _c(
-            "a",
-            {
-              key: catalog.id,
-              staticClass: "dropdown-item d-flex align-items-center",
-              attrs: { href: "#" },
-              on: {
-                click: function($event) {
-                  _vm.moveOrCopyMovieToCatalog(catalog.id, $event)
+          return catalog.id !== _vm.catalogId
+            ? _c(
+                "a",
+                {
+                  key: catalog.id,
+                  staticClass: "dropdown-item d-flex align-items-center",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.moveOrCopyMovieToCatalog(catalog.id, $event)
+                    },
+                    mouseover: function($event) {
+                      _vm.showDelete = catalog.id
+                    },
+                    mouseout: function($event) {
+                      _vm.showDelete = false
+                    }
+                  }
                 },
-                mouseover: function($event) {
-                  _vm.showDelete = catalog.id
-                },
-                mouseout: function($event) {
-                  _vm.showDelete = false
-                }
-              }
-            },
-            [
-              _c("i", {
-                staticClass: "fa",
-                class: _vm.isInCatalog(catalog.id)
-                  ? "fa-star text-primary"
-                  : "fa-star-o text-white"
-              }),
-              _vm._v(
-                " \n            " + _vm._s(catalog.name) + "\n            "
-              ),
-              catalog.movies.length
-                ? _c("span", [
-                    _c("small", [
-                      _vm._v(" (" + _vm._s(catalog.movies.length) + ")")
-                    ])
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.showDelete === catalog.id && _vm.isInCatalog(catalog.id)
-                ? _c("i", { staticClass: "fa fa-ban ml-auto pl-1 text-danger" })
-                : _vm._e()
-            ]
-          )
+                [
+                  _c("i", {
+                    staticClass: "fa",
+                    class: _vm.isInCatalog(catalog.id)
+                      ? "fa-star text-primary"
+                      : "fa-star-o text-white"
+                  }),
+                  _vm._v(
+                    " \n            " + _vm._s(catalog.name) + "\n            "
+                  ),
+                  catalog.movies.length
+                    ? _c("span", [
+                        _c("small", [
+                          _vm._v(" (" + _vm._s(catalog.movies.length) + ")")
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.showDelete === catalog.id && _vm.isInCatalog(catalog.id)
+                    ? _c("i", {
+                        staticClass: "fa fa-ban ml-auto pl-1 text-danger"
+                      })
+                    : _vm._e()
+                ]
+              )
+            : _vm._e()
         }),
         _vm._v(" "),
         _c("div", { staticClass: "dropdown-divider" }),
