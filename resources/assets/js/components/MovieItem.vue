@@ -67,7 +67,7 @@
                 <i class="fa fa-clone fa-lg text-success m-2" aria-hidden="true" :title="'Copy to Catalog'"></i>
             </a>
             <a href="#" @click="confirmDelete($event)">
-                <i class="fa fa-trash fa-lg text-danger m-2" aria-hidden="true" :title="'Delete ' + movie.name"></i>
+                <i class="fa fa-trash fa-lg text-danger m-2" aria-hidden="true" :title="'Delete ' + movie.title"></i>
             </a>
         </span>
     </div>

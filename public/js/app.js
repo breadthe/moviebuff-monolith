@@ -53394,7 +53394,7 @@ var render = function() {
                     staticClass: "fa fa-trash fa-lg text-danger m-2",
                     attrs: {
                       "aria-hidden": "true",
-                      title: "Delete " + _vm.movie.name
+                      title: "Delete " + _vm.movie.title
                     }
                   })
                 ]
