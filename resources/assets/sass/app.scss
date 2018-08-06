@@ -15,6 +15,7 @@ strong {
   font-weight: 700;
 }
 
+// Extend the Bootstrap badge component
 .badge {
   &.badge-moviebuff {
     color: $grey-darker;
@@ -25,16 +26,46 @@ strong {
     &:hover {
       color: $black;
       border-color: $black;
-      text-decoration: none;
-      font-weight: 400;
-      -webkit-box-shadow: 0 8px 6px -6px $black;
-      -moz-box-shadow: 0 8px 6px -6px $black;
       box-shadow: 0 8px 6px -6px $black;
+      -moz-box-shadow: 0 8px 6px -6px $black;
+      -webkit-box-shadow: 0 8px 6px -6px $black;
+      font-weight: 400;
+      text-decoration: none;
     }
   }
 }
 
-/* Roll out my own level component a-la Bulma */
+// Extend the Bootstrap btn component
+.btn {
+  &.btn-catalog-action {
+    background: transparent;
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-weight: 300;
+    letter-spacing: 0.08rem;
+    margin: 0;
+    padding: 1px 5px;
+    &.btn-blue {
+      border-color: $blue;
+      color: $blue;
+      &:hover {
+        background-color: $blue;
+        color: $white;
+      }
+    }
+    &.btn-red {
+      border-color: $red;
+      color: $red;
+      &:hover {
+        background-color: $red;
+        color: $white;
+      }
+    }
+  }
+}
+
+// Roll out my own level component a-la Bulma
 .level {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;

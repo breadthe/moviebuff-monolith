@@ -50027,7 +50027,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50044,6 +50044,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
+//
 //
 //
 //
@@ -51022,7 +51024,7 @@ var render = function() {
             _c(
               "form",
               {
-                staticClass: "form-inline px-2",
+                staticClass: "form-inline",
                 on: {
                   submit: function($event) {
                     _vm.saveCatalogName($event)
@@ -51127,7 +51129,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-danger btn-sm",
+                    staticClass: "btn btn-catalog-action btn-red",
                     on: {
                       click: function($event) {
                         _vm.deleteCatalog()
@@ -51165,9 +51167,10 @@ var render = function() {
               _vm.showControls
                 ? _c("span", { staticClass: "ml-auto pl-1" }, [
                     _c(
-                      "a",
+                      "button",
                       {
-                        attrs: { href: "#" },
+                        staticClass: "btn btn-sm btn-catalog-action btn-blue",
+                        attrs: { title: "Edit " + _vm.catalog.name },
                         on: {
                           click: function($event) {
                             _vm.editCatalog($event)
@@ -51176,19 +51179,22 @@ var render = function() {
                       },
                       [
                         _c("i", {
-                          staticClass: "fa fa-pencil fa-lg text-primary",
+                          staticClass: "fa fa-pencil fa-sm",
                           attrs: {
                             "aria-hidden": "true",
                             title: "Edit " + _vm.catalog.name
                           }
-                        })
+                        }),
+                        _vm._v("\n                Edit\n            ")
                       ]
                     ),
                     _vm._v(" "),
                     _c(
-                      "a",
+                      "button",
                       {
-                        attrs: { href: "#" },
+                        staticClass:
+                          "btn btn-sm btn-catalog-action btn-red ml-3",
+                        attrs: { title: "Delete " + _vm.catalog.name },
                         on: {
                           click: function($event) {
                             _vm.confirmDelete($event)
@@ -51197,12 +51203,13 @@ var render = function() {
                       },
                       [
                         _c("i", {
-                          staticClass: "fa fa-trash fa-lg text-danger ml-3",
+                          staticClass: "fa fa-trash fa-sm",
                           attrs: {
                             "aria-hidden": "true",
                             title: "Delete " + _vm.catalog.name
                           }
-                        })
+                        }),
+                        _vm._v("\n                Delete\n            ")
                       ]
                     )
                   ])

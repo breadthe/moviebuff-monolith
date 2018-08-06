@@ -6,7 +6,7 @@
 >
 
     <span class="d-flex align-items-center" v-if="isEditing">
-        <form class="form-inline px-2" @submit="saveCatalogName($event)">
+        <form class="form-inline" @submit="saveCatalogName($event)">
             <div class="btn-toolbar" role="toolbar" aria-label="Edit catalog name">
                 <div class="input-group">
                     <input 
@@ -36,7 +36,7 @@
         <span>Are you sure you want to delete <strong>{{ catalog.name }}</strong>?</span>
 
         <span class="ml-auto pl-1">
-            <button class="btn btn-danger btn-sm" @click="deleteCatalog()">
+            <button class="btn btn-catalog-action btn-red" @click="deleteCatalog()">
                 Delete
             </button>
 
@@ -51,12 +51,14 @@
         <small v-if="catalog.movies.length">&nbsp;({{ catalog.movies.length }})</small>
 
         <span class="ml-auto pl-1" v-if="showControls">
-            <a href="#" @click="editCatalog($event)">
-                <i class="fa fa-pencil fa-lg text-primary" aria-hidden="true" :title="'Edit ' + catalog.name"></i>
-            </a>
-            <a href="#" @click="confirmDelete($event)">
-                <i class="fa fa-trash fa-lg text-danger ml-3" aria-hidden="true" :title="'Delete ' + catalog.name"></i>
-            </a>
+            <button class="btn btn-sm btn-catalog-action btn-blue" :title="'Edit ' + catalog.name" @click="editCatalog($event)">
+                <i class="fa fa-pencil fa-sm" aria-hidden="true" :title="'Edit ' + catalog.name"></i>
+                Edit
+            </button>
+            <button class="btn btn-sm btn-catalog-action btn-red ml-3" :title="'Delete ' + catalog.name" @click="confirmDelete($event)">
+                <i class="fa fa-trash fa-sm" aria-hidden="true" :title="'Delete ' + catalog.name"></i>
+                Delete
+            </button>
         </span>
     </span>
 
