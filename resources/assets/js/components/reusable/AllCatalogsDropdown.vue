@@ -7,18 +7,19 @@
     <div class="dropdown-menu">
         <a
             class="dropdown-item d-flex align-items-center"
+            :class="{'disabled_catalog': isInCatalog(catalog.id)}"
+            :title="isInCatalog(catalog.id) ? 'The movie is already in this catalog' : ''"
             href="#"
             v-for="catalog in allCatalogs"
-            v-if="catalog.id !== catalogId"
             :key="catalog.id"
             @click="moveOrCopyMovieToCatalog(catalog.id, $event)"
             @mouseover="showDelete = catalog.id"
             @mouseout="showDelete = false"
         >
-            <i class="fa" :class="isInCatalog(catalog.id) ? 'fa-star text-primary' : 'fa-star-o text-white'"></i>&nbsp;
+            <!-- <i class="fa" :class="isInCatalog(catalog.id) ? 'fa-star text-primary' : 'fa-star-o text-white'"></i>&nbsp; -->
             {{ catalog.name }}
             <span v-if="catalog.movies.length"><small>&nbsp;({{ catalog.movies.length }})</small></span>
-            <i class="fa fa-ban ml-auto pl-1 text-danger" v-if="showDelete === catalog.id && isInCatalog(catalog.id)"></i>
+            <!-- <i class="fa fa-ban ml-auto pl-1 text-danger" v-if="showDelete === catalog.id && isInCatalog(catalog.id)"></i> -->
         </a>
 
         <div class="dropdown-divider"></div>
@@ -73,33 +74,36 @@
             isInCatalog(catalogId) {
                 const catalog = this.allCatalogs.filter(catalog => catalog.id === catalogId)
                 const movies = catalog[0].movies // HACKY - find a better way
-                const isInCatalog = movies.filter(movie => movie.id === this.movie.imdbID)
+                const isInCatalog = movies.filter(movie => movie.id === this.movie.id)
                 return isInCatalog.length || false
             },
             moveOrCopyMovieToCatalog(catalogId, event) {
                 event.preventDefault()
                 event.stopPropagation()
 
-                const data = {
-                    'action': this.action,
-                    'catalog_id': this.catalogId // current catalog
+                // Allow Move/Copy only if movie is not already in the catalog
+                if (!this.isInCatalog(catalogId)) {
+                    const data = {
+                        'action': this.action,
+                        'catalog_id': this.catalogId // current catalog
+                    }
+    
+                    axios.put(`/api/catalog/${catalogId}/movie/${this.movie.id}`, data)
+                        .then(response => {
+    
+                            if (this.action === 'move') {
+                                this.$emit('removeItem', this.movie.id);
+                                this.$emit('isMoving', false);
+                            }
+    
+                            this.$emit('isCopying', false);
+    
+                            // Tell the parent to remove this movie from the DOM
+                            this.$emit('loadAllCatalogs');
+                        }).catch (e => {
+                            // TODO: handle errors somehow
+                        })
                 }
-
-                axios.put(`/api/catalog/${catalogId}/movie/${this.movie.id}`, data)
-                    .then(response => {
-
-                        if (this.action === 'move') {
-                            this.$emit('removeItem', this.movie.id);
-                            this.$emit('isMoving', false);
-                        }
-
-                        this.$emit('isCopying', false);
-
-                        // Tell the parent to remove this movie from the DOM
-                        this.$emit('loadAllCatalogs');
-                    }).catch (e => {
-                        // TODO: handle errors somehow
-                    })
             },
             moveOrCopyMovieToNewCatalog(event) {
                 event.preventDefault()

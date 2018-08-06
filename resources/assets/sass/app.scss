@@ -109,6 +109,10 @@ input {
         section {
           &.confirmation {
             font-size: 1rem;
+            .disabled_catalog {
+              cursor: not-allowed;
+              color: $grey-light;
+            }
           }
         }
         .action-buttons {

@@ -13649,6 +13649,11 @@ input.form-control.searchbar::placeholder {
   font-size: 1rem;
 }
 
+.movie-item .right-side section.confirmation .disabled_catalog {
+  cursor: not-allowed;
+  color: #DAE1E7;
+}
+
 .movie-item .right-side .action-buttons {
   margin-top: 10px;
 }

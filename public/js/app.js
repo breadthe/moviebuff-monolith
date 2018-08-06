@@ -53494,7 +53494,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -53505,6 +53505,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -53588,7 +53589,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             var movies = catalog[0].movies; // HACKY - find a better way
             var isInCatalog = movies.filter(function (movie) {
-                return movie.id === _this.movie.imdbID;
+                return movie.id === _this.movie.id;
             });
             return isInCatalog.length || false;
         },
@@ -53598,25 +53599,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             event.preventDefault();
             event.stopPropagation();
 
-            var data = {
-                'action': this.action,
-                'catalog_id': this.catalogId // current catalog
-            };
+            // Allow Move/Copy only if movie is not already in the catalog
+            if (!this.isInCatalog(catalogId)) {
+                var data = {
+                    'action': this.action,
+                    'catalog_id': this.catalogId // current catalog
+                };
 
-            axios.put('/api/catalog/' + catalogId + '/movie/' + this.movie.id, data).then(function (response) {
+                axios.put('/api/catalog/' + catalogId + '/movie/' + this.movie.id, data).then(function (response) {
 
-                if (_this2.action === 'move') {
-                    _this2.$emit('removeItem', _this2.movie.id);
-                    _this2.$emit('isMoving', false);
-                }
+                    if (_this2.action === 'move') {
+                        _this2.$emit('removeItem', _this2.movie.id);
+                        _this2.$emit('isMoving', false);
+                    }
 
-                _this2.$emit('isCopying', false);
+                    _this2.$emit('isCopying', false);
 
-                // Tell the parent to remove this movie from the DOM
-                _this2.$emit('loadAllCatalogs');
-            }).catch(function (e) {
-                // TODO: handle errors somehow
-            });
+                    // Tell the parent to remove this movie from the DOM
+                    _this2.$emit('loadAllCatalogs');
+                }).catch(function (e) {
+                    // TODO: handle errors somehow
+                });
+            }
         },
         moveOrCopyMovieToNewCatalog: function moveOrCopyMovieToNewCatalog(event) {
             var _this3 = this;
@@ -53686,51 +53690,43 @@ var render = function() {
       { staticClass: "dropdown-menu" },
       [
         _vm._l(_vm.allCatalogs, function(catalog) {
-          return catalog.id !== _vm.catalogId
-            ? _c(
-                "a",
-                {
-                  key: catalog.id,
-                  staticClass: "dropdown-item d-flex align-items-center",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      _vm.moveOrCopyMovieToCatalog(catalog.id, $event)
-                    },
-                    mouseover: function($event) {
-                      _vm.showDelete = catalog.id
-                    },
-                    mouseout: function($event) {
-                      _vm.showDelete = false
-                    }
-                  }
+          return _c(
+            "a",
+            {
+              key: catalog.id,
+              staticClass: "dropdown-item d-flex align-items-center",
+              class: { disabled_catalog: _vm.isInCatalog(catalog.id) },
+              attrs: {
+                title: _vm.isInCatalog(catalog.id)
+                  ? "The movie is already in this catalog"
+                  : "",
+                href: "#"
+              },
+              on: {
+                click: function($event) {
+                  _vm.moveOrCopyMovieToCatalog(catalog.id, $event)
                 },
-                [
-                  _c("i", {
-                    staticClass: "fa",
-                    class: _vm.isInCatalog(catalog.id)
-                      ? "fa-star text-primary"
-                      : "fa-star-o text-white"
-                  }),
-                  _vm._v(
-                    " \n            " + _vm._s(catalog.name) + "\n            "
-                  ),
-                  catalog.movies.length
-                    ? _c("span", [
-                        _c("small", [
-                          _vm._v(" (" + _vm._s(catalog.movies.length) + ")")
-                        ])
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.showDelete === catalog.id && _vm.isInCatalog(catalog.id)
-                    ? _c("i", {
-                        staticClass: "fa fa-ban ml-auto pl-1 text-danger"
-                      })
-                    : _vm._e()
-                ]
-              )
-            : _vm._e()
+                mouseover: function($event) {
+                  _vm.showDelete = catalog.id
+                },
+                mouseout: function($event) {
+                  _vm.showDelete = false
+                }
+              }
+            },
+            [
+              _vm._v(
+                "\n            " + _vm._s(catalog.name) + "\n            "
+              ),
+              catalog.movies.length
+                ? _c("span", [
+                    _c("small", [
+                      _vm._v(" (" + _vm._s(catalog.movies.length) + ")")
+                    ])
+                  ])
+                : _vm._e()
+            ]
+          )
         }),
         _vm._v(" "),
         _c("div", { staticClass: "dropdown-divider" }),
