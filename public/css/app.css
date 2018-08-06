@@ -13530,6 +13530,25 @@ strong {
   font-weight: 700;
 }
 
+.badge.badge-moviebuff {
+  color: #606F7B;
+  background-color: #ffdd57;
+  border: 1px solid #B8C2CC;
+  border-radius: 2px;
+  font-weight: 300;
+}
+
+.badge.badge-moviebuff:hover {
+  color: #22292F;
+  border-color: #22292F;
+  text-decoration: none;
+  font-weight: 400;
+  -webkit-box-shadow: 0 8px 6px -6px #22292F;
+  box-shadow: 0 8px 6px -6px #22292F;
+}
+
+/* Roll out my own level component a-la Bulma */
+
 .level {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -13553,13 +13572,13 @@ strong {
       align-self: center;
 }
 
-.navbar-laravel {
+.navbar-moviebuff {
   background-color: #ffdd57;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
-.navbar-laravel .navbar-brand {
+.navbar-moviebuff .navbar-brand {
   color: #22292F;
   font-size: 1.25rem;
   line-height: 1.5;

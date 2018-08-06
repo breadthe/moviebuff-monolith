@@ -15,6 +15,26 @@ strong {
   font-weight: 700;
 }
 
+.badge {
+  &.badge-moviebuff {
+    color: $grey-darker;
+    background-color: $moviebuff-yellow;
+    border: 1px solid $grey;
+    border-radius: 2px;
+    font-weight: 300;
+    &:hover {
+      color: $black;
+      border-color: $black;
+      text-decoration: none;
+      font-weight: 400;
+      -webkit-box-shadow: 0 8px 6px -6px $black;
+      -moz-box-shadow: 0 8px 6px -6px $black;
+      box-shadow: 0 8px 6px -6px $black;
+    }
+  }
+}
+
+/* Roll out my own level component a-la Bulma */
 .level {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -34,8 +54,8 @@ strong {
   }
 }
 
-.navbar-laravel {
-  background-color: $mb-yellow;
+.navbar-moviebuff {
+  background-color: $moviebuff-yellow;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 
   .navbar-brand {

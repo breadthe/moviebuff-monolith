@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+<nav class="navbar navbar-expand-md navbar-light navbar-moviebuff">
     <div class="container">
         <a class="navbar-brand d-flex" href="{{ url('/') }}">
             <i class="fa fa-film fa-2x" aria-hidden="true"></i>&nbsp;

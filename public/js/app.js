@@ -52315,7 +52315,7 @@ var render = function() {
                       "a",
                       {
                         key: catalog.name,
-                        staticClass: "badge badge-primary mr-1",
+                        staticClass: "badge badge-moviebuff mr-1",
                         attrs: { href: "catalogs/" + catalog.id }
                       },
                       [_vm._v(_vm._s(catalog.name))]
