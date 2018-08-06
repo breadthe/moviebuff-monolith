@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     /**
      * Remove the Catalog-Movie association (un-tag a movie)
      */
-    Route::delete('/catalog/{catalog}/movie/{movie}', 'Api\CatalogsController@destroyMovie');
+    Route::delete('/catalog/{catalog}/movie/{movie}', 'Api\CatalogsController@detachMovie');
 
     /**
      * Move/Copy a move to another (existing) Catalog
