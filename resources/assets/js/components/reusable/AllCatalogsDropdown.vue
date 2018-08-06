@@ -23,10 +23,10 @@
 
         <div class="dropdown-divider"></div>
 
-        <form class="form-inline px-2" @submit="addMovieToNewCatalog($event)">
+        <form class="form-inline px-2" @submit="moveOrCopyMovieToNewCatalog($event)">
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="input-group">
-                    <input type="text" class="form-control form-control-sm" placeholder="New catalog" v-model="newCatalogName" @key.enter="addMovieToNewCatalog($event)">
+                    <input type="text" class="form-control form-control-sm" placeholder="New catalog" v-model="newCatalogName" @key.enter="moveOrCopyMovieToNewCatalog($event)">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary btn-sm" :disabled="!newCatalogName.length">{{ action }}</button>
                     </div>
@@ -77,8 +77,6 @@
                 return isInCatalog.length || false
             },
             moveOrCopyMovieToCatalog(catalogId, event) {
-                const $this = this;
-
                 event.preventDefault()
                 event.stopPropagation()
 
@@ -90,38 +88,47 @@
                 axios.put(`/api/catalog/${catalogId}/movie/${this.movie.id}`, data)
                     .then(response => {
 
-                        // Tell the parent to remove this movie from the DOM
                         if (this.action === 'move') {
-                            $this.$emit('removeItem', this.movie.id);
-                            $this.$emit('isMoving', false);
+                            this.$emit('removeItem', this.movie.id);
+                            this.$emit('isMoving', false);
                         }
 
-                        $this.$emit('isCopying', false);
+                        this.$emit('isCopying', false);
+
+                        // Tell the parent to remove this movie from the DOM
                         this.$emit('loadAllCatalogs');
                     }).catch (e => {
                         // TODO: handle errors somehow
                     })
             },
-            moveMovieToNewCatalog(event) {
+            moveOrCopyMovieToNewCatalog(event) {
                 event.preventDefault()
                 event.stopPropagation()
 
                 const data = {
+                    'action': this.action,
                     'movie': this.movie,
-                    'catalog_id': null,
+                    'catalog_id': this.catalogId, // current catalog
                     'catalog_name': this.newCatalogName
                 }
 
-                axios.post(`/api/catalog`, data)
+                axios.put(`/api/catalog`, data)
                     .then(response => {
-                        // Tell the parent to reload all the catalogs
+                        if (this.action === 'move') {
+                            this.$emit('removeItem', this.movie.id);
+                            this.$emit('isMoving', false);
+                        }
+
+                        this.$emit('isCopying', false);
+
+                        // Tell the parent to remove this movie from the DOM
                         this.$emit('loadAllCatalogs');
 
                         this.newCatalogName = ''
                     }).catch (e => {
                         // TODO: handle errors somehow
                     })
-            }
+            },
         },
         mounted () {
             // Restore internal headers headers for axios request

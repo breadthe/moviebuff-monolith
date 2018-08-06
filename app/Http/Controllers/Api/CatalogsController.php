@@ -32,7 +32,8 @@ class CatalogsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Add movie to catalog - pass in movie_id and catalog_id
+     * Create new catalog and add movie to it - pass in movie_id and catalog_name
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -144,6 +145,33 @@ class CatalogsController extends Controller
         // If the action is move, delete it from the old catalog
         if ($request->action === 'move') {
             Catalog::find($old_catalog_id)->movies()->detach($movie_id);
+        }
+    }
+
+    /**
+     * Move/Copy a Movie to a new Catalog
+     */
+    public function moveOrCopyMovieToNewCatalog(Request $request)
+    {
+        $old_catalog_id = $request->catalog_id;
+        $catalog_name = $request->catalog_name;
+        $movie = $request->movie;
+
+        // TODO: Check for duplicate catalog name
+
+        // Create the new catalog
+        $new_catalog = Catalog::create([
+            'user_id' => Auth::user()->id,
+            'name' => $catalog_name
+        ]);
+        $new_catalog_id = $new_catalog->id;
+
+        // Add movie_id, catalog_id to movie_catalog
+        Catalog::find($new_catalog->id)->movies()->attach($movie['id']);
+
+        // If the action is move, delete it from the old catalog
+        if ($request->action === 'move') {
+            Catalog::find($old_catalog_id)->movies()->detach($movie['id']);
         }
     }
 }

@@ -53494,7 +53494,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -53595,8 +53595,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         moveOrCopyMovieToCatalog: function moveOrCopyMovieToCatalog(catalogId, event) {
             var _this2 = this;
 
-            var $this = this;
-
             event.preventDefault();
             event.stopPropagation();
 
@@ -53607,32 +53605,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.put('/api/catalog/' + catalogId + '/movie/' + this.movie.id, data).then(function (response) {
 
-                // Tell the parent to remove this movie from the DOM
                 if (_this2.action === 'move') {
-                    $this.$emit('removeItem', _this2.movie.id);
-                    $this.$emit('isMoving', false);
+                    _this2.$emit('removeItem', _this2.movie.id);
+                    _this2.$emit('isMoving', false);
                 }
 
-                $this.$emit('isCopying', false);
+                _this2.$emit('isCopying', false);
+
+                // Tell the parent to remove this movie from the DOM
                 _this2.$emit('loadAllCatalogs');
             }).catch(function (e) {
                 // TODO: handle errors somehow
             });
         },
-        moveMovieToNewCatalog: function moveMovieToNewCatalog(event) {
+        moveOrCopyMovieToNewCatalog: function moveOrCopyMovieToNewCatalog(event) {
             var _this3 = this;
 
             event.preventDefault();
             event.stopPropagation();
 
             var data = {
+                'action': this.action,
                 'movie': this.movie,
-                'catalog_id': null,
+                'catalog_id': this.catalogId, // current catalog
                 'catalog_name': this.newCatalogName
             };
 
-            axios.post('/api/catalog', data).then(function (response) {
-                // Tell the parent to reload all the catalogs
+            axios.put('/api/catalog', data).then(function (response) {
+                if (_this3.action === 'move') {
+                    _this3.$emit('removeItem', _this3.movie.id);
+                    _this3.$emit('isMoving', false);
+                }
+
+                _this3.$emit('isCopying', false);
+
+                // Tell the parent to remove this movie from the DOM
                 _this3.$emit('loadAllCatalogs');
 
                 _this3.newCatalogName = '';
@@ -53734,7 +53741,7 @@ var render = function() {
             staticClass: "form-inline px-2",
             on: {
               submit: function($event) {
-                _vm.addMovieToNewCatalog($event)
+                _vm.moveOrCopyMovieToNewCatalog($event)
               }
             }
           },
@@ -53776,7 +53783,7 @@ var render = function() {
                         ) {
                           return null
                         }
-                        _vm.addMovieToNewCatalog($event)
+                        _vm.moveOrCopyMovieToNewCatalog($event)
                       },
                       input: function($event) {
                         if ($event.target.composing) {
