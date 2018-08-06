@@ -161,7 +161,7 @@ class CatalogsController extends Controller
         // TODO: Check for duplicate catalog name
 
         // Create the new catalog
-        $new_catalog = Catalog::create([
+        $new_catalog = Catalog::firstOrCreate([
             'user_id' => Auth::user()->id,
             'name' => $catalog_name
         ]);
