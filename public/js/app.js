@@ -53626,7 +53626,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var data = {
                 'action': this.action,
-                'movie': this.movie,
+                'movie_id': this.movie.id,
                 'catalog_id': this.catalogId, // current catalog
                 'catalog_name': this.newCatalogName
             };

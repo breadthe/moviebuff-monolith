@@ -155,7 +155,7 @@ class CatalogsController extends Controller
     {
         $old_catalog_id = $request->catalog_id;
         $catalog_name = $request->catalog_name;
-        $movie = $request->movie;
+        $movie_id = $request->movie_id;
 
         // TODO: Check for duplicate catalog name
 
@@ -167,11 +167,11 @@ class CatalogsController extends Controller
         $new_catalog_id = $new_catalog->id;
 
         // Add movie_id, catalog_id to movie_catalog
-        Catalog::find($new_catalog->id)->movies()->attach($movie['id']);
+        Catalog::find($new_catalog->id)->movies()->attach($movie_id);
 
         // If the action is move, delete it from the old catalog
         if ($request->action === 'move') {
-            Catalog::find($old_catalog_id)->movies()->detach($movie['id']);
+            Catalog::find($old_catalog_id)->movies()->detach($movie_id);
         }
     }
 }
