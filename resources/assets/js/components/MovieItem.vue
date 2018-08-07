@@ -6,71 +6,89 @@
 
     <div class="right-side">
         <section class="confirmation" v-if="isMoving">
-            <p>Move <strong>{{ movie.title }}</strong> to another catalog?</p>
+            <div>
+                <p>Move <strong>{{ movie.title }}</strong> to another catalog?</p>
 
-            <all-catalogs-dropdown
-                :catalog-id="catalogId"
-                :movie="movie"
-                :all-catalogs="allCatalogs"
-                action="move"
-                @removeItem="removeItem($event)"
-                @isMoving="isMoving = $event"
-                @loadAllCatalogs="$emit('loadAllCatalogs')"
-            ></all-catalogs-dropdown>
+                <div>
+                    <all-catalogs-dropdown
+                        :catalog-id="catalogId"
+                        :movie="movie"
+                        :all-catalogs="allCatalogs"
+                        action="move"
+                        @removeItem="removeItem($event)"
+                        @isMoving="isMoving = $event"
+                        @loadAllCatalogs="$emit('loadAllCatalogs')"
+                    ></all-catalogs-dropdown>
 
-            <button class="btn btn-link" @click="isMoving = false">
-                Cancel
-            </button>
+                    <button class="btn btn-link" @click="isMoving = false">
+                        Cancel
+                    </button>
+                </div>
+            </div>
         </section>
 
         <section class="confirmation" v-else-if="isCopying">
-            <p>Copy <strong>{{ movie.title }}</strong> to another catalog?</p>
+            <div>
+                <p>Copy <strong>{{ movie.title }}</strong> to another catalog?</p>
 
-            <all-catalogs-dropdown
-                :catalog-id="catalogId"
-                :movie="movie"
-                :all-catalogs="allCatalogs"
-                action="copy"
-                @isCopying="isCopying = $event"
-                @loadAllCatalogs="$emit('loadAllCatalogs')"
-            ></all-catalogs-dropdown>
+                <div>
+                    <all-catalogs-dropdown
+                        :catalog-id="catalogId"
+                        :movie="movie"
+                        :all-catalogs="allCatalogs"
+                        action="copy"
+                        @isCopying="isCopying = $event"
+                        @loadAllCatalogs="$emit('loadAllCatalogs')"
+                    ></all-catalogs-dropdown>
 
-            <button class="btn btn-link" @click="isCopying = false">
-                Cancel
-            </button>
+                    <button class="btn btn-link" @click="isCopying = false">
+                        Cancel
+                    </button>
+                </div>
+            </div>
         </section>
 
         <section class="confirmation d-flex align-items-center" v-else-if="isDeleting">
-            <p>Are you sure you want to remove <strong>{{ movie.title }}</strong> from this catalog?</p>
+            <div>
+                <p>Are you sure you want to remove <strong>{{ movie.title }}</strong> from this catalog?</p>
 
-            <button class="btn btn-danger btn-sm" @click="deleteMovie()">
-                Delete
-            </button>
+                <div>
+                    <button class="btn btn-catalog-action btn-red" @click="deleteMovie()">
+                        Delete
+                    </button>
 
-            <button class="btn btn-link" @click="isDeleting = false">
-                Cancel
-            </button>
+                    <button class="btn btn-link" @click="isDeleting = false">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+
         </section>
 
         <section v-else>
             <div class="movie-year is-size-6">{{ movie.year }}</div>
             <div class="movie-title is-size-4 has-text-black">{{ movie.title }}</div>
         </section>
+
+        <section class="position-relative" v-if="showControls && !(isMoving || isCopying || isDeleting)">
+            <div class="action-menu position-absolute">
+                <button class="btn btn-sm btn-catalog-action btn-blue" :title="'Move to Catalog'" @click="confirmMove($event)">
+                    <i class="fa fa-share-square-o fa-sm" aria-hidden="true" :title="'Move to Catalog'"></i>
+                    Move
+                </button>
+                <button class="btn btn-sm btn-catalog-action btn-green ml-3" :title="'Copy to Catalog'" @click="confirmCopy($event)">
+                    <i class="fa fa-clone fa-sm" aria-hidden="true" :title="'Copy to Catalog'"></i>
+                    Copy
+                </button>
+                <button class="btn btn-sm btn-catalog-action btn-red ml-3" :title="'Delete ' + movie.title" @click="confirmDelete($event)">
+                    <i class="fa fa-trash fa-sm" aria-hidden="true" :title="'Delete ' + movie.title"></i>
+                    Delete
+                </button>
+            </div>
+        </section>
+
     </div>
 
-    <div class="d-flex align-items-center" v-if="showControls && !(isMoving || isCopying || isDeleting)">
-        <span class="ml-auto align-self-center">
-            <a href="#" @click="confirmMove($event)">
-                <i class="fa fa-share-square-o fa-lg text-primary m-2" aria-hidden="true" :title="'Move to Catalog'"></i>
-            </a>
-            <a href="#" @click="confirmCopy($event)">
-                <i class="fa fa-clone fa-lg text-success m-2" aria-hidden="true" :title="'Copy to Catalog'"></i>
-            </a>
-            <a href="#" @click="confirmDelete($event)">
-                <i class="fa fa-trash fa-lg text-danger m-2" aria-hidden="true" :title="'Delete ' + movie.title"></i>
-            </a>
-        </span>
-    </div>
 </div>
 </template>
 

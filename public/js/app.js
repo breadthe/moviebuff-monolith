@@ -52981,7 +52981,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52998,6 +52998,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -53201,117 +53219,36 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "right-side" }, [
         _vm.isMoving
-          ? _c(
-              "section",
-              { staticClass: "confirmation" },
-              [
+          ? _c("section", { staticClass: "confirmation" }, [
+              _c("div", [
                 _c("p", [
                   _vm._v("Move "),
                   _c("strong", [_vm._v(_vm._s(_vm.movie.title))]),
                   _vm._v(" to another catalog?")
                 ]),
                 _vm._v(" "),
-                _c("all-catalogs-dropdown", {
-                  attrs: {
-                    "catalog-id": _vm.catalogId,
-                    movie: _vm.movie,
-                    "all-catalogs": _vm.allCatalogs,
-                    action: "move"
-                  },
-                  on: {
-                    removeItem: function($event) {
-                      _vm.removeItem($event)
-                    },
-                    isMoving: function($event) {
-                      _vm.isMoving = $event
-                    },
-                    loadAllCatalogs: function($event) {
-                      _vm.$emit("loadAllCatalogs")
-                    }
-                  }
-                }),
-                _vm._v(" "),
                 _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-link",
-                    on: {
-                      click: function($event) {
-                        _vm.isMoving = false
-                      }
-                    }
-                  },
-                  [_vm._v("\n                Cancel\n            ")]
-                )
-              ],
-              1
-            )
-          : _vm.isCopying
-            ? _c(
-                "section",
-                { staticClass: "confirmation" },
-                [
-                  _c("p", [
-                    _vm._v("Copy "),
-                    _c("strong", [_vm._v(_vm._s(_vm.movie.title))]),
-                    _vm._v(" to another catalog?")
-                  ]),
-                  _vm._v(" "),
-                  _c("all-catalogs-dropdown", {
-                    attrs: {
-                      "catalog-id": _vm.catalogId,
-                      movie: _vm.movie,
-                      "all-catalogs": _vm.allCatalogs,
-                      action: "copy"
-                    },
-                    on: {
-                      isCopying: function($event) {
-                        _vm.isCopying = $event
-                      },
-                      loadAllCatalogs: function($event) {
-                        _vm.$emit("loadAllCatalogs")
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-link",
-                      on: {
-                        click: function($event) {
-                          _vm.isCopying = false
-                        }
-                      }
-                    },
-                    [_vm._v("\n                Cancel\n            ")]
-                  )
-                ],
-                1
-              )
-            : _vm.isDeleting
-              ? _c(
-                  "section",
-                  { staticClass: "confirmation d-flex align-items-center" },
+                  "div",
                   [
-                    _c("p", [
-                      _vm._v("Are you sure you want to remove "),
-                      _c("strong", [_vm._v(_vm._s(_vm.movie.title))]),
-                      _vm._v(" from this catalog?")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger btn-sm",
-                        on: {
-                          click: function($event) {
-                            _vm.deleteMovie()
-                          }
-                        }
+                    _c("all-catalogs-dropdown", {
+                      attrs: {
+                        "catalog-id": _vm.catalogId,
+                        movie: _vm.movie,
+                        "all-catalogs": _vm.allCatalogs,
+                        action: "move"
                       },
-                      [_vm._v("\n                Delete\n            ")]
-                    ),
+                      on: {
+                        removeItem: function($event) {
+                          _vm.removeItem($event)
+                        },
+                        isMoving: function($event) {
+                          _vm.isMoving = $event
+                        },
+                        loadAllCatalogs: function($event) {
+                          _vm.$emit("loadAllCatalogs")
+                        }
+                      }
+                    }),
                     _vm._v(" "),
                     _c(
                       "button",
@@ -53319,12 +53256,119 @@ var render = function() {
                         staticClass: "btn btn-link",
                         on: {
                           click: function($event) {
-                            _vm.isDeleting = false
+                            _vm.isMoving = false
                           }
                         }
                       },
-                      [_vm._v("\n                Cancel\n            ")]
+                      [
+                        _vm._v(
+                          "\n                        Cancel\n                    "
+                        )
+                      ]
                     )
+                  ],
+                  1
+                )
+              ])
+            ])
+          : _vm.isCopying
+            ? _c("section", { staticClass: "confirmation" }, [
+                _c("div", [
+                  _c("p", [
+                    _vm._v("Copy "),
+                    _c("strong", [_vm._v(_vm._s(_vm.movie.title))]),
+                    _vm._v(" to another catalog?")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _c("all-catalogs-dropdown", {
+                        attrs: {
+                          "catalog-id": _vm.catalogId,
+                          movie: _vm.movie,
+                          "all-catalogs": _vm.allCatalogs,
+                          action: "copy"
+                        },
+                        on: {
+                          isCopying: function($event) {
+                            _vm.isCopying = $event
+                          },
+                          loadAllCatalogs: function($event) {
+                            _vm.$emit("loadAllCatalogs")
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-link",
+                          on: {
+                            click: function($event) {
+                              _vm.isCopying = false
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Cancel\n                    "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            : _vm.isDeleting
+              ? _c(
+                  "section",
+                  { staticClass: "confirmation d-flex align-items-center" },
+                  [
+                    _c("div", [
+                      _c("p", [
+                        _vm._v("Are you sure you want to remove "),
+                        _c("strong", [_vm._v(_vm._s(_vm.movie.title))]),
+                        _vm._v(" from this catalog?")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-catalog-action btn-red",
+                            on: {
+                              click: function($event) {
+                                _vm.deleteMovie()
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        Delete\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-link",
+                            on: {
+                              click: function($event) {
+                                _vm.isDeleting = false
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        Cancel\n                    "
+                            )
+                          ]
+                        )
+                      ])
+                    ])
                   ]
                 )
               : _c("section", [
@@ -53337,71 +53381,77 @@ var render = function() {
                     { staticClass: "movie-title is-size-4 has-text-black" },
                     [_vm._v(_vm._s(_vm.movie.title))]
                   )
-                ])
-      ]),
-      _vm._v(" "),
-      _vm.showControls && !(_vm.isMoving || _vm.isCopying || _vm.isDeleting)
-        ? _c("div", { staticClass: "d-flex align-items-center" }, [
-            _c("span", { staticClass: "ml-auto align-self-center" }, [
-              _c(
-                "a",
-                {
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      _vm.confirmMove($event)
+                ]),
+        _vm._v(" "),
+        _vm.showControls && !(_vm.isMoving || _vm.isCopying || _vm.isDeleting)
+          ? _c("section", { staticClass: "position-relative" }, [
+              _c("div", { staticClass: "action-menu position-absolute" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-sm btn-catalog-action btn-blue",
+                    attrs: { title: "Move to Catalog" },
+                    on: {
+                      click: function($event) {
+                        _vm.confirmMove($event)
+                      }
                     }
-                  }
-                },
-                [
-                  _c("i", {
-                    staticClass: "fa fa-share-square-o fa-lg text-primary m-2",
-                    attrs: { "aria-hidden": "true", title: "Move to Catalog" }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      _vm.confirmCopy($event)
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-share-square-o fa-sm",
+                      attrs: { "aria-hidden": "true", title: "Move to Catalog" }
+                    }),
+                    _vm._v("\n                    Move\n                ")
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-sm btn-catalog-action btn-green ml-3",
+                    attrs: { title: "Copy to Catalog" },
+                    on: {
+                      click: function($event) {
+                        _vm.confirmCopy($event)
+                      }
                     }
-                  }
-                },
-                [
-                  _c("i", {
-                    staticClass: "fa fa-clone fa-lg text-success m-2",
-                    attrs: { "aria-hidden": "true", title: "Copy to Catalog" }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      _vm.confirmDelete($event)
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-clone fa-sm",
+                      attrs: { "aria-hidden": "true", title: "Copy to Catalog" }
+                    }),
+                    _vm._v("\n                    Copy\n                ")
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-sm btn-catalog-action btn-red ml-3",
+                    attrs: { title: "Delete " + _vm.movie.title },
+                    on: {
+                      click: function($event) {
+                        _vm.confirmDelete($event)
+                      }
                     }
-                  }
-                },
-                [
-                  _c("i", {
-                    staticClass: "fa fa-trash fa-lg text-danger m-2",
-                    attrs: {
-                      "aria-hidden": "true",
-                      title: "Delete " + _vm.movie.title
-                    }
-                  })
-                ]
-              )
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-trash fa-sm",
+                      attrs: {
+                        "aria-hidden": "true",
+                        title: "Delete " + _vm.movie.title
+                      }
+                    }),
+                    _vm._v("\n                    Delete\n                ")
+                  ]
+                )
+              ])
             ])
-          ])
-        : _vm._e()
+          : _vm._e()
+      ])
     ]
   )
 }

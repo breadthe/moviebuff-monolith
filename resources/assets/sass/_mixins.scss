@@ -1,0 +1,5 @@
+@mixin btn-drop-shadow($color) {
+    box-shadow: 0 8px 6px -6px $color;
+    -moz-box-shadow: 0 8px 6px -6px $color;
+    -webkit-box-shadow: 0 8px 6px -6px $color;
+}

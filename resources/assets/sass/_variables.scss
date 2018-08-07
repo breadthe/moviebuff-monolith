@@ -22,7 +22,11 @@ $teal: #4dc0b5;
 $cyan: #6cb2eb;
 
 //==================== Tailwind colors ====================
+$btn-color-map: ("blue": $blue, "red": $red, "green": $green); // Define which colors can be used for buttons
+
 $white: #ffffff;
+$black: #22292F;
+
 $grey-lightest: #F8FAFC;
 $grey-lighter: #F1F5F8;
 $grey-light: #DAE1E7;
@@ -30,7 +34,6 @@ $grey: #B8C2CC; // base
 $grey-dark: #8795A1;
 $grey-darker: #606F7B;
 $grey-darkest: #3D4852;
-$black: #22292F;
 
 $blue-lightest: #EFF8FF;
 $blue-lighter: #BCDEFA;
@@ -47,4 +50,12 @@ $red: #E3342F; // base
 $red-dark: #CC1F1A;
 $red-darker: #621B18;
 $red-darkest: #3B0D0C;
+
+$green-lightest: #E3FCEC;
+$green-lighter: #A2F5BF;
+$green-light: #51D88A;
+$green: #38C172; // base
+$green-dark: #1F9D55;
+$green-darker: #1A4731;
+$green-darkest: #0F2F21;
 //==================== END Tailwind colors ====================

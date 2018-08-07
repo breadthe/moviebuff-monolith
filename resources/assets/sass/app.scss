@@ -5,6 +5,9 @@
 // Variables
 @import 'variables';
 
+// Mixins
+@import 'mixins';
+
 // Font Awesome 4.7.0
 @import "~font-awesome/scss/font-awesome.scss";
 
@@ -26,11 +29,9 @@ strong {
     &:hover {
       color: $black;
       border-color: $black;
-      box-shadow: 0 8px 6px -6px $black;
-      -moz-box-shadow: 0 8px 6px -6px $black;
-      -webkit-box-shadow: 0 8px 6px -6px $black;
       font-weight: 400;
       text-decoration: none;
+      @include btn-drop-shadow($black);
     }
   }
 }
@@ -46,20 +47,17 @@ strong {
     letter-spacing: 0.08rem;
     margin: 0;
     padding: 1px 5px;
-    &.btn-blue {
-      border-color: $blue;
-      color: $blue;
-      &:hover {
-        background-color: $blue;
-        color: $white;
-      }
-    }
-    &.btn-red {
-      border-color: $red;
-      color: $red;
-      &:hover {
-        background-color: $red;
-        color: $white;
+
+    // Generate all the .btn-{color} classes defined in $btn-color-map
+    @each $color, $i in $btn-color-map {
+      &.btn-#{$color} {
+        border-color: map-get($btn-color-map, #{$color});
+        color: map-get($btn-color-map, #{$color});
+        &:hover {
+          background-color: map-get($btn-color-map, #{$color});
+          color: $white;
+          @include btn-drop-shadow($black);
+        }
       }
     }
   }
@@ -147,9 +145,9 @@ input {
         }
     }
     .right-side {
-        display: table-cell;
-        padding-left: 10px;
         font-size: 1.5rem;
+        display: table-cell;
+        margin-left: 10px;
         vertical-align: top;
         .movie-year {
           font-size: 1rem;
@@ -167,7 +165,7 @@ input {
           }
         }
         .action-buttons {
-            margin-top: 10px;
+            margin-bottom: 10px;
             span {
               color: $grey;
               font-size: 1rem;
@@ -181,5 +179,9 @@ input {
               }
             }
         }
+    }
+    .action-menu {
+      background-color: rgba(255,255,255,0.7);
+      top: -20px;
     }
 }

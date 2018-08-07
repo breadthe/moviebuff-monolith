@@ -3068,7 +3068,7 @@
   --red: #E3342F;
   --orange: #f6993f;
   --yellow: #ffed4a;
-  --green: #38c172;
+  --green: #38C172;
   --teal: #4dc0b5;
   --cyan: #6cb2eb;
   --white: #ffffff;
@@ -3076,7 +3076,7 @@
   --gray-dark: #343a40;
   --primary: #3490DC;
   --secondary: #6c757d;
-  --success: #38c172;
+  --success: #38C172;
   --info: #6cb2eb;
   --warning: #ffed4a;
   --danger: #E3342F;
@@ -5482,7 +5482,7 @@ textarea.form-control {
   width: 100%;
   margin-top: 0.25rem;
   font-size: 80%;
-  color: #38c172;
+  color: #38C172;
 }
 
 .valid-tooltip {
@@ -5505,7 +5505,7 @@ textarea.form-control {
 .was-validated
 .custom-select:valid,
 .custom-select.is-valid {
-  border-color: #38c172;
+  border-color: #38C172;
 }
 
 .was-validated .form-control:valid:focus,
@@ -5513,7 +5513,7 @@ textarea.form-control {
 .was-validated
 .custom-select:valid:focus,
 .custom-select.is-valid:focus {
-  border-color: #38c172;
+  border-color: #38C172;
   -webkit-box-shadow: 0 0 0 0.2rem rgba(56, 193, 114, 0.25);
           box-shadow: 0 0 0 0.2rem rgba(56, 193, 114, 0.25);
 }
@@ -5540,7 +5540,7 @@ textarea.form-control {
 
 .was-validated .form-check-input:valid ~ .form-check-label,
 .form-check-input.is-valid ~ .form-check-label {
-  color: #38c172;
+  color: #38C172;
 }
 
 .was-validated .form-check-input:valid ~ .valid-feedback,
@@ -5552,7 +5552,7 @@ textarea.form-control {
 
 .was-validated .custom-control-input:valid ~ .custom-control-label,
 .custom-control-input.is-valid ~ .custom-control-label {
-  color: #38c172;
+  color: #38C172;
 }
 
 .was-validated .custom-control-input:valid ~ .custom-control-label::before,
@@ -5580,7 +5580,7 @@ textarea.form-control {
 
 .was-validated .custom-file-input:valid ~ .custom-file-label,
 .custom-file-input.is-valid ~ .custom-file-label {
-  border-color: #38c172;
+  border-color: #38C172;
 }
 
 .was-validated .custom-file-input:valid ~ .custom-file-label::after,
@@ -5959,8 +5959,8 @@ fieldset:disabled a.btn {
 
 .btn-success {
   color: #ffffff;
-  background-color: #38c172;
-  border-color: #38c172;
+  background-color: #38C172;
+  border-color: #38C172;
 }
 
 .btn-success:hover {
@@ -5978,8 +5978,8 @@ fieldset:disabled a.btn {
 .btn-success.disabled,
 .btn-success:disabled {
   color: #ffffff;
-  background-color: #38c172;
-  border-color: #38c172;
+  background-color: #38C172;
+  border-color: #38C172;
 }
 
 .btn-success:not(:disabled):not(.disabled):active,
@@ -6278,16 +6278,16 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-success {
-  color: #38c172;
+  color: #38C172;
   background-color: transparent;
   background-image: none;
-  border-color: #38c172;
+  border-color: #38C172;
 }
 
 .btn-outline-success:hover {
   color: #ffffff;
-  background-color: #38c172;
-  border-color: #38c172;
+  background-color: #38C172;
+  border-color: #38C172;
 }
 
 .btn-outline-success:focus,
@@ -6298,7 +6298,7 @@ fieldset:disabled a.btn {
 
 .btn-outline-success.disabled,
 .btn-outline-success:disabled {
-  color: #38c172;
+  color: #38C172;
   background-color: transparent;
 }
 
@@ -6306,8 +6306,8 @@ fieldset:disabled a.btn {
 .btn-outline-success:not(:disabled):not(.disabled).active,
 .show > .btn-outline-success.dropdown-toggle {
   color: #ffffff;
-  background-color: #38c172;
-  border-color: #38c172;
+  background-color: #38C172;
+  border-color: #38C172;
 }
 
 .btn-outline-success:not(:disabled):not(.disabled):active:focus,
@@ -8626,7 +8626,7 @@ input[type="button"].btn-block {
 
 .badge-success {
   color: #ffffff;
-  background-color: #38c172;
+  background-color: #38C172;
 }
 
 .badge-success[href]:hover,
@@ -9996,7 +9996,7 @@ button.bg-secondary:focus {
 }
 
 .bg-success {
-  background-color: #38c172 !important;
+  background-color: #38C172 !important;
 }
 
 a.bg-success:hover,
@@ -10118,7 +10118,7 @@ button.bg-dark:focus {
 }
 
 .border-success {
-  border-color: #38c172 !important;
+  border-color: #38C172 !important;
 }
 
 .border-info {
@@ -13342,7 +13342,7 @@ a.text-secondary:focus {
 }
 
 .text-success {
-  color: #38c172 !important;
+  color: #38C172 !important;
 }
 
 a.text-success:hover,
@@ -13541,11 +13541,11 @@ strong {
 .badge.badge-moviebuff:hover {
   color: #22292F;
   border-color: #22292F;
+  font-weight: 400;
+  text-decoration: none;
   box-shadow: 0 8px 6px -6px #22292F;
   -moz-box-shadow: 0 8px 6px -6px #22292F;
   -webkit-box-shadow: 0 8px 6px -6px #22292F;
-  font-weight: 400;
-  text-decoration: none;
 }
 
 .btn.btn-catalog-action {
@@ -13560,23 +13560,42 @@ strong {
 }
 
 .btn.btn-catalog-action.btn-blue {
-  border-color: #3490DC;
-  color: #3490DC;
+  border-color: #3490dc;
+  color: #3490dc;
 }
 
 .btn.btn-catalog-action.btn-blue:hover {
-  background-color: #3490DC;
+  background-color: #3490dc;
   color: #ffffff;
+  box-shadow: 0 8px 6px -6px #22292F;
+  -moz-box-shadow: 0 8px 6px -6px #22292F;
+  -webkit-box-shadow: 0 8px 6px -6px #22292F;
 }
 
 .btn.btn-catalog-action.btn-red {
-  border-color: #E3342F;
-  color: #E3342F;
+  border-color: #e3342f;
+  color: #e3342f;
 }
 
 .btn.btn-catalog-action.btn-red:hover {
-  background-color: #E3342F;
+  background-color: #e3342f;
   color: #ffffff;
+  box-shadow: 0 8px 6px -6px #22292F;
+  -moz-box-shadow: 0 8px 6px -6px #22292F;
+  -webkit-box-shadow: 0 8px 6px -6px #22292F;
+}
+
+.btn.btn-catalog-action.btn-green {
+  border-color: #38c172;
+  color: #38c172;
+}
+
+.btn.btn-catalog-action.btn-green:hover {
+  background-color: #38c172;
+  color: #ffffff;
+  box-shadow: 0 8px 6px -6px #22292F;
+  -moz-box-shadow: 0 8px 6px -6px #22292F;
+  -webkit-box-shadow: 0 8px 6px -6px #22292F;
 }
 
 .level {
@@ -13684,9 +13703,9 @@ input.form-control.searchbar::placeholder {
 }
 
 .movie-item .right-side {
-  display: table-cell;
-  padding-left: 10px;
   font-size: 1.5rem;
+  display: table-cell;
+  margin-left: 10px;
   vertical-align: top;
 }
 
@@ -13704,7 +13723,7 @@ input.form-control.searchbar::placeholder {
 }
 
 .movie-item .right-side .action-buttons {
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .movie-item .right-side .action-buttons span {
@@ -13718,5 +13737,10 @@ input.form-control.searchbar::placeholder {
 
 .movie-item .right-side .action-buttons span i.fa {
   font-size: 1rem;
+}
+
+.movie-item .action-menu {
+  background-color: rgba(255, 255, 255, 0.7);
+  top: -20px;
 }
 
