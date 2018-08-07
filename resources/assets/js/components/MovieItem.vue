@@ -6,63 +6,56 @@
 
     <div class="right-side">
         <section class="confirmation" v-if="isMoving">
+            <p>Move <strong>{{ movie.title }}</strong> to another catalog?</p>
+
             <div>
-                <p>Move <strong>{{ movie.title }}</strong> to another catalog?</p>
+                <all-catalogs-dropdown
+                    :catalog-id="catalogId"
+                    :movie="movie"
+                    :all-catalogs="allCatalogs"
+                    action="move"
+                    @removeItem="removeItem($event)"
+                    @isMoving="isMoving = $event"
+                    @loadAllCatalogs="$emit('loadAllCatalogs')"
+                ></all-catalogs-dropdown>
 
-                <div>
-                    <all-catalogs-dropdown
-                        :catalog-id="catalogId"
-                        :movie="movie"
-                        :all-catalogs="allCatalogs"
-                        action="move"
-                        @removeItem="removeItem($event)"
-                        @isMoving="isMoving = $event"
-                        @loadAllCatalogs="$emit('loadAllCatalogs')"
-                    ></all-catalogs-dropdown>
-
-                    <button class="btn btn-link" @click="isMoving = false">
-                        Cancel
-                    </button>
-                </div>
+                <button class="btn btn-link" @click="isMoving = false">
+                    Cancel
+                </button>
             </div>
         </section>
 
         <section class="confirmation" v-else-if="isCopying">
+            <p>Copy <strong>{{ movie.title }}</strong> to another catalog?</p>
+
             <div>
-                <p>Copy <strong>{{ movie.title }}</strong> to another catalog?</p>
+                <all-catalogs-dropdown
+                    :catalog-id="catalogId"
+                    :movie="movie"
+                    :all-catalogs="allCatalogs"
+                    action="copy"
+                    @isCopying="isCopying = $event"
+                    @loadAllCatalogs="$emit('loadAllCatalogs')"
+                ></all-catalogs-dropdown>
 
-                <div>
-                    <all-catalogs-dropdown
-                        :catalog-id="catalogId"
-                        :movie="movie"
-                        :all-catalogs="allCatalogs"
-                        action="copy"
-                        @isCopying="isCopying = $event"
-                        @loadAllCatalogs="$emit('loadAllCatalogs')"
-                    ></all-catalogs-dropdown>
-
-                    <button class="btn btn-link" @click="isCopying = false">
-                        Cancel
-                    </button>
-                </div>
+                <button class="btn btn-link" @click="isCopying = false">
+                    Cancel
+                </button>
             </div>
         </section>
 
-        <section class="confirmation d-flex align-items-center" v-else-if="isDeleting">
+        <section class="confirmation" v-else-if="isDeleting">
+            <p>Are you sure you want to remove <strong>{{ movie.title }}</strong> from this catalog?</p>
+
             <div>
-                <p>Are you sure you want to remove <strong>{{ movie.title }}</strong> from this catalog?</p>
+                <button class="btn btn-catalog-action btn-red" @click="deleteMovie()">
+                    Delete
+                </button>
 
-                <div>
-                    <button class="btn btn-catalog-action btn-red" @click="deleteMovie()">
-                        Delete
-                    </button>
-
-                    <button class="btn btn-link" @click="isDeleting = false">
-                        Cancel
-                    </button>
-                </div>
+                <button class="btn btn-link" @click="isDeleting = false">
+                    Cancel
+                </button>
             </div>
-
         </section>
 
         <section v-else>
@@ -70,21 +63,19 @@
             <div class="movie-title is-size-4 has-text-black">{{ movie.title }}</div>
         </section>
 
-        <section class="position-relative" v-if="showControls && !(isMoving || isCopying || isDeleting)">
-            <div class="action-menu position-absolute">
-                <button class="btn btn-sm btn-catalog-action btn-blue" :title="'Move to Catalog'" @click="confirmMove($event)">
-                    <i class="fa fa-share-square-o fa-sm" aria-hidden="true" :title="'Move to Catalog'"></i>
-                    Move
-                </button>
-                <button class="btn btn-sm btn-catalog-action btn-green ml-3" :title="'Copy to Catalog'" @click="confirmCopy($event)">
-                    <i class="fa fa-clone fa-sm" aria-hidden="true" :title="'Copy to Catalog'"></i>
-                    Copy
-                </button>
-                <button class="btn btn-sm btn-catalog-action btn-red ml-3" :title="'Delete ' + movie.title" @click="confirmDelete($event)">
-                    <i class="fa fa-trash fa-sm" aria-hidden="true" :title="'Delete ' + movie.title"></i>
-                    Delete
-                </button>
-            </div>
+        <section class="action-menu" v-if="showControls && !(isMoving || isCopying || isDeleting)">
+            <button class="btn btn-sm btn-catalog-action btn-blue" :title="'Move to Catalog'" @click="confirmMove($event)">
+                <i class="fa fa-share-square-o fa-sm" aria-hidden="true" :title="'Move to Catalog'"></i>
+                Move
+            </button>
+            <button class="btn btn-sm btn-catalog-action btn-green ml-3" :title="'Copy to Catalog'" @click="confirmCopy($event)">
+                <i class="fa fa-clone fa-sm" aria-hidden="true" :title="'Copy to Catalog'"></i>
+                Copy
+            </button>
+            <button class="btn btn-sm btn-catalog-action btn-red ml-3" :title="'Delete ' + movie.title" @click="confirmDelete($event)">
+                <i class="fa fa-trash fa-sm" aria-hidden="true" :title="'Delete ' + movie.title"></i>
+                Delete
+            </button>
         </section>
 
     </div>
