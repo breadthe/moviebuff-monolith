@@ -11,6 +11,7 @@
             <div>
                 <all-catalogs-dropdown
                     :catalog-id="catalogId"
+                    :catalog-name="catalogName"
                     :movie="movie"
                     :all-catalogs="allCatalogs"
                     action="move"
@@ -31,6 +32,7 @@
             <div>
                 <all-catalogs-dropdown
                     :catalog-id="catalogId"
+                    :catalog-name="catalogName"
                     :movie="movie"
                     :all-catalogs="allCatalogs"
                     action="copy"
@@ -91,6 +93,11 @@
                 required: true,
                 type: Number
             },
+            'catalogName': {
+                required: true,
+                type: String,
+                default: ''
+            },
             'movie': {
                 required: true,
                 type: Object
@@ -107,7 +114,8 @@
                 showControls: false,
                 isMoving: false,
                 isCopying: false,
-                isDeleting: false
+                isDeleting: false,
+                notifyDuration: 8000 // How long should notifications persist (ms)
             }
         },
         methods: {
@@ -135,9 +143,23 @@
                         if (response.status === 200) {
                             this.isDeleting = false;
                             this.$emit('removeItem', this.movie.id); // remove this item from the DOM
+
+                            this.$notify({
+                                group: 'success',
+                                type: 'success',
+                                duration: this.notifyDuration,
+                                title: 'Success!',
+                                text: '<strong>' + this.movie.title + '</strong> was deleted from <strong>' + this.catalogName + '</strong>'
+                            });
                         }
                     }).catch (e => {
-                        // TODO: handle errors somehow
+                        this.$notify({
+                            group: 'error',
+                            type: 'error',
+                            duration: this.notifyDuration,
+                            title: 'Error!',
+                            text: 'An error occurred trying to delete <strong>' + this.movie.title + '</strong> to <strong>' + this.catalogName + '</strong>'
+                        });
                     })
             },
             removeItem($event) {

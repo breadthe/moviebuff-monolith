@@ -23,6 +23,9 @@
 <body>
     <div id="app">
 
+        <notifications group="success" type="success" position="top center" classes="moviebuff-notification"></notifications>
+        <notifications group="error" type="error" position="top center" classes="moviebuff-notification"></notifications>
+
         @include ('layouts.nav')
 
         @if (Auth::check())

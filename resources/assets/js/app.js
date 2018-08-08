@@ -8,6 +8,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import Notifications from 'vue-notification';
 
 /**
  * Custom directive to focus an input when inserting it into the DOM
@@ -17,6 +18,9 @@ Vue.directive('focus', {
         el.focus()
     }
 });
+
+// Register vue-notification
+Vue.use(Notifications);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

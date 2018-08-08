@@ -3,6 +3,7 @@
     <div v-if="mutableMovies.length">
         <movie-item
             :catalog-id="catalogId"
+            :catalog-name="catalogName"
             :movie="movie"
             :all-catalogs="allCatalogs"
             v-for="(movie, i) in mutableMovies"
@@ -25,6 +26,11 @@
             'catalogId': {
                 required: true,
                 type: Number
+            },
+            'catalogName': {
+                required: true,
+                type: String,
+                default: ''
             },
             'movies': {
                 required: true,

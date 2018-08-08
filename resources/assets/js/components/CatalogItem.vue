@@ -79,7 +79,8 @@
                 csrf: document.head.querySelector('meta[name="csrf-token"]'),
                 showControls: false,
                 isEditing: false,
-                isDeleting: false
+                isDeleting: false,
+                notifyDuration: 8000 // How long should notifications persist (ms)
             }
         },
         methods: {
@@ -98,9 +99,23 @@
                         // A little fall-back in case the name change failed on the back-end for some reason
                         if (response.data.catalog_name) {
                             this.catalog.name = response.data.catalog_name;
+
+                            this.$notify({
+                                group: 'success',
+                                type: 'success',
+                                duration: this.notifyDuration,
+                                title: 'Success!',
+                                text: '<strong>' + this.catalog.name + '</strong> was renamed'
+                            });
                         }
                     }).catch (e => {
-                        // TODO: handle errors somehow
+                        this.$notify({
+                            group: 'error',
+                            type: 'error',
+                            duration: this.notifyDuration,
+                            title: 'Error!',
+                            text: 'An error occurred trying to rename <strong>' + this.catalog.name + '</strong>'
+                        });
                     });
 
                 this.isEditing = false;
@@ -117,9 +132,23 @@
                         if (response.status === 200) {
                             this.isDeleting = false;
                             this.$emit('removeItem', this.catalog.id); // remove this item from the DOM
+
+                            this.$notify({
+                                group: 'success',
+                                type: 'success',
+                                duration: this.notifyDuration,
+                                title: 'Success!',
+                                text: '<strong>' + this.catalog.name + '</strong> was deleted'
+                            });
                         }
                     }).catch (e => {
-                        // TODO: handle errors somehow
+                        this.$notify({
+                            group: 'error',
+                            type: 'error',
+                            duration: this.notifyDuration,
+                            title: 'Error!',
+                            text: 'An error occurred trying to delete <strong>' + this.catalog.name + '</strong>'
+                        });
                     });
             },
         },

@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="card-body">
-                    <movie-items :catalog-id="{{ $catalog->id }}" :movies="{{ $movies }}"></movie-items>
+                    <movie-items :catalog-id="{{ $catalog->id }}" catalog-name="{{ $catalog->name }}" :movies="{{ $movies }}"></movie-items>
                 </div>
             </div>
 

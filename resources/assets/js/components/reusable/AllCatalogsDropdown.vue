@@ -41,10 +41,16 @@
 
 <script>
     export default {
+        name: 'all-catalogs-dropdown',
         props: {
             'catalogId': {
                 required: true,
                 type: Number
+            },
+            'catalogName': {
+                required: true,
+                type: String,
+                default: ''
             },
             'movie': {
                 required: true,
@@ -66,7 +72,8 @@
                 catalogs: [],
                 isLoadingCatalogs: false,
                 newCatalogName: '',
-                showDelete: false
+                showDelete: false,
+                notifyDuration: 8000 // How long should notifications persist (ms)
             }
         },
         methods: {
@@ -100,8 +107,22 @@
     
                             // Tell the parent to remove this movie from the DOM
                             this.$emit('loadAllCatalogs');
+
+                            this.$notify({
+                                group: 'success',
+                                type: 'success',
+                                duration: this.notifyDuration,
+                                title: 'Success!',
+                                text: '<strong>' + this.movie.title + '</strong> ' + (this.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + this.catalogName + '</strong>'
+                            });
                         }).catch (e => {
-                            // TODO: handle errors somehow
+                            this.$notify({
+                                group: 'error',
+                                type: 'error',
+                                duration: this.notifyDuration,
+                                title: 'Error!',
+                                text: 'An error occurred trying to ' + this.action + ' <strong>' + this.movie.title + '</strong> to <strong>' + this.catalogName + '</strong>'
+                            });
                         })
                 }
             },
@@ -128,9 +149,23 @@
                         // Tell the parent to remove this movie from the DOM
                         this.$emit('loadAllCatalogs');
 
+                        this.$notify({
+                            group: 'success',
+                            type: 'success',
+                            duration: this.notifyDuration,
+                            title: 'Success!',
+                            text: '<strong>' + this.movie.title + '</strong> ' + (this.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + this.newCatalogName + '</strong>'
+                        });
+
                         this.newCatalogName = ''
                     }).catch (e => {
-                        // TODO: handle errors somehow
+                        this.$notify({
+                            group: 'error',
+                            type: 'error',
+                            duration: this.notifyDuration,
+                            title: 'Error!',
+                            text: 'An error occurred trying to ' + this.action + ' <strong>' + this.movie.title + '</strong> to <strong>' + this.newCatalogName + '</strong>'
+                        });
                     })
             },
         },
