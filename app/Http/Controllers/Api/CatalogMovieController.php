@@ -33,12 +33,16 @@ class CatalogMovieController extends Controller
         $movie_id = $request->movie;
 
         // Copy the movie to a the specified catalog
-        Catalog::find($new_catalog_id)->movies()->attach($movie_id);
+        $catalog = Catalog::find($new_catalog_id);
+        $catalog->movies()->attach($movie_id);
+        $catalog_name = $catalog->name;
 
         // If the action is move, delete it from the old catalog
         if ($request->action === 'move') {
             Catalog::find($old_catalog_id)->movies()->detach($movie_id);
         }
+
+        return response(['catalog_name' => $catalog_name], 200);
     }
 
     /**
@@ -66,5 +70,7 @@ class CatalogMovieController extends Controller
         if ($request->action === 'move') {
             Catalog::find($old_catalog_id)->movies()->detach($movie_id);
         }
+
+        return response(['catalog_name' => $catalog_name], 200);
     }
 }

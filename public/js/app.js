@@ -49002,7 +49002,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         type: 'success',
                         duration: _this2.notifyDuration,
                         title: 'Success!',
-                        text: '<strong>' + _this2.movie.title + '</strong> ' + (_this2.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + _this2.catalogName + '</strong>'
+                        text: '<strong>' + _this2.movie.title + '</strong> ' + (_this2.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + response.data.catalog_name + '</strong>'
                     });
                 }).catch(function (e) {
                     _this2.$notify({
@@ -49010,7 +49010,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         type: 'error',
                         duration: _this2.notifyDuration,
                         title: 'Error!',
-                        text: 'An error occurred trying to ' + _this2.action + ' <strong>' + _this2.movie.title + '</strong> to <strong>' + _this2.catalogName + '</strong>'
+                        text: 'An error occurred trying to ' + _this2.action + ' <strong>' + _this2.movie.title + '</strong>'
                     });
                 });
             }
@@ -49044,7 +49044,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     type: 'success',
                     duration: _this3.notifyDuration,
                     title: 'Success!',
-                    text: '<strong>' + _this3.movie.title + '</strong> ' + (_this3.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + _this3.newCatalogName + '</strong>'
+                    text: '<strong>' + _this3.movie.title + '</strong> ' + (_this3.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + response.data.catalog_name + '</strong>'
                 });
 
                 _this3.newCatalogName = '';
@@ -49054,7 +49054,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     type: 'error',
                     duration: _this3.notifyDuration,
                     title: 'Error!',
-                    text: 'An error occurred trying to ' + _this3.action + ' <strong>' + _this3.movie.title + '</strong> to <strong>' + _this3.newCatalogName + '</strong>'
+                    text: 'An error occurred trying to ' + _this3.action + ' <strong>' + _this3.movie.title + '</strong>'
                 });
             });
         }

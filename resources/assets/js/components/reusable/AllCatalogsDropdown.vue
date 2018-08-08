@@ -113,7 +113,7 @@
                                 type: 'success',
                                 duration: this.notifyDuration,
                                 title: 'Success!',
-                                text: '<strong>' + this.movie.title + '</strong> ' + (this.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + this.catalogName + '</strong>'
+                                text: '<strong>' + this.movie.title + '</strong> ' + (this.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + response.data.catalog_name + '</strong>'
                             });
                         }).catch (e => {
                             this.$notify({
@@ -121,7 +121,7 @@
                                 type: 'error',
                                 duration: this.notifyDuration,
                                 title: 'Error!',
-                                text: 'An error occurred trying to ' + this.action + ' <strong>' + this.movie.title + '</strong> to <strong>' + this.catalogName + '</strong>'
+                                text: 'An error occurred trying to ' + this.action + ' <strong>' + this.movie.title + '</strong>'
                             });
                         })
                 }
@@ -154,7 +154,7 @@
                             type: 'success',
                             duration: this.notifyDuration,
                             title: 'Success!',
-                            text: '<strong>' + this.movie.title + '</strong> ' + (this.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + this.newCatalogName + '</strong>'
+                            text: '<strong>' + this.movie.title + '</strong> ' + (this.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + response.data.catalog_name + '</strong>'
                         });
 
                         this.newCatalogName = ''
@@ -164,7 +164,7 @@
                             type: 'error',
                             duration: this.notifyDuration,
                             title: 'Error!',
-                            text: 'An error occurred trying to ' + this.action + ' <strong>' + this.movie.title + '</strong> to <strong>' + this.newCatalogName + '</strong>'
+                            text: 'An error occurred trying to ' + this.action + ' <strong>' + this.movie.title + '</strong>'
                         });
                     })
             },
