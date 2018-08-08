@@ -78,18 +78,6 @@ class CatalogsController extends Controller
     }
 
     /**
-     * Detach a Movie from a Catalog (remove the record from movie_catalog)
-     */
-    public function detachMovie(Request $request)
-    {
-        $catalog_id = $request->catalog;
-        $movie_id = $request->movie;
-
-        // Detach the movie from the catalog - remove the record from movie_catalog
-        Catalog::find($catalog_id)->movies()->detach($movie_id);
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -129,50 +117,5 @@ class CatalogsController extends Controller
     public function destroy($id)
     {
         Catalog::destroy($id);
-    }
-
-    /**
-     * Move/Copy a Movie to another Catalog
-     */
-    public function moveOrCopyMovie(Request $request)
-    {
-        $old_catalog_id = $request->catalog_id;
-        $new_catalog_id = $request->catalog;
-        $movie_id = $request->movie;
-
-        // Copy the movie to a the specified catalog
-        Catalog::find($new_catalog_id)->movies()->attach($movie_id);
-
-        // If the action is move, delete it from the old catalog
-        if ($request->action === 'move') {
-            Catalog::find($old_catalog_id)->movies()->detach($movie_id);
-        }
-    }
-
-    /**
-     * Move/Copy a Movie to a new Catalog
-     */
-    public function moveOrCopyMovieToNewCatalog(Request $request)
-    {
-        $old_catalog_id = $request->catalog_id;
-        $catalog_name = $request->catalog_name;
-        $movie_id = $request->movie_id;
-
-        // TODO: Check for duplicate catalog name
-
-        // Create the new catalog
-        $new_catalog = Catalog::firstOrCreate([
-            'user_id' => Auth::user()->id,
-            'name' => $catalog_name
-        ]);
-        $new_catalog_id = $new_catalog->id;
-
-        // Add movie_id, catalog_id to movie_catalog
-        Catalog::find($new_catalog->id)->movies()->attach($movie_id);
-
-        // If the action is move, delete it from the old catalog
-        if ($request->action === 'move') {
-            Catalog::find($old_catalog_id)->movies()->detach($movie_id);
-        }
     }
 }

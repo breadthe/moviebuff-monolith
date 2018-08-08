@@ -39,17 +39,17 @@ Route::group(['middleware' => 'auth:api'], function () {
     /**
      * Remove the Catalog-Movie association (un-tag a movie)
      */
-    Route::delete('/catalog/{catalog}/movie/{movie}', 'Api\CatalogsController@detachMovie');
+    Route::delete('/catalog/{catalog}/movie/{movie}', 'Api\CatalogMovieController@destroy');
 
     /**
-     * Move/Copy a move to another (existing) Catalog
+     * Move/Copy a move to an existing Catalog
      */
-    Route::put('/catalog/{catalog}/movie/{movie}', 'Api\CatalogsController@moveOrCopyMovie');
+    Route::put('/catalog/{catalog}/movie/{movie}', 'Api\CatalogMovieController@update');
 
     /**
-     * Move/Copy movie to new catalog
+     * Move/Copy movie to a new catalog
     */
-    Route::put('/catalog', 'Api\CatalogsController@moveOrCopyMovieToNewCatalog');
+    Route::put('/catalog', 'Api\CatalogMovieController@store');
 
     /**
      * Retrieve all the catalogs for a given movie (tag the movie)
