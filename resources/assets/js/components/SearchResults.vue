@@ -2,7 +2,7 @@
 <div class="container">
 
     <div class="movie-results">
-        <div v-for="movie in movies" :key="movie.imdbID" class="movie-item">
+        <div v-for="movie in movies" :key="movie.imdbID">
             <search-result
                 :all-catalogs="allCatalogs"
                 :movie="movie"

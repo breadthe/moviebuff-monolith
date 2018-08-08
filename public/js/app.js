@@ -54194,7 +54194,7 @@ var render = function() {
       _vm._l(_vm.movies, function(movie) {
         return _c(
           "div",
-          { key: movie.imdbID, staticClass: "movie-item" },
+          { key: movie.imdbID },
           [
             _c("search-result", {
               attrs: { "all-catalogs": _vm.allCatalogs, movie: movie },
@@ -54538,7 +54538,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [
+  return _c("section", { staticClass: "movie-item" }, [
     _c("div", { staticClass: "left-side" }, [
       _vm.movie.Poster && _vm.movie.Poster != "N/A"
         ? _c("img", { attrs: { src: _vm.movie.Poster } })

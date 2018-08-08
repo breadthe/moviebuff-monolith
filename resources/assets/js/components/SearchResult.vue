@@ -1,5 +1,5 @@
 <template>
-<section>
+<section class="movie-item">
 
     <div class="left-side">
         <img :src="movie.Poster" v-if="movie.Poster && movie.Poster != 'N/A'">
