@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('/catalog/{catalog}/movie/{movie}', 'Api\CatalogMovieController@destroy');
 
     /**
-     * Move/Copy a move to an existing Catalog
+     * Move/Copy a movie to an existing Catalog
      */
     Route::put('/catalog/{catalog}/movie/{movie}', 'Api\CatalogMovieController@update');
 
