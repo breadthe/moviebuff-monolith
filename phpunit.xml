@@ -29,5 +29,10 @@
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="MAIL_DRIVER" value="array"/>
+        <env name="DB_DATABASE" value="moviebuff-testing"/>
     </php>
+    <logging>
+        <log type="coverage-html" target="./public/report"
+            lowUpperBound="50" highLowerBound="80" />
+    </logging>
 </phpunit>
