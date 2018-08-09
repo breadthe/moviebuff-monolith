@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     /**
      * Edit the Catalog name
      */
-    Route::post('/catalog/{id}', 'Api\CatalogsController@update');
+    Route::put('/catalog/{id}', 'Api\CatalogsController@update');
 
     /**
      * Delete a Catalog

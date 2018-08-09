@@ -94,7 +94,7 @@
                 event.preventDefault();
                 event.stopPropagation();
 
-                await axios.post(`/api/catalog/${this.catalog.id}`, this.catalog)
+                await axios.put(`/api/catalog/${this.catalog.id}`, this.catalog)
                     .then(response => {
                         // A little fall-back in case the name change failed on the back-end for some reason
                         if (response.data.catalog_name) {
