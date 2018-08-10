@@ -54484,7 +54484,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 });
             } else {
                 // Otherwise add it
-                axios.post('/api/catalog', data).then(function (response) {
+                axios.post('/api/movie/catalog', data).then(function (response) {
                     // Retrieve catalogs for the current movie again
                     _this2.getCatalogs();
 
@@ -54507,7 +54507,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 'catalog_name': this.newCatalogName
             };
 
-            axios.post('/api/catalog', data).then(function (response) {
+            axios.post('/api/movie/catalog', data).then(function (response) {
                 // Retrieve catalogs for the current movie again
                 _this3.getCatalogs();
 

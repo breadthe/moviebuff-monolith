@@ -124,7 +124,7 @@
                             // TODO: handle errors somehow
                         })
                 } else { // Otherwise add it
-                    axios.post(`/api/catalog`, data)
+                    axios.post(`/api/movie/catalog`, data)
                         .then(response => {
                             // Retrieve catalogs for the current movie again
                             this.getCatalogs()
@@ -146,7 +146,7 @@
                     'catalog_name': this.newCatalogName
                 }
 
-                axios.post(`/api/catalog`, data)
+                axios.post(`/api/movie/catalog`, data)
                     .then(response => {
                         // Retrieve catalogs for the current movie again
                         this.getCatalogs()

@@ -75,7 +75,7 @@ class MovieCatalogTest extends TestCase
             'movie' => $this->movies[0]
         ];
 
-        $this->actingAs($this->user, 'api')->json('POST', '/api/catalog', $body, ['Accept' => 'application/json'])
+        $this->actingAs($this->user, 'api')->json('POST', '/api/movie/catalog', $body, ['Accept' => 'application/json'])
             ->assertOk();
     }
 
@@ -92,7 +92,7 @@ class MovieCatalogTest extends TestCase
             'movie' => $this->movies[1]
         ];
 
-        $this->actingAs($this->user, 'api')->json('POST', '/api/catalog', $body, ['Accept' => 'application/json'])
+        $this->actingAs($this->user, 'api')->json('POST', '/api/movie/catalog', $body, ['Accept' => 'application/json'])
             ->assertOk();
     }
 
@@ -126,7 +126,7 @@ class MovieCatalogTest extends TestCase
             'catalog_id' => $from_catalog_id,
             'movie' => $this->movies[0]
         ];
-        $this->actingAs($this->user, 'api')->json('POST', '/api/catalog', $body, ['Accept' => 'application/json']);
+        $this->actingAs($this->user, 'api')->json('POST', '/api/movie/catalog', $body, ['Accept' => 'application/json']);
 
         // Move the movie to the destination catalog
         $body = [
@@ -161,7 +161,7 @@ class MovieCatalogTest extends TestCase
             'catalog_id' => $from_catalog_id,
             'movie' => $this->movies[0]
         ];
-        $this->actingAs($this->user, 'api')->json('POST', '/api/catalog', $body, ['Accept' => 'application/json']);
+        $this->actingAs($this->user, 'api')->json('POST', '/api/movie/catalog', $body, ['Accept' => 'application/json']);
 
         // Copy the movie to the destination catalog
         $body = [
@@ -201,7 +201,7 @@ class MovieCatalogTest extends TestCase
             'catalog_id' => $from_catalog_id,
             'movie' => $this->movies[0]
         ];
-        $this->actingAs($this->user, 'api')->json('POST', '/api/catalog', $body, ['Accept' => 'application/json']);
+        $this->actingAs($this->user, 'api')->json('POST', '/api/movie/catalog', $body, ['Accept' => 'application/json']);
 
         // Move the movie to the destination catalog
         $body = [
@@ -245,7 +245,7 @@ class MovieCatalogTest extends TestCase
             'catalog_id' => $from_catalog_id,
             'movie' => $this->movies[0]
         ];
-        $this->actingAs($this->user, 'api')->json('POST', '/api/catalog', $body, ['Accept' => 'application/json']);
+        $this->actingAs($this->user, 'api')->json('POST', '/api/movie/catalog', $body, ['Accept' => 'application/json']);
 
         // Copy the movie to the destination catalog
         $body = [

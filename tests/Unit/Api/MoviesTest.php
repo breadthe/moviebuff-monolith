@@ -64,7 +64,7 @@ class MoviesTest extends TestCase
                 'movie' => $this->movie
             ];
 
-            $this->actingAs($this->user, 'api')->json('POST', '/api/catalog', $body, ['Accept' => 'application/json']);
+            $this->actingAs($this->user, 'api')->json('POST', '/api/movie/catalog', $body, ['Accept' => 'application/json']);
         });
 
         // Retrieve the catalogs and assert that all 3 are present

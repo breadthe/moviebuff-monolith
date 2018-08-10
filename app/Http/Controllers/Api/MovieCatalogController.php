@@ -12,6 +12,51 @@ use Illuminate\Support\Facades\Auth;
 class MovieCatalogController extends Controller
 {
     /**
+     * Attach Catalog to Movie (tag it)
+     * Add existing catalog if catalog_id
+     * Add new catalog if catalog_name
+     *
+     * $request {
+     *      movie (OMDB object)
+     *      catalog_id
+     *      catalog_name
+     * }
+     */
+    public function create(Request $request)
+    {
+        $movie = $request->movie;
+        extract($movie);
+        $catalog_id = $request->catalog_id;
+        $catalog_name = $request->catalog_name;
+
+        // Check if movie exists; create it if not
+        Movie::where('id', $imdbID)->firstOrCreate([
+            'id' => $imdbID,
+            'title' => $Title,
+            'poster' => $Poster,
+            'year' => $Year,
+            'type' => $Type,
+        ]);
+
+        // New catalog
+        if (!empty($catalog_name)) {
+            /**
+             * Soft-ignore existing Catalog name -
+             * - if the same Catalog name is given,
+             * the Movie is added to the existing Catalog
+             */
+            $new_catalog = Catalog::firstOrCreate([
+                'user_id' => Auth::user()->id,
+                'name' => $catalog_name
+            ]);
+            $catalog_id = $new_catalog->id;
+        }
+
+        // Add movie_id, catalog_id to movie_catalog
+        Catalog::find($catalog_id)->movies()->attach($imdbID);
+    }
+
+    /**
      * Detach a Movie from a Catalog (remove the record from movie_catalog)
      */
     public function destroy(Request $request)

@@ -14,42 +14,29 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['middleware' => 'auth:api'], function () {
+    // User details
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
 
+    // Retrieve all the Catalogs for a given <ovie
+    Route::get('/movies/{movie}/catalogs', 'Api\MoviesController@catalogs');
+
+    // Get all the user's Catalogs
     Route::get('/catalogs', 'Api\CatalogsController@index')->name('catalogs');
 
-    /**
-     * Add movie to catalog - pass in movie_id and catalog_id
-     * Create new catalog and add movie to it - pass in movie_id and catalog_name
-     * TODO: this should be POST /movie/{movie}/catalog MovieCatalogController@create
-    */
-    Route::post('/catalog', 'Api\CatalogsController@store');
-
-    /**
-     * Edit the Catalog name
-     */
+    // Edit the Catalog name
     Route::put('/catalog/{id}', 'Api\CatalogsController@update');
 
-    /**
-     * Delete a Catalog
-     */
+    // Delete a Catalog
     Route::delete('/catalog/{id}', 'Api\CatalogsController@destroy');
 
-    /**
-     * Remove the Catalog-Movie association (un-tag a movie)
-     */
+    // Add Movie to existing or new Catalog
+    Route::post('/movie/catalog', 'Api\MovieCatalogController@create');
+
+    // Remove the Catalog-Movie association (un-tag a movie)
     Route::delete('/movie/{movie}/catalog/{catalog}', 'Api\MovieCatalogController@destroy');
 
-    /**
-     * Move/Copy movie to an existing or new catalog
-     * TODO: this should be PUT /movie/{movie}/catalog
-     */
+    // Move/Copy Movie to an existing or new Catalog
     Route::put('/movie/{movie}/catalog', 'Api\MovieCatalogController@store');
-
-    /**
-     * Retrieve all the catalogs for a given movie (tag the movie)
-     */
-    Route::get('/movies/{movie}/catalogs', 'Api\MoviesController@catalogs');
 });
