@@ -54438,7 +54438,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 $this.isLoadingCatalogs = true;
 
                                 _context.next = 4;
-                                return axios.get('/api/movie/' + $this.movie.imdbID + '/catalogs').then(function (response) {
+                                return axios.get('/api/movies/' + $this.movie.imdbID + '/catalogs').then(function (response) {
                                     $this.catalogs = response.data;
                                     $this.isLoadingCatalogs = false;
                                 }).catch(function (e) {

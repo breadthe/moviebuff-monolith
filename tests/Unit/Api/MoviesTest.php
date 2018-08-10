@@ -68,7 +68,7 @@ class MoviesTest extends TestCase
         });
 
         // Retrieve the catalogs and assert that all 3 are present
-        $this->actingAs($this->user, 'api')->json('GET', "/api/movie/{$this->movie_id}/catalogs", [], ['Accept' => 'application/json'])
+        $this->actingAs($this->user, 'api')->json('GET', "/api/movies/{$this->movie_id}/catalogs", [], ['Accept' => 'application/json'])
             ->assertOk()
             ->assertJsonCount(3);
     }

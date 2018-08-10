@@ -94,7 +94,7 @@
 
                 $this.isLoadingCatalogs = true
 
-                await axios.get(`/api/movie/${$this.movie.imdbID}/catalogs`)
+                await axios.get(`/api/movies/${$this.movie.imdbID}/catalogs`)
                     .then(response => {
                         $this.catalogs = response.data
                         $this.isLoadingCatalogs = false
