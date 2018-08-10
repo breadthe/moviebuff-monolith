@@ -62,7 +62,7 @@ class CatalogMovieTest extends TestCase
     }
 
     /**
-     * POST /catalogs
+     * POST /catalog
      * Test I can add a movie to an existing catalog
      */
     public function test_add_movie_to_existing_catalog()
@@ -80,15 +80,15 @@ class CatalogMovieTest extends TestCase
     }
 
     /**
-     * POST /catalogs
+     * POST /catalog
      * Test I can add a movie to a new catalog
      */
     public function test_add_movie_to_new_catalog()
     {
-        $catalog_name = 'New Catalog';
+        $new_catalog_name = 'New Catalog';
 
         $body = [
-            'catalog_name' => $catalog_name,
+            'catalog_name' => $new_catalog_name,
             'movie' => $this->movies[1]
         ];
 
@@ -103,7 +103,7 @@ class CatalogMovieTest extends TestCase
     public function test_remove_movie_from_catalog()
     {
         $catalog = $this->user->catalogs()->first();
-        $this->catalog_id = $catalog->id;
+        // $this->catalog_id = $catalog->id;
 
         $this->actingAs($this->user, 'api')->json('DELETE', "/api/catalog/{$catalog->id}/movie/{$this->movie_id}", [], ['Accept' => 'application/json'])
             ->assertOk();
@@ -111,23 +111,159 @@ class CatalogMovieTest extends TestCase
 
     /**
      * PUT /catalog/{catalog}/movie/{movie}
-     * Test I can move/copy a movie to an existing Catalog
+     * Test I can Move a movie to an existing Catalog
      */
-    public function test_move_or_copy_movie_to_existing_catalog()
+    public function test_move_movie_to_existing_catalog()
     {
+        // Find the user's catalogs and get the first 2
+        $catalogs = $this->user->catalogs()->get();
+
+        $from_catalog_id = $catalogs[0]->id;
+        $to_catalog_id = $catalogs[1]->id;
+
+        // Attach the movie to the source catalog
+        $body = [
+            'catalog_id' => $from_catalog_id,
+            'movie' => $this->movies[0]
+        ];
+        $this->actingAs($this->user, 'api')->json('POST', '/api/catalog', $body, ['Accept' => 'application/json']);
+
+        // Move the movie to the destination catalog
+        $body = [
+            'action' => 'move',
+            'catalog_id' => $from_catalog_id
+        ];
+        $this->actingAs($this->user, 'api')->json('PUT', "/api/catalog/{$to_catalog_id}/movie/{$this->movie_id}", $body, ['Accept' => 'application/json'])
+            ->assertOk();
+
+        // Check if the movie exists in the destination catalog
+        $this->assertEquals($this->movie_id, $this->user->catalogs()->with('movies')->find($to_catalog_id)->movies->first()->id);
+
+        // And doesn't exist in the source catalog
+        $this->assertCount(0, $this->user->catalogs()->with('movies')->find($from_catalog_id)->movies);
+    }
+
+    /**
+     * PUT /catalog/{catalog}/movie/{movie}
+     * Test I can Copy a movie to an existing Catalog
+     */
+    public function test_copy_movie_to_existing_catalog()
+    {
+        // Find the user's catalogs and get the first 2
+        $catalogs = $this->user->catalogs()->get();
+
+        $from_catalog_id = $catalogs[0]->id;
+        $to_catalog_id = $catalogs[1]->id;
+
+        // Attach the movie to the source catalog
+        $body = [
+            'catalog_id' => $from_catalog_id,
+            'movie' => $this->movies[0]
+        ];
+        $this->actingAs($this->user, 'api')->json('POST', '/api/catalog', $body, ['Accept' => 'application/json']);
+
+        // Copy the movie to the destination catalog
+        $body = [
+            'action' => 'copy',
+            'catalog_id' => $from_catalog_id
+        ];
+        $this->actingAs($this->user, 'api')->json('PUT', "/api/catalog/{$to_catalog_id}/movie/{$this->movie_id}", $body, ['Accept' => 'application/json'])
+            ->assertOk();
+
+        // Check if the movie exists in the destination catalog
+        $this->assertEquals($this->movie_id, $this->user->catalogs()->with('movies')->find($to_catalog_id)->movies->first()->id);
+
+        // And also exists in the source catalog
+        $this->assertEquals($this->movie_id, $this->user->catalogs()->with('movies')->find($from_catalog_id)->movies->first()->id);
     }
 
     /**
      * PUT /catalog
      * TODO: should be
-     * PUT /catalog/{catalog}/movie/{movie}
-     * Test I can move/copy a movie to a new Catalog
+     * PUT /movie/{movie}
+     * or /movie/{movie}/move
+     * with catalog_name, action in the payload
+     * Test I can Move a movie to a new Catalog
      */
-    public function test_move_or_copy_movie_to_new_catalog()
+    public function test_move_movie_to_new_catalog()
     {
+        // Find the user's first catalog
+        $catalog = $this->user->catalogs()->first();
+
+        $from_catalog_id = $catalog->id;
+
+        $new_catalog_name = 'New Catalog';
+
+        // Attach the movie to the source catalog
+        $body = [
+            'catalog_id' => $from_catalog_id,
+            'movie' => $this->movies[0]
+        ];
+        $this->actingAs($this->user, 'api')->json('POST', '/api/catalog', $body, ['Accept' => 'application/json']);
+
+        // Move the movie to the destination catalog
+        $body = [
+            'action' => 'move',
+            'movie_id' => $this->movie_id,
+            'catalog_id' => $from_catalog_id,
+            'catalog_name' => $new_catalog_name
+        ];
+        $this->actingAs($this->user, 'api')->json('PUT', '/api/catalog', $body, ['Accept' => 'application/json'])
+            ->assertOk()
+            ->assertJson(['catalog_name' => $new_catalog_name]);
+
+        // Find the newly created catalog
+        $new_catalog = $this->user->catalogs()->where('name', $new_catalog_name)->first();
+
+        // Check if the movie exists in the destination catalog
+        $this->assertEquals($this->movie_id, $this->user->catalogs()->with('movies')->find($new_catalog->id)->movies->first()->id);
+
+        // And doesn't exist in the source catalog
+        $this->assertCount(0, $this->user->catalogs()->with('movies')->find($from_catalog_id)->movies);
     }
 
-    // Route::put('/catalog/{catalog}/movie/{movie}', 'Api\CatalogMovieController@update');
+    /**
+     * PUT /catalog
+     * TODO: should be
+     * PUT /movie/{movie}
+     * or /movie/{movie}/copy
+     * with catalog_name, action in the payload
+     * Test I can Copy a movie to a new Catalog
+     */
+    public function test_copy_movie_to_new_catalog()
+    {
+        // Find the user's first catalog
+        $catalog = $this->user->catalogs()->first();
 
-    // Route::put('/catalog', 'Api\CatalogMovieController@store');
+        $from_catalog_id = $catalog->id;
+
+        $new_catalog_name = 'New Catalog';
+
+        // Attach the movie to the source catalog
+        $body = [
+            'catalog_id' => $from_catalog_id,
+            'movie' => $this->movies[0]
+        ];
+        $this->actingAs($this->user, 'api')->json('POST', '/api/catalog', $body, ['Accept' => 'application/json']);
+
+        // Copy the movie to the destination catalog
+        $body = [
+            'action' => 'copy',
+            'movie_id' => $this->movie_id,
+            'catalog_id' => $from_catalog_id,
+            'catalog_name' => $new_catalog_name
+        ];
+        $this->actingAs($this->user, 'api')->json('PUT', '/api/catalog', $body, ['Accept' => 'application/json'])
+            ->assertOk()
+            ->assertJson(['catalog_name' => $new_catalog_name]);
+
+        // Find the newly created catalog
+        $new_catalog = $this->user->catalogs()->where('name', $new_catalog_name)->first();
+
+        // Check if the movie exists in the destination catalog
+        $this->assertEquals($this->movie_id, $this->user->catalogs()->with('movies')->find($new_catalog->id)->movies->first()->id);
+
+        // And also exists in the source catalog
+        $this->assertEquals($this->movie_id, $this->user->catalogs()->with('movies')->find($from_catalog_id)->movies->first()->id);
+    }
 }

@@ -22,16 +22,6 @@ class CatalogsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Add movie to catalog - pass in movie_id and catalog_id
      * Create new catalog and add movie to it - pass in movie_id and catalog_name
      *
@@ -75,28 +65,6 @@ class CatalogsController extends Controller
 
         // Add movie_id, catalog_id to movie_catalog
         Catalog::find($catalog_id)->movies()->attach($imdbID);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
