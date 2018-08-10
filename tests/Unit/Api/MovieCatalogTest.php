@@ -105,7 +105,7 @@ class MovieCatalogTest extends TestCase
         $catalog = $this->user->catalogs()->first();
         // $this->catalog_id = $catalog->id;
 
-        $this->actingAs($this->user, 'api')->json('DELETE', "/api/catalog/{$catalog->id}/movie/{$this->movie_id}", [], ['Accept' => 'application/json'])
+        $this->actingAs($this->user, 'api')->json('DELETE', "/api/movie/{$this->movie_id}/catalog/{$catalog->id}", [], ['Accept' => 'application/json'])
             ->assertOk();
     }
 

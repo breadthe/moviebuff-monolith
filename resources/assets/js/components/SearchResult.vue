@@ -113,7 +113,7 @@
                 }
 
                 if (this.isInCatalog(catalogId)) { // If the movie is already in a catalog, remove it
-                    axios.delete(`/api/catalog/${catalogId}/movie/${this.movie.imdbID}`, data)
+                    axios.delete(`/api/movie/${this.movie.imdbID}/catalog/${catalogId}`, data)
                         .then(response => {
                             // Retrieve catalogs for the current movie again
                             this.getCatalogs()

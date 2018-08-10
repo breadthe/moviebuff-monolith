@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth:api'], function () {
      * Remove the Catalog-Movie association (un-tag a movie)
      * TODO: this should be DELETE /movie/{movie}/catalog/{catalog}
      */
-    Route::delete('/catalog/{catalog}/movie/{movie}', 'Api\MovieCatalogController@destroy');
+    Route::delete('/movie/{movie}/catalog/{catalog}', 'Api\MovieCatalogController@destroy');
 
     /**
      * Move/Copy movie to an existing or new catalog

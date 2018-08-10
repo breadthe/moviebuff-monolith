@@ -54473,7 +54473,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             if (this.isInCatalog(catalogId)) {
                 // If the movie is already in a catalog, remove it
-                axios.delete('/api/catalog/' + catalogId + '/movie/' + this.movie.imdbID, data).then(function (response) {
+                axios.delete('/api/movie/' + this.movie.imdbID + '/catalog/' + catalogId, data).then(function (response) {
                     // Retrieve catalogs for the current movie again
                     _this2.getCatalogs();
 
