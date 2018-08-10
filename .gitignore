@@ -13,3 +13,4 @@ yarn-error.log
 .env
 .rnd
 /public/report
+/public/docs

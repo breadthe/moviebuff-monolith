@@ -14,15 +14,15 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['middleware' => 'auth:api'], function () {
-    // User details
+    // Get the User's details
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
 
-    // Retrieve all the Catalogs for a given <ovie
+    // Get all the Catalogs for a given Movie
     Route::get('/movies/{movie}/catalogs', 'Api\MoviesController@catalogs');
 
-    // Get all the user's Catalogs
+    // Get all the User's Catalogs
     Route::get('/catalogs', 'Api\CatalogsController@index')->name('catalogs');
 
     // Edit the Catalog name
