@@ -84,18 +84,20 @@
                 const isInCatalog = movies.filter(movie => movie.id === this.movie.id)
                 return isInCatalog.length || false
             },
-            moveOrCopyMovieToCatalog(catalogId, event) {
+            moveOrCopyMovieToCatalog(destinationCatalogId, event) {
                 event.preventDefault()
                 event.stopPropagation()
 
                 // Allow Move/Copy only if movie is not already in the catalog
-                if (!this.isInCatalog(catalogId)) {
+                if (!this.isInCatalog(destinationCatalogId)) {
                     const data = {
                         'action': this.action,
-                        'catalog_id': this.catalogId // current catalog
+                        'source_catalog_id': this.catalogId,
+                        'destination_catalog_id': destinationCatalogId,
+                        'catalog_name': this.newCatalogName
                     }
     
-                    axios.put(`/api/catalog/${catalogId}/movie/${this.movie.id}`, data)
+                    axios.post(`/api/movie/${this.movie.id}/catalog`, data)
                         .then(response => {
     
                             if (this.action === 'move') {
@@ -132,12 +134,11 @@
 
                 const data = {
                     'action': this.action,
-                    'movie_id': this.movie.id,
-                    'catalog_id': this.catalogId, // current catalog
+                    'source_catalog_id': this.catalogId, // current catalog
                     'catalog_name': this.newCatalogName
                 }
 
-                axios.put(`/api/catalog`, data)
+                axios.post(`/api/movie/${this.movie.id}/catalog`, data)
                     .then(response => {
                         if (this.action === 'move') {
                             this.$emit('removeItem', this.movie.id);

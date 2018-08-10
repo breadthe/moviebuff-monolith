@@ -9,9 +9,9 @@ use App\Movie;
 use App\User;
 
 /**
- * Tests the /catalogs endpoints which handle the catalog-movie relationship
+ * Tests the /catalogs endpoints which handle the movie-catalog relationship
  */
-class CatalogMovieTest extends TestCase
+class MovieCatalogTest extends TestCase
 {
     use Transaction;
 
@@ -131,9 +131,10 @@ class CatalogMovieTest extends TestCase
         // Move the movie to the destination catalog
         $body = [
             'action' => 'move',
-            'catalog_id' => $from_catalog_id
+            'source_catalog_id' => $from_catalog_id,
+            'destination_catalog_id' => $to_catalog_id
         ];
-        $this->actingAs($this->user, 'api')->json('PUT', "/api/catalog/{$to_catalog_id}/movie/{$this->movie_id}", $body, ['Accept' => 'application/json'])
+        $this->actingAs($this->user, 'api')->json('POST', "/api/movie/{$this->movie_id}/catalog", $body, ['Accept' => 'application/json'])
             ->assertOk();
 
         // Check if the movie exists in the destination catalog
@@ -165,9 +166,10 @@ class CatalogMovieTest extends TestCase
         // Copy the movie to the destination catalog
         $body = [
             'action' => 'copy',
-            'catalog_id' => $from_catalog_id
+            'source_catalog_id' => $from_catalog_id,
+            'destination_catalog_id' => $to_catalog_id
         ];
-        $this->actingAs($this->user, 'api')->json('PUT', "/api/catalog/{$to_catalog_id}/movie/{$this->movie_id}", $body, ['Accept' => 'application/json'])
+        $this->actingAs($this->user, 'api')->json('POST', "/api/movie/{$this->movie_id}/catalog", $body, ['Accept' => 'application/json'])
             ->assertOk();
 
         // Check if the movie exists in the destination catalog
@@ -204,11 +206,10 @@ class CatalogMovieTest extends TestCase
         // Move the movie to the destination catalog
         $body = [
             'action' => 'move',
-            'movie_id' => $this->movie_id,
-            'catalog_id' => $from_catalog_id,
+            'source_catalog_id' => $from_catalog_id,
             'catalog_name' => $new_catalog_name
         ];
-        $this->actingAs($this->user, 'api')->json('PUT', '/api/catalog', $body, ['Accept' => 'application/json'])
+        $this->actingAs($this->user, 'api')->json('POST', "/api/movie/{$this->movie_id}/catalog", $body, ['Accept' => 'application/json'])
             ->assertOk()
             ->assertJson(['catalog_name' => $new_catalog_name]);
 
@@ -249,11 +250,10 @@ class CatalogMovieTest extends TestCase
         // Copy the movie to the destination catalog
         $body = [
             'action' => 'copy',
-            'movie_id' => $this->movie_id,
-            'catalog_id' => $from_catalog_id,
+            'source_catalog_id' => $from_catalog_id,
             'catalog_name' => $new_catalog_name
         ];
-        $this->actingAs($this->user, 'api')->json('PUT', '/api/catalog', $body, ['Accept' => 'application/json'])
+        $this->actingAs($this->user, 'api')->json('POST', "/api/movie/{$this->movie_id}/catalog", $body, ['Accept' => 'application/json'])
             ->assertOk()
             ->assertJson(['catalog_name' => $new_catalog_name]);
 

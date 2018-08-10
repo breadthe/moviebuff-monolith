@@ -48833,7 +48833,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48972,20 +48972,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             return isInCatalog.length || false;
         },
-        moveOrCopyMovieToCatalog: function moveOrCopyMovieToCatalog(catalogId, event) {
+        moveOrCopyMovieToCatalog: function moveOrCopyMovieToCatalog(destinationCatalogId, event) {
             var _this2 = this;
 
             event.preventDefault();
             event.stopPropagation();
 
             // Allow Move/Copy only if movie is not already in the catalog
-            if (!this.isInCatalog(catalogId)) {
+            if (!this.isInCatalog(destinationCatalogId)) {
                 var data = {
                     'action': this.action,
-                    'catalog_id': this.catalogId // current catalog
+                    'source_catalog_id': this.catalogId,
+                    'destination_catalog_id': destinationCatalogId,
+                    'catalog_name': this.newCatalogName
                 };
 
-                axios.put('/api/catalog/' + catalogId + '/movie/' + this.movie.id, data).then(function (response) {
+                axios.post('/api/movie/' + this.movie.id + '/catalog', data).then(function (response) {
 
                     if (_this2.action === 'move') {
                         _this2.$emit('removeItem', _this2.movie.id);
@@ -49023,12 +49025,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var data = {
                 'action': this.action,
-                'movie_id': this.movie.id,
-                'catalog_id': this.catalogId, // current catalog
+                'source_catalog_id': this.catalogId, // current catalog
                 'catalog_name': this.newCatalogName
             };
 
-            axios.put('/api/catalog', data).then(function (response) {
+            axios.post('/api/movie/' + this.movie.id + '/catalog', data).then(function (response) {
                 if (_this3.action === 'move') {
                     _this3.$emit('removeItem', _this3.movie.id);
                     _this3.$emit('isMoving', false);

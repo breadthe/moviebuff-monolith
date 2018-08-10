@@ -24,51 +24,40 @@ class MovieCatalogController extends Controller
     }
 
     /**
-     * Move/Copy a Movie to an existing Catalog
-     */
-    public function update(Request $request)
-    {
-        $old_catalog_id = $request->catalog_id;
-        $new_catalog_id = $request->catalog;
-        $movie_id = $request->movie;
-
-        // Copy the movie to a the specified catalog
-        $catalog = Catalog::find($new_catalog_id);
-        $catalog->movies()->attach($movie_id);
-        $catalog_name = $catalog->name;
-
-        // If the action is move, delete it from the old catalog
-        if ($request->action === 'move') {
-            Catalog::find($old_catalog_id)->movies()->detach($movie_id);
-        }
-
-        return response(['catalog_name' => $catalog_name], 200);
-    }
-
-    /**
-     * Move/Copy a Movie to a new Catalog
+     * Move/Copy a Movie to an existing or new Catalog
      */
     public function store(Request $request)
     {
-        $old_catalog_id = $request->catalog_id;
+        $movie_id = $request->movie;
+        $action = $request->action;
+        $source_catalog_id = $request->source_catalog_id;
+        $destination_catalog_id = $request->destination_catalog_id;
         $catalog_name = $request->catalog_name;
-        $movie_id = $request->movie_id;
 
-        // TODO: Check for duplicate catalog name
+        // Existing catalog
+        if (!empty($destination_catalog_id)) {
+            // Copy the movie to a the specified catalog
+            $catalog = Catalog::find($destination_catalog_id);
+            $catalog->movies()->attach($movie_id);
+            $catalog_name = $catalog->name;
+        }
 
-        // Create the new catalog
-        $new_catalog = Catalog::firstOrCreate([
-            'user_id' => Auth::user()->id,
-            'name' => $catalog_name
-        ]);
-        $new_catalog_id = $new_catalog->id;
+        // New catalog
+        elseif (!empty($catalog_name)) {
+            // Create the new catalog
+            $new_catalog = Catalog::firstOrCreate([
+                'user_id' => Auth::user()->id,
+                'name' => $catalog_name
+            ]);
+            $destination_catalog_id = $new_catalog->id;
 
-        // Add movie_id, catalog_id to movie_catalog
-        Catalog::find($new_catalog->id)->movies()->attach($movie_id);
+            // Add movie_id, catalog_id to movie_catalog
+            Catalog::find($destination_catalog_id)->movies()->attach($movie_id);
+        }
 
         // If the action is move, delete it from the old catalog
-        if ($request->action === 'move') {
-            Catalog::find($old_catalog_id)->movies()->detach($movie_id);
+        if ($action === 'move') {
+            Catalog::find($source_catalog_id)->movies()->detach($movie_id);
         }
 
         return response(['catalog_name' => $catalog_name], 200);
