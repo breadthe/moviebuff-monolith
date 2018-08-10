@@ -51731,7 +51731,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 event.stopPropagation();
 
                                 _context.next = 4;
-                                return axios.put('/api/catalog/' + this.catalog.id, this.catalog).then(function (response) {
+                                return axios.put('/api/catalog/' + this.catalog.id, { 'catalog_name': this.catalog.name }).then(function (response) {
                                     // A little fall-back in case the name change failed on the back-end for some reason
                                     if (response.data.catalog_name) {
                                         _this.catalog.name = response.data.catalog_name;

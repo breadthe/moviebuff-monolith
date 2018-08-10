@@ -70,7 +70,7 @@ class CatalogsTest extends TestCase
 
         $catalog = $this->user->catalogs()->first();
 
-        $body = ['name' => $new_catalog_name];
+        $body = ['catalog_name' => $new_catalog_name];
 
         $this->actingAs($this->user, 'api')->json('PUT', "/api/catalog/{$catalog->id}", $body, ['Accept' => 'application/json'])
             ->assertOk()

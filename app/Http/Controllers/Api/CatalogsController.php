@@ -73,7 +73,7 @@ class CatalogsController extends Controller
     public function update(Request $request, $id)
     {
         $catalog = Auth::user()->catalogs()->where('id', $id)->first();
-        $catalog->name = $request->name;
+        $catalog->name = $request->catalog_name;
         $catalog->save();
 
         return response(['catalog_name' => $catalog->name], 200);
