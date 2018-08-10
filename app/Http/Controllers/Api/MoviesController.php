@@ -20,7 +20,6 @@ class MoviesController extends Controller
         return DB::table('catalogs')
             ->leftJoin('movie_catalog', 'catalogs.id', '=', 'movie_catalog.catalog_id')
             ->leftJoin('movies', 'movies.id', '=', 'movie_catalog.movie_id')
-            ->select('catalogs.*')
             ->where([
                 'catalogs.user_id' => Auth::user()->id,
                 'movies.id' => $movie->id
