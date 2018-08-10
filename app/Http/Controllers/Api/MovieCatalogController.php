@@ -9,7 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CatalogMovieController extends Controller
+class MovieCatalogController extends Controller
 {
     /**
      * Detach a Movie from a Catalog (remove the record from movie_catalog)
