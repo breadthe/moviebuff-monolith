@@ -97,7 +97,7 @@
                         'catalog_name': this.newCatalogName
                     }
     
-                    axios.post(`/api/movie/${this.movie.id}/catalog`, data)
+                    axios.put(`/api/movie/${this.movie.id}/catalog`, data)
                         .then(response => {
     
                             if (this.action === 'move') {
@@ -138,7 +138,7 @@
                     'catalog_name': this.newCatalogName
                 }
 
-                axios.post(`/api/movie/${this.movie.id}/catalog`, data)
+                axios.put(`/api/movie/${this.movie.id}/catalog`, data)
                     .then(response => {
                         if (this.action === 'move') {
                             this.$emit('removeItem', this.movie.id);

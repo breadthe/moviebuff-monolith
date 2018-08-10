@@ -134,7 +134,7 @@ class MovieCatalogTest extends TestCase
             'source_catalog_id' => $from_catalog_id,
             'destination_catalog_id' => $to_catalog_id
         ];
-        $this->actingAs($this->user, 'api')->json('POST', "/api/movie/{$this->movie_id}/catalog", $body, ['Accept' => 'application/json'])
+        $this->actingAs($this->user, 'api')->json('PUT', "/api/movie/{$this->movie_id}/catalog", $body, ['Accept' => 'application/json'])
             ->assertOk();
 
         // Check if the movie exists in the destination catalog
@@ -169,7 +169,7 @@ class MovieCatalogTest extends TestCase
             'source_catalog_id' => $from_catalog_id,
             'destination_catalog_id' => $to_catalog_id
         ];
-        $this->actingAs($this->user, 'api')->json('POST', "/api/movie/{$this->movie_id}/catalog", $body, ['Accept' => 'application/json'])
+        $this->actingAs($this->user, 'api')->json('PUT', "/api/movie/{$this->movie_id}/catalog", $body, ['Accept' => 'application/json'])
             ->assertOk();
 
         // Check if the movie exists in the destination catalog
@@ -209,7 +209,7 @@ class MovieCatalogTest extends TestCase
             'source_catalog_id' => $from_catalog_id,
             'catalog_name' => $new_catalog_name
         ];
-        $this->actingAs($this->user, 'api')->json('POST', "/api/movie/{$this->movie_id}/catalog", $body, ['Accept' => 'application/json'])
+        $this->actingAs($this->user, 'api')->json('PUT', "/api/movie/{$this->movie_id}/catalog", $body, ['Accept' => 'application/json'])
             ->assertOk()
             ->assertJson(['catalog_name' => $new_catalog_name]);
 
@@ -253,7 +253,7 @@ class MovieCatalogTest extends TestCase
             'source_catalog_id' => $from_catalog_id,
             'catalog_name' => $new_catalog_name
         ];
-        $this->actingAs($this->user, 'api')->json('POST', "/api/movie/{$this->movie_id}/catalog", $body, ['Accept' => 'application/json'])
+        $this->actingAs($this->user, 'api')->json('PUT', "/api/movie/{$this->movie_id}/catalog", $body, ['Accept' => 'application/json'])
             ->assertOk()
             ->assertJson(['catalog_name' => $new_catalog_name]);
 

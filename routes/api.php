@@ -46,7 +46,7 @@ Route::group(['middleware' => 'auth:api'], function () {
      * Move/Copy movie to an existing or new catalog
      * TODO: this should be PUT /movie/{movie}/catalog
      */
-    Route::post('/movie/{movie}/catalog', 'Api\MovieCatalogController@store');
+    Route::put('/movie/{movie}/catalog', 'Api\MovieCatalogController@store');
 
     /**
      * Retrieve all the catalogs for a given movie (tag the movie)

@@ -48987,7 +48987,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     'catalog_name': this.newCatalogName
                 };
 
-                axios.post('/api/movie/' + this.movie.id + '/catalog', data).then(function (response) {
+                axios.put('/api/movie/' + this.movie.id + '/catalog', data).then(function (response) {
 
                     if (_this2.action === 'move') {
                         _this2.$emit('removeItem', _this2.movie.id);
@@ -49029,7 +49029,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'catalog_name': this.newCatalogName
             };
 
-            axios.post('/api/movie/' + this.movie.id + '/catalog', data).then(function (response) {
+            axios.put('/api/movie/' + this.movie.id + '/catalog', data).then(function (response) {
                 if (_this3.action === 'move') {
                     _this3.$emit('removeItem', _this3.movie.id);
                     _this3.$emit('isMoving', false);
