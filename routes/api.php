@@ -38,5 +38,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('/movie/{movie}/catalog/{catalog}', 'Api\MovieCatalogController@destroy');
 
     // Move/Copy Movie to an existing or new Catalog
+    // TODO: refactor to PUT /movie/{movie}/catalog/{sourceCatalog}/move
     Route::put('/movie/{movie}/catalog', 'Api\MovieCatalogController@store');
 });
