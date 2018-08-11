@@ -25299,6 +25299,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_notification___default.a);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+Vue.component('tags-dropdown', __webpack_require__(117));
 Vue.component('all-catalogs-dropdown', __webpack_require__(44));
 
 Vue.component('passport-clients', __webpack_require__(50));
@@ -48997,7 +48998,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this2.$emit('isCopying', false);
 
                     // Tell the parent to remove this movie from the DOM
-                    _this2.$emit('loadAllCatalogs');
+                    _this2.$emit('getAllTags');
 
                     _this2.$notify({
                         group: 'success',
@@ -49038,7 +49039,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this3.$emit('isCopying', false);
 
                 // Tell the parent to remove this movie from the DOM
-                _this3.$emit('loadAllCatalogs');
+                _this3.$emit('getAllTags');
 
                 _this3.$notify({
                     group: 'success',
@@ -52985,7 +52986,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        loadAllCatalogs: function loadAllCatalogs() {
+        getAllTags: function getAllTags() {
             var $this = this;
 
             axios.get('/api/catalogs').then(function (response) {
@@ -53009,7 +53010,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             'X-Requested-With': 'XMLHttpRequest'
         };
 
-        this.loadAllCatalogs();
+        this.getAllTags();
     }
 });
 
@@ -53038,8 +53039,8 @@ var render = function() {
                 removeItem: function($event) {
                   _vm.removeItem($event)
                 },
-                loadAllCatalogs: function($event) {
-                  _vm.loadAllCatalogs()
+                getAllTags: function($event) {
+                  _vm.getAllTags()
                 }
               }
             })
@@ -53313,7 +53314,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                axios.delete('/api/catalog/' + this.catalogId + '/movie/' + this.movie.id).then(function (response) {
+                                axios.delete('/api/movie/' + this.movie.id + '/catalog/' + this.catalogId).then(function (response) {
                                     if (response.status === 200) {
                                         _this.isDeleting = false;
                                         _this.$emit('removeItem', _this.movie.id); // remove this item from the DOM
@@ -53422,8 +53423,8 @@ var render = function() {
                       isMoving: function($event) {
                         _vm.isMoving = $event
                       },
-                      loadAllCatalogs: function($event) {
-                        _vm.$emit("loadAllCatalogs")
+                      getAllTags: function($event) {
+                        _vm.$emit("getAllTags")
                       }
                     }
                   }),
@@ -53467,8 +53468,8 @@ var render = function() {
                         isCopying: function($event) {
                           _vm.isCopying = $event
                         },
-                        loadAllCatalogs: function($event) {
-                          _vm.$emit("loadAllCatalogs")
+                        getAllTags: function($event) {
+                          _vm.$emit("getAllTags")
                         }
                       }
                     }),
@@ -54157,7 +54158,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        loadAllCatalogs: function loadAllCatalogs() {
+        getAllTags: function getAllTags() {
             var $this = this;
 
             axios.get('/api/catalogs').then(function (response) {
@@ -54176,7 +54177,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             'X-Requested-With': 'XMLHttpRequest'
         };
 
-        this.loadAllCatalogs();
+        this.getAllTags();
     }
 });
 
@@ -54200,8 +54201,8 @@ var render = function() {
             _c("search-result", {
               attrs: { "all-catalogs": _vm.allCatalogs, movie: movie },
               on: {
-                loadAllCatalogs: function($event) {
-                  _vm.loadAllCatalogs()
+                getAllTags: function($event) {
+                  _vm.getAllTags()
                 }
               }
             })
@@ -54308,7 +54309,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54325,35 +54326,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -54405,26 +54377,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         return {
             csrf: document.head.querySelector('meta[name="csrf-token"]'),
             catalogs: [],
-            isLoadingCatalogs: false,
-            newCatalogName: '',
-            showDelete: false,
-            notifyDuration: 8000 // How long should notifications persist (ms)
+            isLoadingCatalogs: false
         };
     },
 
     methods: {
-        // Determines if a movie belongs to a catalog
-        hasTag: function hasTag(catalogId) {
-            var _this = this;
-
-            var catalog = this.allCatalogs.filter(function (catalog) {
-                return catalog.id === catalogId;
-            });
-            var movies = catalog[0].movies; // HACKY - find a better way
-            var hasTag = movies.filter(function (movie) {
-                return movie.id === _this.movie.imdbID;
-            });
-            return hasTag.length || false;
+        getAllTags: function getAllTags() {
+            // Tell the parent to reload all the catalogs
+            this.$emit('getAllTags');
         },
         getMovieTags: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
@@ -54460,105 +54420,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }
 
             return getMovieTags;
-        }(),
-        tagMovie: function tagMovie(catalogId, event) {
-            var _this2 = this;
-
-            event.preventDefault();
-            event.stopPropagation();
-
-            var addTag = function () {
-                var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(data) {
-                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-                        while (1) {
-                            switch (_context2.prev = _context2.next) {
-                                case 0:
-                                    _context2.next = 2;
-                                    return axios.post('/api/movie/catalog', data).then(function (response) {
-                                        handleSuccess();
-                                    }).catch(function (e) {
-                                        handleFailure('An error occurred trying to tag <strong>' + _this2.movie.Title + '</strong>');
-                                    });
-
-                                case 2:
-                                case 'end':
-                                    return _context2.stop();
-                            }
-                        }
-                    }, _callee2, _this2);
-                }));
-
-                return function addTag(_x) {
-                    return _ref2.apply(this, arguments);
-                };
-            }();
-
-            var removeTag = function () {
-                var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(movieId, catalogId) {
-                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
-                        while (1) {
-                            switch (_context3.prev = _context3.next) {
-                                case 0:
-                                    _context3.next = 2;
-                                    return axios.delete('/api/movie/' + movieId + '/catalog/' + catalogId).then(function (response) {
-                                        handleSuccess();
-                                    }).catch(function (e) {
-                                        handleFailure('An error occurred trying to untag <strong>' + _this2.movie.Title + '</strong>');
-                                    });
-
-                                case 2:
-                                case 'end':
-                                    return _context3.stop();
-                            }
-                        }
-                    }, _callee3, _this2);
-                }));
-
-                return function removeTag(_x2, _x3) {
-                    return _ref3.apply(this, arguments);
-                };
-            }();
-
-            var handleSuccess = function handleSuccess() {
-                // Retrieve catalogs for the current movie again
-                _this2.getMovieTags();
-
-                // Tell the parent to reload all the catalogs
-                _this2.$emit('loadAllCatalogs');
-            };
-
-            var handleFailure = function handleFailure(text) {
-                _this2.$notify({
-                    group: 'error',
-                    type: 'error',
-                    duration: _this2.notifyDuration,
-                    title: 'Error!',
-                    text: text
-                });
-            };
-
-            // Existing catalog
-            if (catalogId) {
-                // If the movie is already in a catalog, remove it
-                if (this.hasTag(catalogId)) {
-                    removeTag(this.movie.imdbID, catalogId);
-                }
-                // Otherwise add it
-                else {
-                        addTag({
-                            'movie': this.movie,
-                            'catalog_id': catalogId
-                        });
-                    }
-            }
-            // New catalog
-            else {
-                    addTag({
-                        'movie': this.movie,
-                        'catalog_name': this.newCatalogName
-                    });
-                }
-        }
+        }()
     },
     mounted: function mounted() {
         // Restore internal headers headers for axios request
@@ -54597,193 +54459,47 @@ var render = function() {
         _vm._v(_vm._s(_vm.movie.Title))
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "action-buttons" }, [
-        _c("div", { staticClass: "btn-group" }, [
-          _vm._m(0),
+      _c(
+        "div",
+        { staticClass: "action-buttons" },
+        [
+          _c("tags-dropdown", {
+            attrs: { movie: _vm.movie, "all-catalogs": _vm.allCatalogs },
+            on: {
+              getMovieTags: function($event) {
+                _vm.getMovieTags()
+              },
+              getAllTags: function($event) {
+                _vm.getAllTags()
+              }
+            }
+          }),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "dropdown-menu" },
-            [
-              _vm._l(_vm.allCatalogs, function(catalog) {
-                return _c(
-                  "a",
-                  {
-                    key: catalog.id,
-                    staticClass: "dropdown-item d-flex align-items-center",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        _vm.tagMovie(catalog.id, $event)
-                      },
-                      mouseover: function($event) {
-                        _vm.showDelete = catalog.id
-                      },
-                      mouseout: function($event) {
-                        _vm.showDelete = false
-                      }
-                    }
-                  },
-                  [
-                    _c("i", {
-                      staticClass: "fa",
-                      class: _vm.hasTag(catalog.id)
-                        ? "fa-star text-primary"
-                        : "fa-star-o text-white"
-                    }),
-                    _vm._v(
-                      " \n                        " +
-                        _vm._s(catalog.name) +
-                        "\n                        "
-                    ),
-                    catalog.movies.length
-                      ? _c("span", [
-                          _c("small", [
-                            _vm._v(" (" + _vm._s(catalog.movies.length) + ")")
-                          ])
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.showDelete === catalog.id && _vm.hasTag(catalog.id)
-                      ? _c("i", {
-                          staticClass: "fa fa-ban ml-auto pl-1 text-danger"
-                        })
-                      : _vm._e()
-                  ]
-                )
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "dropdown-divider" }),
-              _vm._v(" "),
-              _c(
-                "form",
-                {
-                  staticClass: "form-inline px-2",
-                  on: {
-                    submit: function($event) {
-                      _vm.tagMovie(null, $event)
-                    }
-                  }
-                },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "btn-toolbar",
-                      attrs: {
-                        role: "toolbar",
-                        "aria-label": "Toolbar with button groups"
-                      }
-                    },
-                    [
-                      _c("div", { staticClass: "input-group" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.newCatalogName,
-                              expression: "newCatalogName"
-                            }
-                          ],
-                          staticClass: "form-control form-control-sm",
-                          attrs: { type: "text", placeholder: "New catalog" },
-                          domProps: { value: _vm.newCatalogName },
-                          on: {
-                            key: function($event) {
-                              if (
-                                !("button" in $event) &&
-                                _vm._k(
-                                  $event.keyCode,
-                                  "enter",
-                                  13,
-                                  $event.key,
-                                  "Enter"
-                                )
-                              ) {
-                                return null
-                              }
-                              _vm.addMovieToNewCatalog($event)
-                            },
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.newCatalogName = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "input-group-append" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-primary btn-sm",
-                              attrs: {
-                                type: "submit",
-                                disabled: !_vm.newCatalogName.length
-                              }
-                            },
-                            [_vm._v("Add")]
-                          )
-                        ])
-                      ])
-                    ]
-                  )
-                ]
+          !_vm.isLoadingCatalogs
+            ? _c(
+                "span",
+                _vm._l(_vm.catalogs, function(catalog) {
+                  return _vm.catalogs.length
+                    ? _c(
+                        "a",
+                        {
+                          key: catalog.name,
+                          staticClass: "badge badge-moviebuff mr-1",
+                          attrs: { href: "catalogs/" + catalog.id }
+                        },
+                        [_vm._v(_vm._s(catalog.name))]
+                      )
+                    : _vm._e()
+                })
               )
-            ],
-            2
-          )
-        ]),
-        _vm._v(" "),
-        _vm.isLoadingCatalogs
-          ? _c("span", [
-              _c("i", {
-                staticClass: "fa fa-circle-o-notch fa-spin fa-3x fa-fw"
-              })
-            ])
-          : _c(
-              "span",
-              _vm._l(_vm.catalogs, function(catalog) {
-                return _vm.catalogs.length
-                  ? _c(
-                      "a",
-                      {
-                        key: catalog.name,
-                        staticClass: "badge badge-moviebuff mr-1",
-                        attrs: { href: "catalogs/" + catalog.id }
-                      },
-                      [_vm._v(_vm._s(catalog.name))]
-                    )
-                  : _vm._e()
-              })
-            )
-      ])
+            : _vm._e()
+        ],
+        1
+      )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-light btn-sm dropdown-toggle",
-        attrs: {
-          type: "button",
-          "data-toggle": "dropdown",
-          "aria-haspopup": "true",
-          "aria-expanded": "false",
-          title: "Add to Catalog"
-        }
-      },
-      [_c("i", { staticClass: "fa fa-plus fa-lg text-secondary" })]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -55100,6 +54816,479 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */,
+/* 116 */,
+/* 117 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(118)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(120)
+/* template */
+var __vue_template__ = __webpack_require__(121)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-29929d87"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/reusable/TagsDropdown.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-29929d87", Component.options)
+  } else {
+    hotAPI.reload("data-v-29929d87", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 118 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(119);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("f68c07fa", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-29929d87\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TagsDropdown.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-29929d87\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TagsDropdown.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 119 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 120 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'tags-dropdown',
+    props: {
+        'movie': {
+            required: true,
+            type: Object
+        },
+        'allCatalogs': {
+            required: false,
+            type: Array,
+            default: function _default() {
+                return [];
+            }
+        }
+    },
+    data: function data() {
+        return {
+            csrf: document.head.querySelector('meta[name="csrf-token"]'),
+            newCatalogName: '',
+            showDelete: false,
+            notifyDuration: 8000 // How long should notifications persist (ms)
+        };
+    },
+
+    methods: {
+        // Determines if a Movie has a specific Tag
+        hasTag: function hasTag(catalogId) {
+            var _this = this;
+
+            var catalog = this.allCatalogs.filter(function (catalog) {
+                return catalog.id === catalogId;
+            });
+            var movies = catalog[0].movies; // HACKY - find a better way
+            var hasTag = movies.filter(function (movie) {
+                return movie.id === _this.movie.imdbID;
+            });
+            return hasTag.length || false;
+        },
+        tagMovie: function tagMovie(catalogId, event) {
+            var _this2 = this;
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            var addTag = function () {
+                var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(data) {
+                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                        while (1) {
+                            switch (_context.prev = _context.next) {
+                                case 0:
+                                    _context.next = 2;
+                                    return axios.post('/api/movie/catalog', data).then(function (response) {
+                                        handleSuccess();
+                                    }).catch(function (e) {
+                                        handleFailure('An error occurred trying to tag <strong>' + _this2.movie.Title + '</strong>');
+                                    });
+
+                                case 2:
+                                case 'end':
+                                    return _context.stop();
+                            }
+                        }
+                    }, _callee, _this2);
+                }));
+
+                return function addTag(_x) {
+                    return _ref.apply(this, arguments);
+                };
+            }();
+
+            var removeTag = function () {
+                var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(movieId, catalogId) {
+                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                        while (1) {
+                            switch (_context2.prev = _context2.next) {
+                                case 0:
+                                    _context2.next = 2;
+                                    return axios.delete('/api/movie/' + movieId + '/catalog/' + catalogId).then(function (response) {
+                                        handleSuccess();
+                                    }).catch(function (e) {
+                                        handleFailure('An error occurred trying to untag <strong>' + _this2.movie.Title + '</strong>');
+                                    });
+
+                                case 2:
+                                case 'end':
+                                    return _context2.stop();
+                            }
+                        }
+                    }, _callee2, _this2);
+                }));
+
+                return function removeTag(_x2, _x3) {
+                    return _ref2.apply(this, arguments);
+                };
+            }();
+
+            var handleSuccess = function handleSuccess() {
+                // Retrieve catalogs for the current movie again
+                _this2.$emit('getMovieTags');
+
+                // Tell the parent to reload all the catalogs
+                _this2.$emit('getAllTags');
+            };
+
+            var handleFailure = function handleFailure(text) {
+                _this2.$notify({
+                    group: 'error',
+                    type: 'error',
+                    duration: _this2.notifyDuration,
+                    title: 'Error!',
+                    text: text
+                });
+            };
+
+            // Existing catalog
+            if (catalogId) {
+                // If the movie is already in a catalog, remove it
+                if (this.hasTag(catalogId)) {
+                    removeTag(this.movie.imdbID, catalogId);
+                }
+                // Otherwise add it
+                else {
+                        addTag({
+                            'movie': this.movie,
+                            'catalog_id': catalogId
+                        });
+                    }
+            }
+            // New catalog
+            else {
+                    addTag({
+                        'movie': this.movie,
+                        'catalog_name': this.newCatalogName
+                    });
+
+                    this.newCatalogName = '';
+                }
+        }
+    },
+    mounted: function mounted() {
+        // Restore internal headers headers for axios request
+        window.axios.defaults.headers.common = {
+            'X-CSRF-TOKEN': this.csrf.content,
+            'X-Requested-With': 'XMLHttpRequest'
+        };
+    }
+});
+
+/***/ }),
+/* 121 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "btn-group" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "dropdown-menu" },
+      [
+        _vm._l(_vm.allCatalogs, function(catalog) {
+          return _c(
+            "a",
+            {
+              key: catalog.id,
+              staticClass: "dropdown-item d-flex align-items-center",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  _vm.tagMovie(catalog.id, $event)
+                },
+                mouseover: function($event) {
+                  _vm.showDelete = catalog.id
+                },
+                mouseout: function($event) {
+                  _vm.showDelete = false
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fa",
+                class: _vm.hasTag(catalog.id)
+                  ? "fa-check text-primary"
+                  : "fa-check text-white"
+              }),
+              _vm._v(
+                " \n            " + _vm._s(catalog.name) + "\n            "
+              ),
+              catalog.movies.length
+                ? _c("span", [
+                    _c("small", [
+                      _vm._v(" (" + _vm._s(catalog.movies.length) + ")")
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.showDelete === catalog.id && _vm.hasTag(catalog.id)
+                ? _c("i", { staticClass: "fa fa-ban ml-auto pl-1 text-danger" })
+                : _vm._e()
+            ]
+          )
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "dropdown-divider" }),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            staticClass: "form-inline px-2",
+            on: {
+              submit: function($event) {
+                _vm.tagMovie(null, $event)
+              }
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "btn-toolbar",
+                attrs: {
+                  role: "toolbar",
+                  "aria-label": "Toolbar with button groups"
+                }
+              },
+              [
+                _c("div", { staticClass: "input-group" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.newCatalogName,
+                        expression: "newCatalogName"
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "text", placeholder: "New catalog" },
+                    domProps: { value: _vm.newCatalogName },
+                    on: {
+                      key: function($event) {
+                        if (
+                          !("button" in $event) &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        _vm.tagMovie(null, $event)
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.newCatalogName = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group-append" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary btn-sm",
+                        attrs: {
+                          type: "submit",
+                          disabled: !_vm.newCatalogName.length
+                        }
+                      },
+                      [_vm._v("Add")]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-light btn-sm dropdown-toggle",
+        attrs: {
+          type: "button",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false",
+          title: "Add to Catalog"
+        }
+      },
+      [_c("i", { staticClass: "fa fa-plus fa-lg text-secondary" })]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-29929d87", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

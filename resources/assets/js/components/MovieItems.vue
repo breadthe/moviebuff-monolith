@@ -9,7 +9,7 @@
             v-for="(movie, i) in mutableMovies"
             :key="i"
             @removeItem="removeItem($event)"
-            @loadAllCatalogs="loadAllCatalogs()"
+            @getAllTags="getAllTags()"
         ></movie-item>
     </div>
 
@@ -45,7 +45,7 @@
             }
         },
         methods: {
-            loadAllCatalogs() {
+            getAllTags() {
                 const $this = this;
 
                 axios.get('/api/catalogs')
@@ -69,7 +69,7 @@
                 'X-Requested-With': 'XMLHttpRequest'
             };
 
-            this.loadAllCatalogs()
+            this.getAllTags()
         }
     }
 </script>

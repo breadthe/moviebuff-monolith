@@ -17,7 +17,7 @@
                     action="move"
                     @removeItem="removeItem($event)"
                     @isMoving="isMoving = $event"
-                    @loadAllCatalogs="$emit('loadAllCatalogs')"
+                    @getAllTags="$emit('getAllTags')"
                 ></all-catalogs-dropdown>
 
                 <button class="btn btn-link" @click="isMoving = false">
@@ -37,7 +37,7 @@
                     :all-catalogs="allCatalogs"
                     action="copy"
                     @isCopying="isCopying = $event"
-                    @loadAllCatalogs="$emit('loadAllCatalogs')"
+                    @getAllTags="$emit('getAllTags')"
                 ></all-catalogs-dropdown>
 
                 <button class="btn btn-link" @click="isCopying = false">
@@ -138,7 +138,7 @@
                 this.isDeleting = true;
             },
             async deleteMovie() {
-                axios.delete(`/api/catalog/${this.catalogId}/movie/${this.movie.id}`)
+                axios.delete(`/api/movie/${this.movie.id}/catalog/${this.catalogId}`)
                     .then(response => {
                         if (response.status === 200) {
                             this.isDeleting = false;

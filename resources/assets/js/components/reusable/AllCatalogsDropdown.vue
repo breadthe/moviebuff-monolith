@@ -108,7 +108,7 @@
                             this.$emit('isCopying', false);
     
                             // Tell the parent to remove this movie from the DOM
-                            this.$emit('loadAllCatalogs');
+                            this.$emit('getAllTags');
 
                             this.$notify({
                                 group: 'success',
@@ -148,7 +148,7 @@
                         this.$emit('isCopying', false);
 
                         // Tell the parent to remove this movie from the DOM
-                        this.$emit('loadAllCatalogs');
+                        this.$emit('getAllTags');
 
                         this.$notify({
                             group: 'success',

@@ -10,46 +10,17 @@
         <div class="movie-title is-size-4 has-text-black">{{movie.Title}}</div>
         <div class="action-buttons">
 
-            <div class="btn-group">
-                <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Add to Catalog">
-                    <i class="fa fa-plus fa-lg text-secondary"></i>
-                </button>
+            <tags-dropdown
+                :movie="movie"
+                :all-catalogs="allCatalogs"
+                @getMovieTags="getMovieTags()"
+                @getAllTags="getAllTags()"
+            ></tags-dropdown>
 
-                <div class="dropdown-menu">
-                    <a
-                        class="dropdown-item d-flex align-items-center"
-                        href="#"
-                        v-for="catalog in allCatalogs"
-                        :key="catalog.id"
-                        @click="tagMovie(catalog.id, $event)"
-                        @mouseover="showDelete = catalog.id"
-                        @mouseout="showDelete = false"
-                    >
-                        <i class="fa" :class="hasTag(catalog.id) ? 'fa-star text-primary' : 'fa-star-o text-white'"></i>&nbsp;
-                        {{ catalog.name }}
-                        <span v-if="catalog.movies.length"><small>&nbsp;({{ catalog.movies.length }})</small></span>
-                        <i class="fa fa-ban ml-auto pl-1 text-danger" v-if="showDelete === catalog.id && hasTag(catalog.id)"></i>
-                    </a>
+            <!-- <span v-if="isLoadingCatalogs"><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></span> -->
 
-                    <div class="dropdown-divider"></div>
-
-                    <form class="form-inline px-2" @submit="tagMovie(null, $event)">
-                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                            <div class="input-group">
-                                <input type="text" class="form-control form-control-sm" placeholder="New catalog" v-model="newCatalogName" @key.enter="addMovieToNewCatalog($event)">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary btn-sm" :disabled="!newCatalogName.length">Add</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                </div><!-- .dropdown-menu -->
-            </div><!-- .btn-group -->
-
-            <span v-if="isLoadingCatalogs"><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></span>
-
-            <span v-else>
+            <!-- <span v-else> -->
+            <span v-if="!isLoadingCatalogs">
                 <a :href="'catalogs/' + catalog.id" class="badge badge-moviebuff mr-1" v-if="catalogs.length" v-for="catalog in catalogs" :key="catalog.name">{{ catalog.name }}</a>
             </span>
 
@@ -76,19 +47,13 @@
             return {
                 csrf: document.head.querySelector('meta[name="csrf-token"]'),
                 catalogs: [],
-                isLoadingCatalogs: false,
-                newCatalogName: '',
-                showDelete: false,
-                notifyDuration: 8000 // How long should notifications persist (ms)
+                isLoadingCatalogs: false
             }
         },
         methods: {
-            // Determines if a movie belongs to a catalog
-            hasTag(catalogId) {
-                const catalog = this.allCatalogs.filter(catalog => catalog.id === catalogId)
-                const movies = catalog[0].movies // HACKY - find a better way
-                const hasTag = movies.filter(movie => movie.id === this.movie.imdbID)
-                return hasTag.length || false
+            getAllTags() {
+                // Tell the parent to reload all the catalogs
+                this.$emit('getAllTags');
             },
             async getMovieTags() {
                 const $this = this
@@ -104,68 +69,6 @@
                         $this.isLoadingCatalogs = ''
                     })
             },
-            tagMovie(catalogId, event) {
-                event.preventDefault()
-                event.stopPropagation()
-
-                const addTag = async (data) => {
-                    await axios.post(`/api/movie/catalog`, data)
-                        .then(response => {
-                            handleSuccess();
-                        }).catch (e => {
-                            handleFailure('An error occurred trying to tag <strong>' + this.movie.Title + '</strong>');
-                        })
-                }
-
-                const removeTag = async (movieId, catalogId) => {
-                    await axios.delete(`/api/movie/${movieId}/catalog/${catalogId}`)
-                        .then(response => {
-                            handleSuccess();
-                        }).catch (e => {
-                            handleFailure('An error occurred trying to untag <strong>' + this.movie.Title + '</strong>');
-                        })
-                }
-
-                const handleSuccess = () => {
-                    // Retrieve catalogs for the current movie again
-                    this.getMovieTags();
-
-                    // Tell the parent to reload all the catalogs
-                    this.$emit('loadAllCatalogs');
-                }
-
-                const handleFailure = (text) => {
-                    this.$notify({
-                        group: 'error',
-                        type: 'error',
-                        duration: this.notifyDuration,
-                        title: 'Error!',
-                        text: text
-                    });
-                }
-
-                // Existing catalog
-                if (catalogId) {
-                    // If the movie is already in a catalog, remove it
-                    if (this.hasTag(catalogId)) {
-                        removeTag(this.movie.imdbID, catalogId);
-                    }
-                    // Otherwise add it
-                    else {
-                        addTag({
-                            'movie': this.movie,
-                            'catalog_id': catalogId
-                        });
-                    }
-                }
-                // New catalog
-                else {
-                    addTag({
-                        'movie': this.movie,
-                        'catalog_name': this.newCatalogName
-                    });
-                }
-            }
         },
         mounted () {
             // Restore internal headers headers for axios request

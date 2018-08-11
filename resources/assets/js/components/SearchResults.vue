@@ -6,7 +6,7 @@
             <search-result
                 :all-catalogs="allCatalogs"
                 :movie="movie"
-                @loadAllCatalogs="loadAllCatalogs()"
+                @getAllTags="getAllTags()"
             ></search-result>
         </div>
     </div>
@@ -31,7 +31,7 @@
             }
         },
         methods: {
-            loadAllCatalogs() {
+            getAllTags() {
                 const $this = this
 
                 axios.get('/api/catalogs')
@@ -52,7 +52,7 @@
                 'X-Requested-With': 'XMLHttpRequest'
             };
 
-            this.loadAllCatalogs()
+            this.getAllTags()
         }
     }
 </script>

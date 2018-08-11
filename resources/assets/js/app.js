@@ -27,6 +27,7 @@ Vue.use(Notifications);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+Vue.component('tags-dropdown', require('./components/reusable/TagsDropdown.vue'));
 Vue.component('all-catalogs-dropdown', require('./components/reusable/AllCatalogsDropdown.vue'));
 
 Vue.component('passport-clients', require('./components/passport/Clients.vue'));
