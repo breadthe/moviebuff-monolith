@@ -71,11 +71,11 @@ class MovieCatalogController extends Controller
     /**
      * Move/Copy a Movie to an existing or new Catalog
      */
-    public function store(Request $request)
+    public function update(Request $request)
     {
         $movie_id = $request->movie;
+        $source_catalog_id = $request->catalog;
         $action = $request->action;
-        $source_catalog_id = $request->source_catalog_id;
         $destination_catalog_id = $request->destination_catalog_id;
         $catalog_name = $request->catalog_name;
 

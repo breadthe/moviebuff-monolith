@@ -54935,7 +54935,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55063,7 +55063,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                             switch (_context.prev = _context.next) {
                                 case 0:
                                     _context.next = 2;
-                                    return axios.put('/api/movie/' + _this2.movie.id + '/catalog', data).then(function (response) {
+                                    return axios.put('/api/movie/' + _this2.movie.id + '/catalog/' + _this2.catalogId + '/' + _this2.action, data).then(function (response) {
                                         handleSuccess(response);
                                     }).catch(function (e) {
                                         handleFailure();
@@ -55118,8 +55118,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 // Allow Move/Copy only if movie is not already in the catalog
                 if (!this.hasTag(destinationCatalogId)) {
                     moveOrCopyToTag({
-                        'action': this.action,
-                        'source_catalog_id': this.catalogId,
                         'destination_catalog_id': destinationCatalogId
                     });
                 }
@@ -55127,8 +55125,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             // New catalog
             else {
                     moveOrCopyToTag({
-                        'action': this.action,
-                        'source_catalog_id': this.catalogId, // current catalog
                         'catalog_name': this.newCatalogName
                     });
                 }

@@ -91,7 +91,7 @@
                 event.stopPropagation();
 
                 const moveOrCopyToTag = async (data) => {
-                    await axios.put(`/api/movie/${this.movie.id}/catalog`, data)
+                    await axios.put(`/api/movie/${this.movie.id}/catalog/${this.catalogId}/${this.action}`, data)
                         .then(response => {
                             handleSuccess(response);
                         }).catch (e => {
@@ -135,8 +135,6 @@
                     // Allow Move/Copy only if movie is not already in the catalog
                     if (!this.hasTag(destinationCatalogId)) {
                         moveOrCopyToTag({
-                            'action': this.action,
-                            'source_catalog_id': this.catalogId,
                             'destination_catalog_id': destinationCatalogId
                         });
                     }
@@ -144,8 +142,6 @@
                 // New catalog
                 else {
                     moveOrCopyToTag({
-                        'action': this.action,
-                        'source_catalog_id': this.catalogId, // current catalog
                         'catalog_name': this.newCatalogName
                     });
                 }

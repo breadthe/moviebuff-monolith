@@ -62,7 +62,7 @@ class MovieCatalogTest extends TestCase
     }
 
     /**
-     * POST /catalog
+     * POST /movie/catalog
      * Test I can add a movie to an existing catalog
      */
     public function test_add_movie_to_existing_catalog()
@@ -80,7 +80,7 @@ class MovieCatalogTest extends TestCase
     }
 
     /**
-     * POST /catalog
+     * POST /movie/catalog
      * Test I can add a movie to a new catalog
      */
     public function test_add_movie_to_new_catalog()
@@ -97,7 +97,7 @@ class MovieCatalogTest extends TestCase
     }
 
     /**
-     * DELETE /catalog/{catalog}/movie/{movie}
+     * DELETE /movie/{movie}/catalog/{catalog}
      * Test I can remove a movie from a catalog (untag it)
      */
     public function test_remove_movie_from_catalog()
@@ -110,7 +110,7 @@ class MovieCatalogTest extends TestCase
     }
 
     /**
-     * PUT /catalog/{catalog}/movie/{movie}
+     * PUT /movie/{movie}/catalog/{catalog}/{action}
      * Test I can Move a movie to an existing Catalog
      */
     public function test_move_movie_to_existing_catalog()
@@ -130,11 +130,9 @@ class MovieCatalogTest extends TestCase
 
         // Move the movie to the destination catalog
         $body = [
-            'action' => 'move',
-            'source_catalog_id' => $from_catalog_id,
             'destination_catalog_id' => $to_catalog_id
         ];
-        $this->actingAs($this->user, 'api')->json('PUT', "/api/movie/{$this->movie_id}/catalog", $body, ['Accept' => 'application/json'])
+        $this->actingAs($this->user, 'api')->json('PUT', "/api/movie/{$this->movie_id}/catalog/{$from_catalog_id}/move", $body, ['Accept' => 'application/json'])
             ->assertOk();
 
         // Check if the movie exists in the destination catalog
@@ -145,7 +143,7 @@ class MovieCatalogTest extends TestCase
     }
 
     /**
-     * PUT /catalog/{catalog}/movie/{movie}
+     * PUT /movie/{movie}/catalog/{catalog}/{action}
      * Test I can Copy a movie to an existing Catalog
      */
     public function test_copy_movie_to_existing_catalog()
@@ -165,11 +163,9 @@ class MovieCatalogTest extends TestCase
 
         // Copy the movie to the destination catalog
         $body = [
-            'action' => 'copy',
-            'source_catalog_id' => $from_catalog_id,
             'destination_catalog_id' => $to_catalog_id
         ];
-        $this->actingAs($this->user, 'api')->json('PUT', "/api/movie/{$this->movie_id}/catalog", $body, ['Accept' => 'application/json'])
+        $this->actingAs($this->user, 'api')->json('PUT', "/api/movie/{$this->movie_id}/catalog/{$from_catalog_id}/copy", $body, ['Accept' => 'application/json'])
             ->assertOk();
 
         // Check if the movie exists in the destination catalog
@@ -180,11 +176,7 @@ class MovieCatalogTest extends TestCase
     }
 
     /**
-     * PUT /catalog
-     * TODO: should be
-     * PUT /movie/{movie}
-     * or /movie/{movie}/move
-     * with catalog_name, action in the payload
+     * PUT /movie/{movie}/catalog/{catalog}/{action}
      * Test I can Move a movie to a new Catalog
      */
     public function test_move_movie_to_new_catalog()
@@ -205,11 +197,9 @@ class MovieCatalogTest extends TestCase
 
         // Move the movie to the destination catalog
         $body = [
-            'action' => 'move',
-            'source_catalog_id' => $from_catalog_id,
             'catalog_name' => $new_catalog_name
         ];
-        $this->actingAs($this->user, 'api')->json('PUT', "/api/movie/{$this->movie_id}/catalog", $body, ['Accept' => 'application/json'])
+        $this->actingAs($this->user, 'api')->json('PUT', "/api/movie/{$this->movie_id}/catalog/{$from_catalog_id}/move", $body, ['Accept' => 'application/json'])
             ->assertOk()
             ->assertJson(['catalog_name' => $new_catalog_name]);
 
@@ -224,11 +214,7 @@ class MovieCatalogTest extends TestCase
     }
 
     /**
-     * PUT /catalog
-     * TODO: should be
-     * PUT /movie/{movie}
-     * or /movie/{movie}/copy
-     * with catalog_name, action in the payload
+     * PUT /movie/{movie}/catalog/{catalog}/{action}
      * Test I can Copy a movie to a new Catalog
      */
     public function test_copy_movie_to_new_catalog()
@@ -249,11 +235,9 @@ class MovieCatalogTest extends TestCase
 
         // Copy the movie to the destination catalog
         $body = [
-            'action' => 'copy',
-            'source_catalog_id' => $from_catalog_id,
             'catalog_name' => $new_catalog_name
         ];
-        $this->actingAs($this->user, 'api')->json('PUT', "/api/movie/{$this->movie_id}/catalog", $body, ['Accept' => 'application/json'])
+        $this->actingAs($this->user, 'api')->json('PUT', "/api/movie/{$this->movie_id}/catalog/{$from_catalog_id}/copy", $body, ['Accept' => 'application/json'])
             ->assertOk()
             ->assertJson(['catalog_name' => $new_catalog_name]);
 

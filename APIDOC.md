@@ -203,51 +203,32 @@ Code | Status | Description
 
 ### Move/Copy Movie to an existing or new Tag (Catalog)
 
-`PUT /movie/{movie}/catalog`
+`PUT /movie/{movie}/catalog/{catalog}/{action}`
 
 **Examples**
 
-> Request
+> Request (Move)
 ```shell
-PUT /movie/tt0076759/catalog
+PUT /movie/tt0076759/catalog/46/move
 ```
 
-> Request Body (Move - Existing Tag)
+> Request (Copy)
+```shell
+PUT /movie/tt0076759/catalog/46/copy
+```
+
+> Request Body (Move/Copy - Existing Tag)
 
 ```json
 {
-    "action":"move",
-    "source_catalog_id":46,
     "destination_catalog_id":47
 }
 ```
 
-> Request Body (Move - New Tag)
+> Request Body (Move/Copy - New Tag)
 
 ```json
 {
-    "action":"move",
-    "source_catalog_id":46,
-    "catalog_name":"SciFi"
-}
-```
-
-> Request Body (Copy - Existing Tag)
-
-```json
-{
-    "action":"copy",
-    "source_catalog_id":46,
-    "destination_catalog_id":47
-}
-```
-
-> Request Body (Copy - New Tag)
-
-```json
-{
-    "action":"copy",
-    "source_catalog_id":46,
     "catalog_name":"SciFi"
 }
 ```
