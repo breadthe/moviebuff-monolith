@@ -21,19 +21,19 @@
                         href="#"
                         v-for="catalog in allCatalogs"
                         :key="catalog.id"
-                        @click="addMovieToCatalog(catalog.id, $event)"
+                        @click="tagMovie(catalog.id, $event)"
                         @mouseover="showDelete = catalog.id"
                         @mouseout="showDelete = false"
                     >
-                        <i class="fa" :class="isInCatalog(catalog.id) ? 'fa-star text-primary' : 'fa-star-o text-white'"></i>&nbsp;
+                        <i class="fa" :class="hasTag(catalog.id) ? 'fa-star text-primary' : 'fa-star-o text-white'"></i>&nbsp;
                         {{ catalog.name }}
                         <span v-if="catalog.movies.length"><small>&nbsp;({{ catalog.movies.length }})</small></span>
-                        <i class="fa fa-ban ml-auto pl-1 text-danger" v-if="showDelete === catalog.id && isInCatalog(catalog.id)"></i>
+                        <i class="fa fa-ban ml-auto pl-1 text-danger" v-if="showDelete === catalog.id && hasTag(catalog.id)"></i>
                     </a>
 
                     <div class="dropdown-divider"></div>
 
-                    <form class="form-inline px-2" @submit="addMovieToNewCatalog($event)">
+                    <form class="form-inline px-2" @submit="tagMovie(null, $event)">
                         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                             <div class="input-group">
                                 <input type="text" class="form-control form-control-sm" placeholder="New catalog" v-model="newCatalogName" @key.enter="addMovieToNewCatalog($event)">
@@ -78,18 +78,19 @@
                 catalogs: [],
                 isLoadingCatalogs: false,
                 newCatalogName: '',
-                showDelete: false
+                showDelete: false,
+                notifyDuration: 8000 // How long should notifications persist (ms)
             }
         },
         methods: {
             // Determines if a movie belongs to a catalog
-            isInCatalog(catalogId) {
+            hasTag(catalogId) {
                 const catalog = this.allCatalogs.filter(catalog => catalog.id === catalogId)
                 const movies = catalog[0].movies // HACKY - find a better way
-                const isInCatalog = movies.filter(movie => movie.id === this.movie.imdbID)
-                return isInCatalog.length || false
+                const hasTag = movies.filter(movie => movie.id === this.movie.imdbID)
+                return hasTag.length || false
             },
-            async getCatalogs() {
+            async getMovieTags() {
                 const $this = this
 
                 $this.isLoadingCatalogs = true
@@ -103,61 +104,67 @@
                         $this.isLoadingCatalogs = ''
                     })
             },
-            addMovieToCatalog(catalogId, event) {
+            tagMovie(catalogId, event) {
                 event.preventDefault()
                 event.stopPropagation()
 
-                const data = {
-                    'movie': this.movie,
-                    'catalog_id': catalogId
-                }
-
-                if (this.isInCatalog(catalogId)) { // If the movie is already in a catalog, remove it
-                    axios.delete(`/api/movie/${this.movie.imdbID}/catalog/${catalogId}`, data)
+                const addTag = async (data) => {
+                    await axios.post(`/api/movie/catalog`, data)
                         .then(response => {
-                            // Retrieve catalogs for the current movie again
-                            this.getCatalogs()
-
-                            // Tell the parent to reload all the catalogs
-                            this.$emit('loadAllCatalogs')
+                            handleSuccess();
                         }).catch (e => {
-                            // TODO: handle errors somehow
-                        })
-                } else { // Otherwise add it
-                    axios.post(`/api/movie/catalog`, data)
-                        .then(response => {
-                            // Retrieve catalogs for the current movie again
-                            this.getCatalogs()
-
-                            // Tell the parent to reload all the catalogs
-                            this.$emit('loadAllCatalogs')
-                        }).catch (e => {
-                            // TODO: handle errors somehow
+                            handleFailure('An error occurred trying to tag <strong>' + this.movie.Title + '</strong>');
                         })
                 }
-            },
-            addMovieToNewCatalog(event) {
-                event.preventDefault()
-                event.stopPropagation()
 
-                const data = {
-                    'movie': this.movie,
-                    'catalog_id': null,
-                    'catalog_name': this.newCatalogName
+                const removeTag = async (movieId, catalogId) => {
+                    await axios.delete(`/api/movie/${movieId}/catalog/${catalogId}`)
+                        .then(response => {
+                            handleSuccess();
+                        }).catch (e => {
+                            handleFailure('An error occurred trying to untag <strong>' + this.movie.Title + '</strong>');
+                        })
                 }
 
-                axios.post(`/api/movie/catalog`, data)
-                    .then(response => {
-                        // Retrieve catalogs for the current movie again
-                        this.getCatalogs()
+                const handleSuccess = () => {
+                    // Retrieve catalogs for the current movie again
+                    this.getMovieTags();
 
-                        // Tell the parent to reload all the catalogs
-                        this.$emit('loadAllCatalogs')
+                    // Tell the parent to reload all the catalogs
+                    this.$emit('loadAllCatalogs');
+                }
 
-                        this.newCatalogName = ''
-                    }).catch (e => {
-                        // TODO: handle errors somehow
-                    })
+                const handleFailure = (text) => {
+                    this.$notify({
+                        group: 'error',
+                        type: 'error',
+                        duration: this.notifyDuration,
+                        title: 'Error!',
+                        text: text
+                    });
+                }
+
+                // Existing catalog
+                if (catalogId) {
+                    // If the movie is already in a catalog, remove it
+                    if (this.hasTag(catalogId)) {
+                        removeTag(this.movie.imdbID, catalogId);
+                    }
+                    // Otherwise add it
+                    else {
+                        addTag({
+                            'movie': this.movie,
+                            'catalog_id': catalogId
+                        });
+                    }
+                }
+                // New catalog
+                else {
+                    addTag({
+                        'movie': this.movie,
+                        'catalog_name': this.newCatalogName
+                    });
+                }
             }
         },
         mounted () {
@@ -167,11 +174,10 @@
                 'X-Requested-With': 'XMLHttpRequest'
             };
 
-            this.getCatalogs()
+            this.getMovieTags()
         }
     }
 </script>
 
 <style scoped>
 </style>
-

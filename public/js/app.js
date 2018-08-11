@@ -54308,7 +54308,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54407,25 +54407,26 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             catalogs: [],
             isLoadingCatalogs: false,
             newCatalogName: '',
-            showDelete: false
+            showDelete: false,
+            notifyDuration: 8000 // How long should notifications persist (ms)
         };
     },
 
     methods: {
         // Determines if a movie belongs to a catalog
-        isInCatalog: function isInCatalog(catalogId) {
+        hasTag: function hasTag(catalogId) {
             var _this = this;
 
             var catalog = this.allCatalogs.filter(function (catalog) {
                 return catalog.id === catalogId;
             });
             var movies = catalog[0].movies; // HACKY - find a better way
-            var isInCatalog = movies.filter(function (movie) {
+            var hasTag = movies.filter(function (movie) {
                 return movie.id === _this.movie.imdbID;
             });
-            return isInCatalog.length || false;
+            return hasTag.length || false;
         },
-        getCatalogs: function () {
+        getMovieTags: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
                 var $this;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
@@ -54454,70 +54455,109 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 }, _callee, this);
             }));
 
-            function getCatalogs() {
+            function getMovieTags() {
                 return _ref.apply(this, arguments);
             }
 
-            return getCatalogs;
+            return getMovieTags;
         }(),
-        addMovieToCatalog: function addMovieToCatalog(catalogId, event) {
+        tagMovie: function tagMovie(catalogId, event) {
             var _this2 = this;
 
             event.preventDefault();
             event.stopPropagation();
 
-            var data = {
-                'movie': this.movie,
-                'catalog_id': catalogId
-            };
+            var addTag = function () {
+                var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(data) {
+                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                        while (1) {
+                            switch (_context2.prev = _context2.next) {
+                                case 0:
+                                    _context2.next = 2;
+                                    return axios.post('/api/movie/catalog', data).then(function (response) {
+                                        handleSuccess();
+                                    }).catch(function (e) {
+                                        handleFailure('An error occurred trying to tag <strong>' + _this2.movie.Title + '</strong>');
+                                    });
 
-            if (this.isInCatalog(catalogId)) {
-                // If the movie is already in a catalog, remove it
-                axios.delete('/api/movie/' + this.movie.imdbID + '/catalog/' + catalogId, data).then(function (response) {
-                    // Retrieve catalogs for the current movie again
-                    _this2.getCatalogs();
+                                case 2:
+                                case 'end':
+                                    return _context2.stop();
+                            }
+                        }
+                    }, _callee2, _this2);
+                }));
 
-                    // Tell the parent to reload all the catalogs
-                    _this2.$emit('loadAllCatalogs');
-                }).catch(function (e) {
-                    // TODO: handle errors somehow
-                });
-            } else {
-                // Otherwise add it
-                axios.post('/api/movie/catalog', data).then(function (response) {
-                    // Retrieve catalogs for the current movie again
-                    _this2.getCatalogs();
+                return function addTag(_x) {
+                    return _ref2.apply(this, arguments);
+                };
+            }();
 
-                    // Tell the parent to reload all the catalogs
-                    _this2.$emit('loadAllCatalogs');
-                }).catch(function (e) {
-                    // TODO: handle errors somehow
-                });
-            }
-        },
-        addMovieToNewCatalog: function addMovieToNewCatalog(event) {
-            var _this3 = this;
+            var removeTag = function () {
+                var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(movieId, catalogId) {
+                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                        while (1) {
+                            switch (_context3.prev = _context3.next) {
+                                case 0:
+                                    _context3.next = 2;
+                                    return axios.delete('/api/movie/' + movieId + '/catalog/' + catalogId).then(function (response) {
+                                        handleSuccess();
+                                    }).catch(function (e) {
+                                        handleFailure('An error occurred trying to untag <strong>' + _this2.movie.Title + '</strong>');
+                                    });
 
-            event.preventDefault();
-            event.stopPropagation();
+                                case 2:
+                                case 'end':
+                                    return _context3.stop();
+                            }
+                        }
+                    }, _callee3, _this2);
+                }));
 
-            var data = {
-                'movie': this.movie,
-                'catalog_id': null,
-                'catalog_name': this.newCatalogName
-            };
+                return function removeTag(_x2, _x3) {
+                    return _ref3.apply(this, arguments);
+                };
+            }();
 
-            axios.post('/api/movie/catalog', data).then(function (response) {
+            var handleSuccess = function handleSuccess() {
                 // Retrieve catalogs for the current movie again
-                _this3.getCatalogs();
+                _this2.getMovieTags();
 
                 // Tell the parent to reload all the catalogs
-                _this3.$emit('loadAllCatalogs');
+                _this2.$emit('loadAllCatalogs');
+            };
 
-                _this3.newCatalogName = '';
-            }).catch(function (e) {
-                // TODO: handle errors somehow
-            });
+            var handleFailure = function handleFailure(text) {
+                _this2.$notify({
+                    group: 'error',
+                    type: 'error',
+                    duration: _this2.notifyDuration,
+                    title: 'Error!',
+                    text: text
+                });
+            };
+
+            // Existing catalog
+            if (catalogId) {
+                // If the movie is already in a catalog, remove it
+                if (this.hasTag(catalogId)) {
+                    removeTag(this.movie.imdbID, catalogId);
+                }
+                // Otherwise add it
+                else {
+                        addTag({
+                            'movie': this.movie,
+                            'catalog_id': catalogId
+                        });
+                    }
+            }
+            // New catalog
+            else {
+                    addTag({
+                        'movie': this.movie,
+                        'catalog_name': this.newCatalogName
+                    });
+                }
         }
     },
     mounted: function mounted() {
@@ -54527,7 +54567,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             'X-Requested-With': 'XMLHttpRequest'
         };
 
-        this.getCatalogs();
+        this.getMovieTags();
     }
 });
 
@@ -54574,7 +54614,7 @@ var render = function() {
                     attrs: { href: "#" },
                     on: {
                       click: function($event) {
-                        _vm.addMovieToCatalog(catalog.id, $event)
+                        _vm.tagMovie(catalog.id, $event)
                       },
                       mouseover: function($event) {
                         _vm.showDelete = catalog.id
@@ -54587,7 +54627,7 @@ var render = function() {
                   [
                     _c("i", {
                       staticClass: "fa",
-                      class: _vm.isInCatalog(catalog.id)
+                      class: _vm.hasTag(catalog.id)
                         ? "fa-star text-primary"
                         : "fa-star-o text-white"
                     }),
@@ -54604,7 +54644,7 @@ var render = function() {
                         ])
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.showDelete === catalog.id && _vm.isInCatalog(catalog.id)
+                    _vm.showDelete === catalog.id && _vm.hasTag(catalog.id)
                       ? _c("i", {
                           staticClass: "fa fa-ban ml-auto pl-1 text-danger"
                         })
@@ -54621,7 +54661,7 @@ var render = function() {
                   staticClass: "form-inline px-2",
                   on: {
                     submit: function($event) {
-                      _vm.addMovieToNewCatalog($event)
+                      _vm.tagMovie(null, $event)
                     }
                   }
                 },
