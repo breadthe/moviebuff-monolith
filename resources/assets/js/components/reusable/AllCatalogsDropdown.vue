@@ -7,27 +7,27 @@
     <div class="dropdown-menu">
         <a
             class="dropdown-item d-flex align-items-center"
-            :class="{'disabled_catalog': isInCatalog(catalog.id)}"
-            :title="isInCatalog(catalog.id) ? 'The movie is already in this catalog' : ''"
+            :class="{'disabled_catalog': hasTag(catalog.id)}"
+            :title="hasTag(catalog.id) ? 'The movie is already in this catalog' : ''"
             href="#"
             v-for="catalog in allCatalogs"
             :key="catalog.id"
-            @click="moveOrCopyMovieToCatalog(catalog.id, $event)"
+            @click="transformTag(catalog.id, $event)"
             @mouseover="showDelete = catalog.id"
             @mouseout="showDelete = false"
         >
-            <!-- <i class="fa" :class="isInCatalog(catalog.id) ? 'fa-star text-primary' : 'fa-star-o text-white'"></i>&nbsp; -->
+            <!-- <i class="fa" :class="hasTag(catalog.id) ? 'fa-star text-primary' : 'fa-star-o text-white'"></i>&nbsp; -->
             {{ catalog.name }}
             <span v-if="catalog.movies.length"><small>&nbsp;({{ catalog.movies.length }})</small></span>
-            <!-- <i class="fa fa-ban ml-auto pl-1 text-danger" v-if="showDelete === catalog.id && isInCatalog(catalog.id)"></i> -->
+            <!-- <i class="fa fa-ban ml-auto pl-1 text-danger" v-if="showDelete === catalog.id && hasTag(catalog.id)"></i> -->
         </a>
 
         <div class="dropdown-divider"></div>
 
-        <form class="form-inline px-2" @submit="moveOrCopyMovieToNewCatalog($event)">
+        <form class="form-inline px-2" @submit="transformTag(null, $event)">
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="input-group">
-                    <input type="text" class="form-control form-control-sm" placeholder="New catalog" v-model="newCatalogName" @key.enter="moveOrCopyMovieToNewCatalog($event)">
+                    <input type="text" class="form-control form-control-sm" placeholder="New catalog" v-model="newCatalogName" @key.enter="transformTag(null, $event)">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary btn-sm" :disabled="!newCatalogName.length">{{ action }}</button>
                     </div>
@@ -78,96 +78,78 @@
         },
         methods: {
             // Determines if a movie belongs to a catalog
-            isInCatalog(catalogId) {
+            hasTag(catalogId) {
                 const catalog = this.allCatalogs.filter(catalog => catalog.id === catalogId)
                 const movies = catalog[0].movies // HACKY - find a better way
-                const isInCatalog = movies.filter(movie => movie.id === this.movie.id)
-                return isInCatalog.length || false
+                const hasTag = movies.filter(movie => movie.id === this.movie.id)
+                return hasTag.length || false
             },
-            moveOrCopyMovieToCatalog(destinationCatalogId, event) {
-                event.preventDefault()
-                event.stopPropagation()
 
-                // Allow Move/Copy only if movie is not already in the catalog
-                if (!this.isInCatalog(destinationCatalogId)) {
-                    const data = {
-                        'action': this.action,
-                        'source_catalog_id': this.catalogId,
-                        'destination_catalog_id': destinationCatalogId,
-                        'catalog_name': this.newCatalogName
-                    }
-    
-                    axios.put(`/api/movie/${this.movie.id}/catalog`, data)
+            // Move/Copy Movie to an existing or new Tag
+            transformTag(destinationCatalogId, event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                const moveOrCopyToTag = async (data) => {
+                    await axios.put(`/api/movie/${this.movie.id}/catalog`, data)
                         .then(response => {
-    
-                            if (this.action === 'move') {
-                                this.$emit('removeItem', this.movie.id);
-                                this.$emit('isMoving', false);
-                            }
-    
-                            this.$emit('isCopying', false);
-    
-                            // Tell the parent to remove this movie from the DOM
-                            this.$emit('getAllTags');
-
-                            this.$notify({
-                                group: 'success',
-                                type: 'success',
-                                duration: this.notifyDuration,
-                                title: 'Success!',
-                                text: '<strong>' + this.movie.title + '</strong> ' + (this.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + response.data.catalog_name + '</strong>'
-                            });
+                            handleSuccess(response);
                         }).catch (e => {
-                            this.$notify({
-                                group: 'error',
-                                type: 'error',
-                                duration: this.notifyDuration,
-                                title: 'Error!',
-                                text: 'An error occurred trying to ' + this.action + ' <strong>' + this.movie.title + '</strong>'
-                            });
+                            handleFailure();
                         })
                 }
-            },
-            moveOrCopyMovieToNewCatalog(event) {
-                event.preventDefault()
-                event.stopPropagation()
 
-                const data = {
-                    'action': this.action,
-                    'source_catalog_id': this.catalogId, // current catalog
-                    'catalog_name': this.newCatalogName
+                const handleSuccess = (response) => {
+                    if (this.action === 'move') {
+                        this.$emit('isMoving', false);
+                        this.$emit('removeItem', this.movie.id);
+                    } else {
+                        this.$emit('isCopying', false);
+                    }
+
+                    this.newCatalogName = '';
+        
+                    this.$emit('getAllTags');
+
+                    this.$notify({
+                        group: 'success',
+                        type: 'success',
+                        duration: this.notifyDuration,
+                        title: 'Success!',
+                        text: '<strong>' + this.movie.title + '</strong> ' + (this.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + response.data.catalog_name + '</strong>'
+                    });
                 }
 
-                axios.put(`/api/movie/${this.movie.id}/catalog`, data)
-                    .then(response => {
-                        if (this.action === 'move') {
-                            this.$emit('removeItem', this.movie.id);
-                            this.$emit('isMoving', false);
-                        }
+                const handleFailure = () => {
+                    this.$notify({
+                        group: 'error',
+                        type: 'error',
+                        duration: this.notifyDuration,
+                        title: 'Error!',
+                        text: 'An error occurred trying to ' + this.action + ' <strong>' + this.movie.title + '</strong>'
+                    });
+                }
 
-                        this.$emit('isCopying', false);
-
-                        // Tell the parent to remove this movie from the DOM
-                        this.$emit('getAllTags');
-
-                        this.$notify({
-                            group: 'success',
-                            type: 'success',
-                            duration: this.notifyDuration,
-                            title: 'Success!',
-                            text: '<strong>' + this.movie.title + '</strong> ' + (this.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + response.data.catalog_name + '</strong>'
+                // Existing catalog
+                if (destinationCatalogId) {
+                    // Allow Move/Copy only if movie is not already in the catalog
+                    if (!this.hasTag(destinationCatalogId)) {
+                        moveOrCopyToTag({
+                            'action': this.action,
+                            'source_catalog_id': this.catalogId,
+                            'destination_catalog_id': destinationCatalogId
                         });
+                    }
+                }
+                // New catalog
+                else {
+                    moveOrCopyToTag({
+                        'action': this.action,
+                        'source_catalog_id': this.catalogId, // current catalog
+                        'catalog_name': this.newCatalogName
+                    });
+                }
 
-                        this.newCatalogName = ''
-                    }).catch (e => {
-                        this.$notify({
-                            group: 'error',
-                            type: 'error',
-                            duration: this.notifyDuration,
-                            title: 'Error!',
-                            text: 'An error occurred trying to ' + this.action + ' <strong>' + this.movie.title + '</strong>'
-                        });
-                    })
             },
         },
         mounted () {
@@ -182,4 +164,3 @@
 
 <style scoped>
 </style>
-

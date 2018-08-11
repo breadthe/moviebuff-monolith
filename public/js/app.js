@@ -48834,7 +48834,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48878,6 +48878,12 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 //
 //
 //
@@ -48961,104 +48967,103 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         // Determines if a movie belongs to a catalog
-        isInCatalog: function isInCatalog(catalogId) {
+        hasTag: function hasTag(catalogId) {
             var _this = this;
 
             var catalog = this.allCatalogs.filter(function (catalog) {
                 return catalog.id === catalogId;
             });
             var movies = catalog[0].movies; // HACKY - find a better way
-            var isInCatalog = movies.filter(function (movie) {
+            var hasTag = movies.filter(function (movie) {
                 return movie.id === _this.movie.id;
             });
-            return isInCatalog.length || false;
+            return hasTag.length || false;
         },
-        moveOrCopyMovieToCatalog: function moveOrCopyMovieToCatalog(destinationCatalogId, event) {
+
+
+        // Move/Copy Movie to an existing or new Tag
+        transformTag: function transformTag(destinationCatalogId, event) {
             var _this2 = this;
 
             event.preventDefault();
             event.stopPropagation();
 
-            // Allow Move/Copy only if movie is not already in the catalog
-            if (!this.isInCatalog(destinationCatalogId)) {
-                var data = {
-                    'action': this.action,
-                    'source_catalog_id': this.catalogId,
-                    'destination_catalog_id': destinationCatalogId,
-                    'catalog_name': this.newCatalogName
+            var moveOrCopyToTag = function () {
+                var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(data) {
+                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                        while (1) {
+                            switch (_context.prev = _context.next) {
+                                case 0:
+                                    _context.next = 2;
+                                    return axios.put('/api/movie/' + _this2.movie.id + '/catalog', data).then(function (response) {
+                                        handleSuccess(response);
+                                    }).catch(function (e) {
+                                        handleFailure();
+                                    });
+
+                                case 2:
+                                case 'end':
+                                    return _context.stop();
+                            }
+                        }
+                    }, _callee, _this2);
+                }));
+
+                return function moveOrCopyToTag(_x) {
+                    return _ref.apply(this, arguments);
                 };
+            }();
 
-                axios.put('/api/movie/' + this.movie.id + '/catalog', data).then(function (response) {
-
-                    if (_this2.action === 'move') {
-                        _this2.$emit('removeItem', _this2.movie.id);
-                        _this2.$emit('isMoving', false);
-                    }
-
+            var handleSuccess = function handleSuccess(response) {
+                if (_this2.action === 'move') {
+                    _this2.$emit('isMoving', false);
+                    _this2.$emit('removeItem', _this2.movie.id);
+                } else {
                     _this2.$emit('isCopying', false);
-
-                    // Tell the parent to remove this movie from the DOM
-                    _this2.$emit('getAllTags');
-
-                    _this2.$notify({
-                        group: 'success',
-                        type: 'success',
-                        duration: _this2.notifyDuration,
-                        title: 'Success!',
-                        text: '<strong>' + _this2.movie.title + '</strong> ' + (_this2.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + response.data.catalog_name + '</strong>'
-                    });
-                }).catch(function (e) {
-                    _this2.$notify({
-                        group: 'error',
-                        type: 'error',
-                        duration: _this2.notifyDuration,
-                        title: 'Error!',
-                        text: 'An error occurred trying to ' + _this2.action + ' <strong>' + _this2.movie.title + '</strong>'
-                    });
-                });
-            }
-        },
-        moveOrCopyMovieToNewCatalog: function moveOrCopyMovieToNewCatalog(event) {
-            var _this3 = this;
-
-            event.preventDefault();
-            event.stopPropagation();
-
-            var data = {
-                'action': this.action,
-                'source_catalog_id': this.catalogId, // current catalog
-                'catalog_name': this.newCatalogName
-            };
-
-            axios.put('/api/movie/' + this.movie.id + '/catalog', data).then(function (response) {
-                if (_this3.action === 'move') {
-                    _this3.$emit('removeItem', _this3.movie.id);
-                    _this3.$emit('isMoving', false);
                 }
 
-                _this3.$emit('isCopying', false);
+                _this2.newCatalogName = '';
 
-                // Tell the parent to remove this movie from the DOM
-                _this3.$emit('getAllTags');
+                _this2.$emit('getAllTags');
 
-                _this3.$notify({
+                _this2.$notify({
                     group: 'success',
                     type: 'success',
-                    duration: _this3.notifyDuration,
+                    duration: _this2.notifyDuration,
                     title: 'Success!',
-                    text: '<strong>' + _this3.movie.title + '</strong> ' + (_this3.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + response.data.catalog_name + '</strong>'
+                    text: '<strong>' + _this2.movie.title + '</strong> ' + (_this2.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + response.data.catalog_name + '</strong>'
                 });
+            };
 
-                _this3.newCatalogName = '';
-            }).catch(function (e) {
-                _this3.$notify({
+            var handleFailure = function handleFailure() {
+                _this2.$notify({
                     group: 'error',
                     type: 'error',
-                    duration: _this3.notifyDuration,
+                    duration: _this2.notifyDuration,
                     title: 'Error!',
-                    text: 'An error occurred trying to ' + _this3.action + ' <strong>' + _this3.movie.title + '</strong>'
+                    text: 'An error occurred trying to ' + _this2.action + ' <strong>' + _this2.movie.title + '</strong>'
                 });
-            });
+            };
+
+            // Existing catalog
+            if (destinationCatalogId) {
+                // Allow Move/Copy only if movie is not already in the catalog
+                if (!this.hasTag(destinationCatalogId)) {
+                    moveOrCopyToTag({
+                        'action': this.action,
+                        'source_catalog_id': this.catalogId,
+                        'destination_catalog_id': destinationCatalogId
+                    });
+                }
+            }
+            // New catalog
+            else {
+                    moveOrCopyToTag({
+                        'action': this.action,
+                        'source_catalog_id': this.catalogId, // current catalog
+                        'catalog_name': this.newCatalogName
+                    });
+                }
         }
     },
     mounted: function mounted() {
@@ -49104,16 +49109,16 @@ var render = function() {
             {
               key: catalog.id,
               staticClass: "dropdown-item d-flex align-items-center",
-              class: { disabled_catalog: _vm.isInCatalog(catalog.id) },
+              class: { disabled_catalog: _vm.hasTag(catalog.id) },
               attrs: {
-                title: _vm.isInCatalog(catalog.id)
+                title: _vm.hasTag(catalog.id)
                   ? "The movie is already in this catalog"
                   : "",
                 href: "#"
               },
               on: {
                 click: function($event) {
-                  _vm.moveOrCopyMovieToCatalog(catalog.id, $event)
+                  _vm.transformTag(catalog.id, $event)
                 },
                 mouseover: function($event) {
                   _vm.showDelete = catalog.id
@@ -49146,7 +49151,7 @@ var render = function() {
             staticClass: "form-inline px-2",
             on: {
               submit: function($event) {
-                _vm.moveOrCopyMovieToNewCatalog($event)
+                _vm.transformTag(null, $event)
               }
             }
           },
@@ -49188,7 +49193,7 @@ var render = function() {
                         ) {
                           return null
                         }
-                        _vm.moveOrCopyMovieToNewCatalog($event)
+                        _vm.transformTag(null, $event)
                       },
                       input: function($event) {
                         if ($event.target.composing) {
