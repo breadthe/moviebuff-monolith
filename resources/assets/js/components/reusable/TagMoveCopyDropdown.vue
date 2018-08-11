@@ -39,7 +39,7 @@
 
 <script>
     export default {
-        name: 'tags-dropdown',
+        name: 'tag-move-copy-dropdown',
         props: {
             'movie': {
                 required: true,

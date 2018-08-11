@@ -9,7 +9,7 @@
             <p>Move <strong>{{ movie.title }}</strong> to another catalog?</p>
 
             <div>
-                <all-catalogs-dropdown
+                <tag-untag-dropdown
                     :catalog-id="catalogId"
                     :catalog-name="catalogName"
                     :movie="movie"
@@ -18,7 +18,7 @@
                     @removeItem="removeItem($event)"
                     @isMoving="isMoving = $event"
                     @getAllTags="$emit('getAllTags')"
-                ></all-catalogs-dropdown>
+                ></tag-untag-dropdown>
 
                 <button class="btn btn-link" @click="isMoving = false">
                     Cancel
@@ -30,7 +30,7 @@
             <p>Copy <strong>{{ movie.title }}</strong> to another catalog?</p>
 
             <div>
-                <all-catalogs-dropdown
+                <tag-untag-dropdown
                     :catalog-id="catalogId"
                     :catalog-name="catalogName"
                     :movie="movie"
@@ -38,7 +38,7 @@
                     action="copy"
                     @isCopying="isCopying = $event"
                     @getAllTags="$emit('getAllTags')"
-                ></all-catalogs-dropdown>
+                ></tag-untag-dropdown>
 
                 <button class="btn btn-link" @click="isCopying = false">
                     Cancel

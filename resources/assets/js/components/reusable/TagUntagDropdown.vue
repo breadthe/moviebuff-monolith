@@ -41,7 +41,7 @@
 
 <script>
     export default {
-        name: 'all-catalogs-dropdown',
+        name: 'tag-untag-dropdown',
         props: {
             'catalogId': {
                 required: true,

@@ -10,12 +10,12 @@
         <div class="movie-title is-size-4 has-text-black">{{movie.Title}}</div>
         <div class="action-buttons">
 
-            <tags-dropdown
+            <tag-move-copy-dropdown
                 :movie="movie"
                 :all-catalogs="allCatalogs"
                 @getMovieTags="getMovieTags()"
                 @getAllTags="getAllTags()"
-            ></tags-dropdown>
+            ></tag-move-copy-dropdown>
 
             <!-- <span v-if="isLoadingCatalogs"><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></span> -->
 

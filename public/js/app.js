@@ -25299,8 +25299,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_notification___default.a);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-Vue.component('tags-dropdown', __webpack_require__(117));
-Vue.component('all-catalogs-dropdown', __webpack_require__(44));
+Vue.component('tag-move-copy-dropdown', __webpack_require__(122));
+Vue.component('tag-untag-dropdown', __webpack_require__(127));
 
 Vue.component('passport-clients', __webpack_require__(50));
 Vue.component('passport-authorized-clients', __webpack_require__(55));
@@ -48749,97 +48749,9 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_20__;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(45)
-}
-var normalizeComponent = __webpack_require__(3)
-/* script */
-var __vue_script__ = __webpack_require__(48)
-/* template */
-var __vue_template__ = __webpack_require__(49)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-4de329bf"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/reusable/AllCatalogsDropdown.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4de329bf", Component.options)
-  } else {
-    hotAPI.reload("data-v-4de329bf", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(46);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("e430fbac", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4de329bf\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AllCatalogsDropdown.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4de329bf\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AllCatalogsDropdown.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 44 */,
+/* 45 */,
+/* 46 */,
 /* 47 */
 /***/ (function(module, exports) {
 
@@ -48873,371 +48785,8 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 48 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'all-catalogs-dropdown',
-    props: {
-        'catalogId': {
-            required: true,
-            type: Number
-        },
-        'catalogName': {
-            required: true,
-            type: String,
-            default: ''
-        },
-        'movie': {
-            required: true,
-            type: Object
-        },
-        'action': {
-            required: true,
-            type: String
-        },
-        'allCatalogs': {
-            required: false,
-            type: Array,
-            default: function _default() {
-                return [];
-            }
-        }
-    },
-    data: function data() {
-        return {
-            csrf: document.head.querySelector('meta[name="csrf-token"]'),
-            catalogs: [],
-            isLoadingCatalogs: false,
-            newCatalogName: '',
-            showDelete: false,
-            notifyDuration: 8000 // How long should notifications persist (ms)
-        };
-    },
-
-    methods: {
-        // Determines if a movie belongs to a catalog
-        hasTag: function hasTag(catalogId) {
-            var _this = this;
-
-            var catalog = this.allCatalogs.filter(function (catalog) {
-                return catalog.id === catalogId;
-            });
-            var movies = catalog[0].movies; // HACKY - find a better way
-            var hasTag = movies.filter(function (movie) {
-                return movie.id === _this.movie.id;
-            });
-            return hasTag.length || false;
-        },
-
-
-        // Move/Copy Movie to an existing or new Tag
-        transformTag: function transformTag(destinationCatalogId, event) {
-            var _this2 = this;
-
-            event.preventDefault();
-            event.stopPropagation();
-
-            var moveOrCopyToTag = function () {
-                var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(data) {
-                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-                        while (1) {
-                            switch (_context.prev = _context.next) {
-                                case 0:
-                                    _context.next = 2;
-                                    return axios.put('/api/movie/' + _this2.movie.id + '/catalog', data).then(function (response) {
-                                        handleSuccess(response);
-                                    }).catch(function (e) {
-                                        handleFailure();
-                                    });
-
-                                case 2:
-                                case 'end':
-                                    return _context.stop();
-                            }
-                        }
-                    }, _callee, _this2);
-                }));
-
-                return function moveOrCopyToTag(_x) {
-                    return _ref.apply(this, arguments);
-                };
-            }();
-
-            var handleSuccess = function handleSuccess(response) {
-                if (_this2.action === 'move') {
-                    _this2.$emit('isMoving', false);
-                    _this2.$emit('removeItem', _this2.movie.id);
-                } else {
-                    _this2.$emit('isCopying', false);
-                }
-
-                _this2.newCatalogName = '';
-
-                _this2.$emit('getAllTags');
-
-                _this2.$notify({
-                    group: 'success',
-                    type: 'success',
-                    duration: _this2.notifyDuration,
-                    title: 'Success!',
-                    text: '<strong>' + _this2.movie.title + '</strong> ' + (_this2.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + response.data.catalog_name + '</strong>'
-                });
-            };
-
-            var handleFailure = function handleFailure() {
-                _this2.$notify({
-                    group: 'error',
-                    type: 'error',
-                    duration: _this2.notifyDuration,
-                    title: 'Error!',
-                    text: 'An error occurred trying to ' + _this2.action + ' <strong>' + _this2.movie.title + '</strong>'
-                });
-            };
-
-            // Existing catalog
-            if (destinationCatalogId) {
-                // Allow Move/Copy only if movie is not already in the catalog
-                if (!this.hasTag(destinationCatalogId)) {
-                    moveOrCopyToTag({
-                        'action': this.action,
-                        'source_catalog_id': this.catalogId,
-                        'destination_catalog_id': destinationCatalogId
-                    });
-                }
-            }
-            // New catalog
-            else {
-                    moveOrCopyToTag({
-                        'action': this.action,
-                        'source_catalog_id': this.catalogId, // current catalog
-                        'catalog_name': this.newCatalogName
-                    });
-                }
-        }
-    },
-    mounted: function mounted() {
-        // Restore internal headers headers for axios request
-        window.axios.defaults.headers.common = {
-            'X-CSRF-TOKEN': this.csrf.content,
-            'X-Requested-With': 'XMLHttpRequest'
-        };
-    }
-});
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "btn-group" }, [
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-light btn-sm dropdown-toggle",
-        attrs: {
-          type: "button",
-          "data-toggle": "dropdown",
-          "aria-haspopup": "true",
-          "aria-expanded": "false",
-          title: "Move to Catalog"
-        }
-      },
-      [_vm._v("\n        -- " + _vm._s(_vm.action) + " --\n    ")]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "dropdown-menu" },
-      [
-        _vm._l(_vm.allCatalogs, function(catalog) {
-          return _c(
-            "a",
-            {
-              key: catalog.id,
-              staticClass: "dropdown-item d-flex align-items-center",
-              class: { disabled_catalog: _vm.hasTag(catalog.id) },
-              attrs: {
-                title: _vm.hasTag(catalog.id)
-                  ? "The movie is already in this catalog"
-                  : "",
-                href: "#"
-              },
-              on: {
-                click: function($event) {
-                  _vm.transformTag(catalog.id, $event)
-                },
-                mouseover: function($event) {
-                  _vm.showDelete = catalog.id
-                },
-                mouseout: function($event) {
-                  _vm.showDelete = false
-                }
-              }
-            },
-            [
-              _vm._v(
-                "\n            " + _vm._s(catalog.name) + "\n            "
-              ),
-              catalog.movies.length
-                ? _c("span", [
-                    _c("small", [
-                      _vm._v(" (" + _vm._s(catalog.movies.length) + ")")
-                    ])
-                  ])
-                : _vm._e()
-            ]
-          )
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "dropdown-divider" }),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            staticClass: "form-inline px-2",
-            on: {
-              submit: function($event) {
-                _vm.transformTag(null, $event)
-              }
-            }
-          },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "btn-toolbar",
-                attrs: {
-                  role: "toolbar",
-                  "aria-label": "Toolbar with button groups"
-                }
-              },
-              [
-                _c("div", { staticClass: "input-group" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.newCatalogName,
-                        expression: "newCatalogName"
-                      }
-                    ],
-                    staticClass: "form-control form-control-sm",
-                    attrs: { type: "text", placeholder: "New catalog" },
-                    domProps: { value: _vm.newCatalogName },
-                    on: {
-                      key: function($event) {
-                        if (
-                          !("button" in $event) &&
-                          _vm._k(
-                            $event.keyCode,
-                            "enter",
-                            13,
-                            $event.key,
-                            "Enter"
-                          )
-                        ) {
-                          return null
-                        }
-                        _vm.transformTag(null, $event)
-                      },
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.newCatalogName = $event.target.value
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input-group-append" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary btn-sm",
-                        attrs: {
-                          type: "submit",
-                          disabled: !_vm.newCatalogName.length
-                        }
-                      },
-                      [_vm._v(_vm._s(_vm.action))]
-                    )
-                  ])
-                ])
-              ]
-            )
-          ]
-        )
-      ],
-      2
-    )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-4de329bf", module.exports)
-  }
-}
-
-/***/ }),
+/* 48 */,
+/* 49 */,
 /* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -53413,7 +52962,7 @@ var render = function() {
               _c(
                 "div",
                 [
-                  _c("all-catalogs-dropdown", {
+                  _c("tag-untag-dropdown", {
                     attrs: {
                       "catalog-id": _vm.catalogId,
                       "catalog-name": _vm.catalogName,
@@ -53461,7 +53010,7 @@ var render = function() {
                 _c(
                   "div",
                   [
-                    _c("all-catalogs-dropdown", {
+                    _c("tag-untag-dropdown", {
                       attrs: {
                         "catalog-id": _vm.catalogId,
                         "catalog-name": _vm.catalogName,
@@ -54468,7 +54017,7 @@ var render = function() {
         "div",
         { staticClass: "action-buttons" },
         [
-          _c("tags-dropdown", {
+          _c("tag-move-copy-dropdown", {
             attrs: { movie: _vm.movie, "all-catalogs": _vm.allCatalogs },
             on: {
               getMovieTags: function($event) {
@@ -54832,25 +54381,30 @@ if (false) {
 /* 114 */,
 /* 115 */,
 /* 116 */,
-/* 117 */
+/* 117 */,
+/* 118 */,
+/* 119 */,
+/* 120 */,
+/* 121 */,
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(118)
+  __webpack_require__(123)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(120)
+var __vue_script__ = __webpack_require__(125)
 /* template */
-var __vue_template__ = __webpack_require__(121)
+var __vue_template__ = __webpack_require__(126)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-29929d87"
+var __vue_scopeId__ = "data-v-47c662a4"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -54861,7 +54415,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/reusable/TagsDropdown.vue"
+Component.options.__file = "resources/assets/js/components/reusable/TagMoveCopyDropdown.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -54870,9 +54424,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-29929d87", Component.options)
+    hotAPI.createRecord("data-v-47c662a4", Component.options)
   } else {
-    hotAPI.reload("data-v-29929d87", Component.options)
+    hotAPI.reload("data-v-47c662a4", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -54883,23 +54437,23 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 118 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(119);
+var content = __webpack_require__(124);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("f68c07fa", content, false, {});
+var update = __webpack_require__(2)("4fe0d6f8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-29929d87\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TagsDropdown.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-29929d87\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TagsDropdown.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-47c662a4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TagMoveCopyDropdown.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-47c662a4\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TagMoveCopyDropdown.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -54909,7 +54463,7 @@ if(false) {
 }
 
 /***/ }),
-/* 119 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -54923,7 +54477,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 120 */
+/* 125 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54975,7 +54529,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'tags-dropdown',
+    name: 'tag-move-copy-dropdown',
     props: {
         'movie': {
             required: true,
@@ -55123,7 +54677,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 121 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -55291,7 +54845,463 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-29929d87", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-47c662a4", module.exports)
+  }
+}
+
+/***/ }),
+/* 127 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(128)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(130)
+/* template */
+var __vue_template__ = __webpack_require__(131)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-0b5548d5"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/reusable/TagUntagDropdown.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0b5548d5", Component.options)
+  } else {
+    hotAPI.reload("data-v-0b5548d5", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(129);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("23daaf66", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0b5548d5\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TagUntagDropdown.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0b5548d5\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TagUntagDropdown.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 129 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 130 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'tag-untag-dropdown',
+    props: {
+        'catalogId': {
+            required: true,
+            type: Number
+        },
+        'catalogName': {
+            required: true,
+            type: String,
+            default: ''
+        },
+        'movie': {
+            required: true,
+            type: Object
+        },
+        'action': {
+            required: true,
+            type: String
+        },
+        'allCatalogs': {
+            required: false,
+            type: Array,
+            default: function _default() {
+                return [];
+            }
+        }
+    },
+    data: function data() {
+        return {
+            csrf: document.head.querySelector('meta[name="csrf-token"]'),
+            catalogs: [],
+            isLoadingCatalogs: false,
+            newCatalogName: '',
+            showDelete: false,
+            notifyDuration: 8000 // How long should notifications persist (ms)
+        };
+    },
+
+    methods: {
+        // Determines if a movie belongs to a catalog
+        hasTag: function hasTag(catalogId) {
+            var _this = this;
+
+            var catalog = this.allCatalogs.filter(function (catalog) {
+                return catalog.id === catalogId;
+            });
+            var movies = catalog[0].movies; // HACKY - find a better way
+            var hasTag = movies.filter(function (movie) {
+                return movie.id === _this.movie.id;
+            });
+            return hasTag.length || false;
+        },
+
+
+        // Move/Copy Movie to an existing or new Tag
+        transformTag: function transformTag(destinationCatalogId, event) {
+            var _this2 = this;
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            var moveOrCopyToTag = function () {
+                var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(data) {
+                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                        while (1) {
+                            switch (_context.prev = _context.next) {
+                                case 0:
+                                    _context.next = 2;
+                                    return axios.put('/api/movie/' + _this2.movie.id + '/catalog', data).then(function (response) {
+                                        handleSuccess(response);
+                                    }).catch(function (e) {
+                                        handleFailure();
+                                    });
+
+                                case 2:
+                                case 'end':
+                                    return _context.stop();
+                            }
+                        }
+                    }, _callee, _this2);
+                }));
+
+                return function moveOrCopyToTag(_x) {
+                    return _ref.apply(this, arguments);
+                };
+            }();
+
+            var handleSuccess = function handleSuccess(response) {
+                if (_this2.action === 'move') {
+                    _this2.$emit('isMoving', false);
+                    _this2.$emit('removeItem', _this2.movie.id);
+                } else {
+                    _this2.$emit('isCopying', false);
+                }
+
+                _this2.newCatalogName = '';
+
+                _this2.$emit('getAllTags');
+
+                _this2.$notify({
+                    group: 'success',
+                    type: 'success',
+                    duration: _this2.notifyDuration,
+                    title: 'Success!',
+                    text: '<strong>' + _this2.movie.title + '</strong> ' + (_this2.action === 'move' ? 'moved' : 'copied') + ' to <strong>' + response.data.catalog_name + '</strong>'
+                });
+            };
+
+            var handleFailure = function handleFailure() {
+                _this2.$notify({
+                    group: 'error',
+                    type: 'error',
+                    duration: _this2.notifyDuration,
+                    title: 'Error!',
+                    text: 'An error occurred trying to ' + _this2.action + ' <strong>' + _this2.movie.title + '</strong>'
+                });
+            };
+
+            // Existing catalog
+            if (destinationCatalogId) {
+                // Allow Move/Copy only if movie is not already in the catalog
+                if (!this.hasTag(destinationCatalogId)) {
+                    moveOrCopyToTag({
+                        'action': this.action,
+                        'source_catalog_id': this.catalogId,
+                        'destination_catalog_id': destinationCatalogId
+                    });
+                }
+            }
+            // New catalog
+            else {
+                    moveOrCopyToTag({
+                        'action': this.action,
+                        'source_catalog_id': this.catalogId, // current catalog
+                        'catalog_name': this.newCatalogName
+                    });
+                }
+        }
+    },
+    mounted: function mounted() {
+        // Restore internal headers headers for axios request
+        window.axios.defaults.headers.common = {
+            'X-CSRF-TOKEN': this.csrf.content,
+            'X-Requested-With': 'XMLHttpRequest'
+        };
+    }
+});
+
+/***/ }),
+/* 131 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "btn-group" }, [
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-light btn-sm dropdown-toggle",
+        attrs: {
+          type: "button",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false",
+          title: "Move to Catalog"
+        }
+      },
+      [_vm._v("\n        -- " + _vm._s(_vm.action) + " --\n    ")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "dropdown-menu" },
+      [
+        _vm._l(_vm.allCatalogs, function(catalog) {
+          return _c(
+            "a",
+            {
+              key: catalog.id,
+              staticClass: "dropdown-item d-flex align-items-center",
+              class: { disabled_catalog: _vm.hasTag(catalog.id) },
+              attrs: {
+                title: _vm.hasTag(catalog.id)
+                  ? "The movie is already in this catalog"
+                  : "",
+                href: "#"
+              },
+              on: {
+                click: function($event) {
+                  _vm.transformTag(catalog.id, $event)
+                },
+                mouseover: function($event) {
+                  _vm.showDelete = catalog.id
+                },
+                mouseout: function($event) {
+                  _vm.showDelete = false
+                }
+              }
+            },
+            [
+              _vm._v(
+                "\n            " + _vm._s(catalog.name) + "\n            "
+              ),
+              catalog.movies.length
+                ? _c("span", [
+                    _c("small", [
+                      _vm._v(" (" + _vm._s(catalog.movies.length) + ")")
+                    ])
+                  ])
+                : _vm._e()
+            ]
+          )
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "dropdown-divider" }),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            staticClass: "form-inline px-2",
+            on: {
+              submit: function($event) {
+                _vm.transformTag(null, $event)
+              }
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "btn-toolbar",
+                attrs: {
+                  role: "toolbar",
+                  "aria-label": "Toolbar with button groups"
+                }
+              },
+              [
+                _c("div", { staticClass: "input-group" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.newCatalogName,
+                        expression: "newCatalogName"
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "text", placeholder: "New catalog" },
+                    domProps: { value: _vm.newCatalogName },
+                    on: {
+                      key: function($event) {
+                        if (
+                          !("button" in $event) &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        _vm.transformTag(null, $event)
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.newCatalogName = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group-append" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary btn-sm",
+                        attrs: {
+                          type: "submit",
+                          disabled: !_vm.newCatalogName.length
+                        }
+                      },
+                      [_vm._v(_vm._s(_vm.action))]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0b5548d5", module.exports)
   }
 }
 
