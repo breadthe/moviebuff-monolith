@@ -61,8 +61,8 @@
         </section>
 
         <section v-else>
-            <div class="movie-year is-size-6">{{ movie.year }}</div>
-            <div class="movie-title is-size-4 has-text-black">{{ movie.title }}</div>
+            <h6>{{movie.year}}</h6>
+            <h3>{{movie.title}}</h3>
         </section>
 
         <section class="action-menu" v-if="showControls && !(isMoving || isCopying || isDeleting)">

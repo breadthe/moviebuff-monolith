@@ -53081,15 +53081,9 @@ var render = function() {
                   ])
                 ])
               : _c("section", [
-                  _c("div", { staticClass: "movie-year is-size-6" }, [
-                    _vm._v(_vm._s(_vm.movie.year))
-                  ]),
+                  _c("h6", [_vm._v(_vm._s(_vm.movie.year))]),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "movie-title is-size-4 has-text-black" },
-                    [_vm._v(_vm._s(_vm.movie.title))]
-                  )
+                  _c("h3", [_vm._v(_vm._s(_vm.movie.title))])
                 ]),
         _vm._v(" "),
         _vm.showControls && !(_vm.isMoving || _vm.isCopying || _vm.isDeleting)
@@ -53863,7 +53857,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -53880,6 +53874,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
+//
 //
 //
 //
@@ -54005,16 +54001,14 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "right-side" }, [
-      _c("div", { staticClass: "movie-year is-size-6" }, [
-        _vm._v(_vm._s(_vm.movie.Year))
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "movie-title is-size-4 has-text-black" }, [
-        _vm._v(_vm._s(_vm.movie.Title))
+      _c("section", [
+        _c("h6", [_vm._v(_vm._s(_vm.movie.Year))]),
+        _vm._v(" "),
+        _c("h3", [_vm._v(_vm._s(_vm.movie.Title))])
       ]),
       _vm._v(" "),
       _c(
-        "div",
+        "section",
         { staticClass: "action-buttons" },
         [
           _c("tag-move-copy-dropdown", {

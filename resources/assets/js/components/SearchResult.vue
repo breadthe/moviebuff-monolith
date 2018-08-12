@@ -6,9 +6,11 @@
         <img src="http://via.placeholder.com/75x100?text=NO+IMAGE" v-else>
     </div>
     <div class="right-side">
-        <div class="movie-year is-size-6">{{movie.Year}}</div>
-        <div class="movie-title is-size-4 has-text-black">{{movie.Title}}</div>
-        <div class="action-buttons">
+        <section>
+            <h6>{{movie.Year}}</h6>
+            <h3>{{movie.Title}}</h3>
+        </section>
+        <section class="action-buttons">
 
             <tag-move-copy-dropdown
                 :movie="movie"
@@ -24,7 +26,7 @@
                 <a :href="'catalogs/' + catalog.id" class="badge badge-moviebuff mr-1" v-if="catalogs.length" v-for="catalog in catalogs" :key="catalog.name">{{ catalog.name }}</a>
             </span>
 
-        </div>
+        </section>
     </div>
 
 </section>

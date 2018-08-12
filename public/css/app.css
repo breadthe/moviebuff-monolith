@@ -13736,12 +13736,7 @@ input.form-control.searchbar::placeholder {
 
 .movie-item .right-side {
   display: grid;
-  font-size: 1.5rem;
   grid-template-rows: 1fr 30px;
-}
-
-.movie-item .right-side .movie-year {
-  font-size: 1rem;
 }
 
 .movie-item .right-side section.confirmation {
@@ -13751,10 +13746,6 @@ input.form-control.searchbar::placeholder {
 .movie-item .right-side section.confirmation .disabled_catalog {
   cursor: not-allowed;
   color: #DAE1E7;
-}
-
-.movie-item .right-side .action-buttons {
-  margin-bottom: 10px;
 }
 
 .movie-item .right-side .action-buttons span {
@@ -13768,10 +13759,5 @@ input.form-control.searchbar::placeholder {
 
 .movie-item .right-side .action-buttons span i.fa {
   font-size: 1rem;
-}
-
-.movie-item .action-menu {
-  background-color: rgba(255, 255, 255, 0.7);
-  top: -20px;
 }
 

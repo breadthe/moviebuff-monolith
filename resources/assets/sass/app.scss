@@ -189,11 +189,7 @@ input {
     }
     .right-side {
         display: grid;
-        font-size: 1.5rem;
         grid-template-rows: 1fr 30px;
-        .movie-year {
-          font-size: 1rem;
-        }
         section {
           &.confirmation {
             font-size: 1rem;
@@ -204,7 +200,6 @@ input {
           }
         }
         .action-buttons {
-            margin-bottom: 10px;
             span {
               color: $grey;
               font-size: 1rem;
@@ -218,9 +213,5 @@ input {
               }
             }
         }
-    }
-    .action-menu {
-      background-color: rgba(255,255,255,0.7);
-      top: -20px;
     }
 }
