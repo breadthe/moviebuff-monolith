@@ -14,7 +14,7 @@ class Movie extends Model
      * Primary key (id) is the imdbID
      */
     protected $keyType = 'string'; // Indicate that the primary key is not an integer
-    public $incrementing = false; // Indicate that the primary key is non-numeric and non-incrementing
+    public $incrementing = false; // Indicate that the primary key is non-incrementing
 
     /**
      * Many-to-many relationship between Movie and Catalog

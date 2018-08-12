@@ -25,9 +25,8 @@ GET /api/movies/tt0080684/catalogs
 ]
 ```
 
-> TODO: Response Body (no Tags)
+> Response Body (no Tags)
 
-This should be the correct behavior, not the 404
 ```json
 []
 ```

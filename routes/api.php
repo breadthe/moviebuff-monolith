@@ -20,10 +20,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     });
 
     // Get all the Catalogs for a given Movie
-    Route::get('/movies/{movie}/catalogs', 'Api\MoviesController@catalogs');
+    Route::get('/movies/{movie}/catalogs', 'Api\MoviesController@tags');
 
     // Get all the User's Catalogs
-    Route::get('/catalogs', 'Api\CatalogsController@index')->name('catalogs');
+    Route::get('/catalogs', 'Api\CatalogsController@index');
 
     // Edit the Catalog name
     Route::put('/catalog/{id}', 'Api\CatalogsController@update');

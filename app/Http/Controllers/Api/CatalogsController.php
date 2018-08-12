@@ -11,9 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class CatalogsController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Get all the User's Catalogs
      */
     public function index()
     {
