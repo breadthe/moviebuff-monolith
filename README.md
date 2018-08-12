@@ -111,3 +111,7 @@ You're on your own, buddy! Again, feel free to make a PR if you have Windows-spe
 ## Linux
 
 See above.
+
+## API Documentation
+
+MovieBuff uses an internal API ([documented here](/APIDOC.md)) to communicate with the Vue front-end.
